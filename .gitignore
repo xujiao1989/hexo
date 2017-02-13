@@ -2,3 +2,7 @@ node_modules
 .DS_Store
 themes
 .git
+scaffolds
+source
+.deploy_git
+.idea

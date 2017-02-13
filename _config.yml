@@ -10,9 +10,9 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://xujiao1989.github.io/blog/
+url: https://xujiao1989.github.io/blog
 root: /
-permalink: /blog/:year/:month/:title.html
+permalink: /:year/:month/:title.html
 permalink_defaults:
 
 # Directory
@@ -35,7 +35,7 @@ external_link: true # Open external links in new tab
 filename_case: 0
 render_drafts: false
 post_asset_folder: false
-relative_link: true
+relative_link: false
 future: true
 highlight:
   enable: true
@@ -55,3 +55,17 @@ per_page: 5
 pagination_dir: page
 
 theme: next
+
+deploy:
+
+     type: git
+
+     repo: https://github.com/xujiao1989/blog.git
+
+     branch: master
+
+
+
+disqus_shortname: xujiaoblog
+
+duoshuo_shortname: xujiaoblog
