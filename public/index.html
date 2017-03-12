@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="zh-Hans">
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -15,6 +15,9 @@
 
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
 
 
 
@@ -51,17 +54,11 @@
   
 
   
-    
-      
-    
-
-    
-  
 
   
     
     
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
@@ -71,19 +68,19 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="徐姣, 博客, 徐大胖, js, html, css, 前端" />
-
-
-
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=" />
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
 
 
 
@@ -103,13 +100,13 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Mist',
-    sidebar: {"position":"left","display":"post"},
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: '6374973779067536000',
-      author: '徐大胖'
+      userId: '0',
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -122,6 +119,8 @@
 </script>
 
 
+
+  <link rel="canonical" href="https://xujiao1989.github.io/blog/"/>
 
 
 
@@ -143,6 +142,10 @@
 
 
 
+
+
+
+
   
   
     
@@ -154,27 +157,29 @@
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">徐姣的个人博客</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">徐姣的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">麻将大神徐大胖</p>
+      
   </div>
-    
-      <p class="site-subtitle">麻将大神徐大胖</p>
-    
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
@@ -190,26 +195,6 @@
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
           </a>
         </li>
       
@@ -262,20 +247,314 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2017/02/网络/HTTP简介.html">
+    <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2017/03/前端面试题/javascript实现对象的深度克隆.html">
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="徐大胖">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/uploads/avater.jpeg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="徐姣的个人博客">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="徐姣的个人博客" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="徐姣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avater.jpeg">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="徐姣的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/前端面试题/javascript实现对象的深度克隆.html" itemprop="url">
+                  js实现对象的深度克隆
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-12T13:22:55+08:00">
+                2017-03-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">javascript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/03/前端面试题/javascript实现对象的深度克隆.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/2017/03/前端面试题/javascript实现对象的深度克隆.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="变量访问的方式"><a href="#变量访问的方式" class="headerlink" title="变量访问的方式"></a>变量访问的方式</h2><p>在JavaScript中，访问变量可以通过<strong>值访问</strong>也可以通过<strong>引用访问</strong>。</p>
+<ul>
+<li><p><code>按值访问：</code>直接读取值的本身</p>
+</li>
+<li><p><code>按引用访问：</code>读取引用地址，根据地址查找真实值。引用类型的值是保存在内存中的对象，在JavaScript中不允许直接访问内存中的位置。所以在操作对象时，实际上操作的是在操作对象的引用而不是实际的对象。</p>
+</li>
+</ul>
+<h2 id="函数中的传参方式"><a href="#函数中的传参方式" class="headerlink" title="函数中的传参方式"></a>函数中的传参方式</h2><p>在JavaScript的函数传参数方式只能<code>按值传递</code>（不管传递的变量是值类型还是引用类型）。也就是将传递的参数复制给函数的一个局部变量（arguments）。</p>
+<p>值复制和引用复制：</p>
+<ul>
+<li><code>值复制:</code>将值本身复制给arguments的一个元素，参数不会影响原变量</li>
+<li><code>引用复制:</code>将值得地址复制给arguments的一个元素，参数会影响到原来的变量</li>
+</ul>
+<h2 id="如何实现一个对象的深度克隆"><a href="#如何实现一个对象的深度克隆" class="headerlink" title="如何实现一个对象的深度克隆"></a>如何实现一个对象的深度克隆</h2><h3 id="为什么要深度克隆一个对象"><a href="#为什么要深度克隆一个对象" class="headerlink" title="为什么要深度克隆一个对象"></a>为什么要深度克隆一个对象</h3><p>在日常中对一个对象的复制都只是对其引用的复制，两者之间还是会相互影响，如：</p>
+<pre><code>var a = [1,2,3];
+var b = a;
+b.push(5);
+console.log(a);// [1, 2, 3, 5]，对b的操作影响了a
+</code></pre><p>所以为了是b和a完全一致,但是又不相互影响,就有了深度克隆这一说。</p>
+<h3 id="获取对象的基本类型"><a href="#获取对象的基本类型" class="headerlink" title="获取对象的基本类型"></a>获取对象的基本类型</h3><p>我们都知道在JavaScript中,基本的数据类型(string/boolean/undefined/null/number)的复制属于值复制,相互之间不会有什么影响。那么我们接下来主要讨论的是对象的复制。</p>
+<ul>
+<li>对象的类型：function、object、Array</li>
+<li><p>如何获取以上的基本类型： Object.prototype.toString.call(para) </p>
+<ul>
+<li>[object Function]</li>
+<li>[object Object]</li>
+<li>[object Array]</li>
+</ul>
+<p>也就是返回值是一个字符串，可以通过以下方法获取具体的类型</p>
+<pre><code>function objType(obj) {
+    var obj = Object.prototype.toString.call(obj).substring(8);
+    return obj.substring(0,obj.length-1);
+}
+
+//获取值分别是：
+
+Function
+Object
+Array
+</code></pre></li>
+</ul>
+<ul>
+<li><p>函数的复制我们怎么去理解</p>
+<ul>
+<li><p>函数是一个对象,函数名是指向对象的名称。</p>
+<pre><code>function text(){
+    console.log(&quot;a&quot;);
+}
+
+这里,我们可以理解,以上的声明在内存中开辟了一个空间,保存了一个方法,这个方法包含一个打印功能。
+
+然后 变量text包含执行这个方法的地址。
+
+所以,var b = text;操作,就是将方法的地址复制给函数b。
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>在JavaScript中,函数不存在重载,也就是不存在某个函数被修改了的情况(只是断开了指向)。</li>
+</ul>
+<h3 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h3><p>这里的实现分为你三个部分,入口函数deepClone,对象的克隆函数,以及数组的克隆函数</p>
+<ul>
+<li><p>对象的克隆</p>
+<pre><code>function cloneObj(obj) {
+        var tempObj = new Object();
+        for(key in obj){
+            switch (objType(obj[key])){
+                case &quot;Object&quot;:
+                    tempObj[key] =cloneObj(obj[key]);
+                    break;
+                case &quot;Array&quot;:
+                    tempObj[key] = cloneArr(obj[key]);
+                    break;
+                default:
+                    tempObj[key] = obj[key];
+
+                break;
+            }
+        }
+        return tempObj;
+    }
+</code></pre></li>
+</ul>
+<ul>
+<li><p>数组的克隆</p>
+<pre><code>function cloneArr(arr) {
+    var tempArr = new Array();
+    for(var i = 0;i&lt;arr.length;i++){
+        switch (objType(arr[i])){
+            case &quot;Object&quot;:
+                tempArr.push(cloneObj(arr[key]));
+                break;
+            case &quot;Array&quot;:
+                tempArr.push(cloneArr(arr[key]))
+                cloneArr(arr[i]);
+                break;
+            default:
+                tempArr.push(arr[i])
+
+                break;
+        }
+    }
+
+    return tempArr;
+}
+</code></pre></li>
+</ul>
+<ul>
+<li><p>克隆的入口</p>
+<pre><code>function deepClone(para) {
+         var temp = null;
+         switch (objType(para)){
+             case &quot;Object&quot;:
+                 temp = cloneObj(para);
+                 break;
+             case &quot;Array&quot;:
+                 temp = cloneArr(para);
+                 break;
+             default:
+                 temp = para;
+                 break;
+         }
+         return temp;
+     }
+</code></pre></li>
+</ul>
+<ul>
+<li><p>测试</p>
+<pre><code>var testObj = {
+    &quot;name&quot;:&quot;xujiao&quot;,
+    &quot;age&quot;:&quot;28&quot;,
+    &quot;say&quot;:function () {
+        console.log(123);
+    },
+    &quot;arr&quot;:[1,3,4],
+    &quot;obj&quot;:{
+        &quot;a&quot;:12,
+        &quot;b&quot;:1,
+        &quot;c&quot;:3
+    }
+}
+  var clonexx = deepClone(testObj);
+  clonexx.arr.push(333);
+  console.log(clonexx);
+  console.log(testObj);//对clonexx的操作并没有影响testObj
+</code></pre></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2017/02/网络/HTTP简介.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="徐姣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avater.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="徐姣的个人博客">
+    </span>
 
     
       <header class="post-header">
@@ -304,7 +583,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-22T00:00:00+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-22T00:00:00+08:00">
                 2017-02-22
               </time>
             
@@ -353,19 +632,8 @@
           
 
           
+          
 
-          
-          
-             <span id="/2017/02/网络/HTTP简介.html" class="leancloud_visitors" data-flag-title="HTTP学习总结">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
           
 
           
@@ -385,15 +653,124 @@
       
         
           
-          前端工程师在面试过程中不可避免的会被问到是否知道http，讲真，似乎我们没有细究过http也好好的开发了很长一段时间。那为何越是大公司越会很注重你是否了解http呢。站在我们前端开发人员的角度，前后端通信几乎都是基于HTTP的，我们发送http请求，由RD接受请求处理后返回我们需要的资源。我们更深入
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/02/网络/HTTP简介.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <p>前端工程师在面试过程中不可避免的会被问到是否知道http，讲真，似乎我们没有细究过http也好好的开发了很长一段时间。那为何越是大公司越会很注重你是否了解http呢。<br>站在我们前端开发人员的角度，前后端通信几乎都是基于HTTP的，我们发送http请求，由RD接受请求处理后返回我们需要的资源。我们更深入的了解http到底是为了什么：</p>
+<ul>
+<li><code>更好的定位问题：</code>我们发送一个请求之后，可以根据请求返回的状态码定位这次请求是否成功，如果没有成功是谁的问题</li>
+<li><code>让前后端通信更快更安全：</code>在更深入的了解http请求后，我们就知道http通信的瓶颈在哪，有哪些行为会导致此次通信不安全、如何做可以让通信更快</li>
+<li><code>用更好的方式去沟通：</code>不同的业务场景选用不同的方法沟通不仅仅提高可读性，也可以提高安全性、服务器处理的效率</li>
+<li><code>应付面试：</code>很重要<br>其实主要内容我还是从《HTTP权威指南》上抄的~</li>
+</ul>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>http说的通俗一点，相当于客户端和服务器端的沟通语言。那么http协议简单来说包括哪些内容呢：</p>
+<ol>
+<li>如何沟通：http报文，告诉客户端如何提出要求，服务器端应该怎样分析客户端的请求并给出响应的反应</li>
+<li>沟通的高效性：http缓存、长连接等</li>
+<li>沟通的安全性：https、客户端识别、cookie机制<br>站在前端的角度来讲，我们常用的客户端是浏览器，服务器端可以是任何提供服务一个机器（废话）。</li>
+</ol>
+<h2 id="如何沟通–http报文结构"><a href="#如何沟通–http报文结构" class="headerlink" title="如何沟通–http报文结构"></a>如何沟通–http报文结构</h2><p>这个部分主要讲解客户端和服务器端应该遵循什么样的规范来沟通。他们都得遵循http报文规范。</p>
+<ul>
+<li>http报文是什么：简单的格式化数据块</li>
+<li><p>http报文包含3个部分</p>
+<ul>
+<li>起始行：对报文进行描述</li>
+<li>首部：包含一些属性</li>
+<li><p>主体（可以没有）：包含数据主体</p>
+<h5 id="请求报文格式"><a href="#请求报文格式" class="headerlink" title="请求报文格式"></a>请求报文格式</h5><p>method request-url version<br>headers</p>
+<p>entity-body</p>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="响应报文格式"><a href="#响应报文格式" class="headerlink" title="响应报文格式"></a>响应报文格式</h5><pre><code>version status reason-phrase
+headers
+
+entity-body
+</code></pre><h2 id="method请求的方法"><a href="#method请求的方法" class="headerlink" title="method请求的方法"></a>method请求的方法</h2><p>HTTP规范总共定义了<strong>7个</strong>请求方法，为了告诉客户端，客户端想要执行什么动作。但不是每个服务器都实现了以下的方法。<strong>HTTP1.1协议要求实现GET和HEAD方法</strong></p>
+<ol>
+<li>GET:从服务器端获取资源，没有实体<br>HTTP1.1要求实现GET方法</li>
+<li>HEAD：从服务器获取资源的首部，没有实体<br>与GET方法很类似，但是服务器在响应中只返回首部，不会返回实体的主体部分。HTTP1.1要求实现GET方法。HEAD方法可以用来：        <ul>
+<li>在不获取资源的情况下，知道资源的情况（资源的类型）</li>
+<li>通过查看资源的状态码，了解资源的存在情况</li>
+<li>通过查看首部，看资源是否被修改了        </li>
+</ul>
+</li>
+<li>POST：向服务器发送需要处理的数据，<strong>有实体</strong><br> 在chrome的面板里，能看到POST请求的如下信息<br> <img src="/images/post-data.png" alt="POST请求带的数据">                </li>
+<li>PUT:将请求的主体部分放在服务器上，<strong>有实体</strong><br>PUT请求让服务器用PUT请求带的主体部分来创建一个由它所请求的url命名的新文档，如果文档已经存在，则覆盖它。PUT请求容许用户修改服务器的内容，所以从安全性角度来讲，应该要用户登录。        </li>
+<li>TRACE：对可能经过的代理服务器传送到服务器上去的报文进行追踪，没有实体<br>客户端发一个请求到达服务器时，可能会经过很多的代理服务器、防护墙、网关等等，中间每一个环节都有可能改变原来的HTTP请求。TRACE方法，容许客户端在最终发送请求到服务器端时，看看它变成了什么样子。最后一站的服务器会返回一个相关的响应，并在主体中携带上原始的请求报文。        <ul>
+<li>优点：可以用于查看代理和其他的应用程序对用户请求的影响</li>
+<li>缺点：它假定了中间程序对不同方法的请求处理方式是一致的。说到底我们还是不能保证中间代理和网关等对用户请求处理方式是一致的</li>
+</ul>
+</li>
+<li>OPTIONS：决定（”决定二字”如何来理解？）可以在服务器上执行哪些方式，没有实体<br>OPTIONS方式是希望服务器告诉我们，我们可以使用哪些方法，或者说对特殊资源支持哪些方法。            </li>
+<li>DELETE：从服务器上删除一份文档，没有实体<br>请求服务器端删除一个资源，但是不能保证这个请求一定会被执行，因为HTTP的规范容许服务器在不通知客户端的情况下撤销请求。        </li>
+<li>扩展方法<br>HTTP被设计成字段可拓展的，这样可以向下兼容。但是我并不想看这块。</li>
+</ol>
+<h2 id="请求的URL简单介绍"><a href="#请求的URL简单介绍" class="headerlink" title="请求的URL简单介绍"></a>请求的URL简单介绍</h2><p>URL提供了统一的资源命名方式：方案：//服务器位置//路径。URL的语法会由于方案的不同而不同,几乎没有哪个URL中包含了所以所有的组件：scheme://user:pwd@host:port/path;params?query#frag</p>
+<ol>
+<li>params参数<br>一个URL中可以有多个参数，参数为键值对，各个参数之间以及参数与URL其他部分之间用逗号分隔        </li>
+<li>query<br>查询组件的内容没有通用的格式，用字符“？”将其与URL的其余部分分隔开</li>
+</ol>
+<h5 id="方案：例如HTTP-FTP-SMTP"><a href="#方案：例如HTTP-FTP-SMTP" class="headerlink" title="方案：例如HTTP/FTP/SMTP"></a>方案：例如HTTP/FTP/SMTP</h5><p>方案名不区分大小写,告诉应用程序应该使用什么协议        </p>
+<h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><p>格式类似于HTTP/1.1,HTTP/2.0,是为了服务器和客户端之间相互了解各自的能力和报文的格式。版本号说明了应用程序支持的最高的HTTP版本。版本号不会被当做小数来处理，所以HTTP2.22比HTTP2.3的版本要高，因为22&gt;3</p>
+<h2 id="状态码"><a href="#状态码" class="headerlink" title="状态码"></a>状态码</h2><p>状态码配合原因短语一起告诉客户端他的请求处于什么状态,目前有5个种类的状态码</p>
+<ul>
+<li>100~199:信息类状态码(目前实现了2个)</li>
+<li>200~299:成功类状态码(目前实现了7个)</li>
+<li>300~399:重定向类状态码(目前实现了7个)</li>
+<li>400~499:客户端失败状态码(目前实现了18个)</li>
+<li>500~599:服务器端状态码(目前实现了6个)</li>
+</ul>
+<h5 id="信息类状态码"><a href="#信息类状态码" class="headerlink" title="信息类状态码"></a>信息类状态码</h5><p>这类型状态码是http1.1引入的,都比较新也比较受争议,所以目前只实现了2个:</p>
+<ol>
+<li>100 Continue<br>说明服务器端已经收到部分请求,请求客户端继续。那么为什么我们需要这个状态码: http客户端应用程序要发给服务器一个实体的主体,但是在发送前想知道服务器端是否接受服务器端只有接受到带有值为100 continue的expires请求头时才会返回100状态码,</li>
+<li>101 switching protocols<br>说明服务器根据客户端的请示,将协议切换成update首部所列的协议</li>
+</ol>
+<h5 id="成功类状态码"><a href="#成功类状态码" class="headerlink" title="成功类状态码"></a>成功类状态码</h5><p>目前已经实现了7个(200~206)</p>
+<ol>
+<li>200 OK<br>请求没有问题,响应的实体主体部分包含请求的资源</li>
+<li>201 created<br>主要用来创建服务器端请求(PUT)<br>服务器在返回改状态码前必须已经创建好对象<br>响应的主体部分应该包含各组引用了已创建的资源的URL</li>
+<li>202 Accept<br>请求已经被接受,但是服务器还未对该请求做任何处理也不能保证服务器能完成这个请求<br>返回的实体主体部分包含对该请求的状态描述,或者也可以加上对请求完成时间的估计</li>
+<li>203 None-Authoritative Information<br>实体的信息不是来自于服务器端,而是来自于资源的一个副本<br>如中间节点上有一份资源副本,但无法或者对发送资源进行验证就可以发送这个状态码</li>
+<li>204 No content<br>响应中包含起始行和首部,但是每天实体的主体部分<br>主要用于浏览器不转为显示新文档的情况下对其进行更新</li>
+<li>205 Reset content<br>也是主要用于浏览器<br>用于告知浏览器清空所以得HTML元素</li>
+<li>206 partial content<br>成功的执行了一个range请求<br>206响应必须包含以下几个响应</li>
+</ol>
+<ul>
+<li>Content-range</li>
+<li>Date</li>
+<li>ETag</li>
+<li>Content-Location</li>
+</ul>
+<h5 id="重定向类状态码-目前实现了7个"><a href="#重定向类状态码-目前实现了7个" class="headerlink" title="重定向类状态码(目前实现了7个)"></a>重定向类状态码(目前实现了7个)</h5><ol>
+<li>300 Multiple Choice<br>请求的url对应多个资源(中文、英文等)会返回该状态码<br>服务器可以在响应的location首部给出首选的URL</li>
+<li>301 Moved permanently<br>表示请求的资源已经转移<br>响应的location头部应该包含资源的新URL</li>
+<li>302 Found<br>与301类似,客户端使用响应的location首部来临时定位资源<br>以后还是会使用来的URL定位资源</li>
+<li>303 See Other<br>告知客户端使用另一个URL来访问资源<br>新的URL位于响应的location首部<br>主要目的是容许post请求将客户端定位到某个资源上<br>讲真,我已经晕了</li>
+<li>304 Not Found<br>这个我倒是经常遇到,传说中的条件缓存<br>客户端的条件get请求,资源未被修改<br>响应的实体不包含主体部分</li>
+<li>305 use proxy<br>必须通过代理来访问资源,代理的位置在响应的location首部</li>
+<li>306 未使用</li>
+<li>307 Temporary Redirect<br>临时的重定向,类似于301,但响应中给出的是临时的url<br>以后还是使用老的url来访问资源</li>
+</ol>
+<h5 id="服务器端错误状态码"><a href="#服务器端错误状态码" class="headerlink" title="服务器端错误状态码"></a>服务器端错误状态码</h5><p>目前实现了6个</p>
+<ol>
+<li>500 Internal server error<br>遇到妨碍服务器提供服务的内部错误时返回</li>
+<li>501 Not implemented<br>客户端发起的请求超出了服务器的能力范围,例如使用了服务器不支持的方法</li>
+<li>502 bad gateway<br>代理在请求的响应链的下一条链时返回一个伪响应(如无法连接父代理)<br>测试过程中,测试服务器挂了会报这个错误类型</li>
+<li>503 service unavailable<br>表示服务器现在没办法为请求提供服务,但是未来可以<br>如果服务器知道什么时候能够用,可以在响应中返回一个包含retry-after首部</li>
+<li>504 gateway timeout<br>类似于408,这里的响应来自于网关或者代理<br>在等服务器等待请求进行响应时超时了</li>
+<li>505 http version not support</li>
+</ol>
+<h2 id="学习时间线"><a href="#学习时间线" class="headerlink" title="学习时间线"></a>学习时间线</h2><h5 id="2017-02-27"><a href="#2017-02-27" class="headerlink" title="2017-02-27"></a>2017-02-27</h5><ul>
+<li>http简介</li>
+<li>http报文结构</li>
+<li>url</li>
+<li>请求的方法</li>
+</ul>
+<h5 id="2017-03-01"><a href="#2017-03-01" class="headerlink" title="2017-03-01"></a>2017-03-01</h5><ul>
+<li>状态码 (信息类状态码、成功类状态码、重定向类状态码、服务器端错误状态码)</li>
+</ul>
+<h2 id="鸡汤"><a href="#鸡汤" class="headerlink" title="鸡汤"></a>鸡汤</h2><p>做一个勤于思考的人~</p>
+
+          
         
       
     </div>
@@ -408,6 +785,8 @@
 
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -430,20 +809,17 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2017/02/个人成长/前端资料总结.html">
+    <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2017/02/个人成长/前端资料总结.html">
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="徐大胖">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/uploads/avater.jpeg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="徐姣的个人博客">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="徐姣的个人博客" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="徐姣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avater.jpeg">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="徐姣的个人博客">
+    </span>
 
     
       <header class="post-header">
@@ -472,7 +848,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-21T00:00:00+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-21T00:00:00+08:00">
                 2017-02-21
               </time>
             
@@ -521,19 +897,8 @@
           
 
           
+          
 
-          
-          
-             <span id="/2017/02/个人成长/前端资料总结.html" class="leancloud_visitors" data-flag-title="前端资料总结">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
           
 
           
@@ -553,30 +918,103 @@
       
         
           
-          移动端
-js中flexible.js实现淘宝弹性布局方案
-Zepto中文API
-从淘宝适配布局谈移动端适配
+            <h2 id="移动端"><a href="#移动端" class="headerlink" title="移动端"></a>移动端</h2><ul>
+<li><a href="http://www.jb51.net/article/76893.htm" target="_blank" rel="external">js中flexible.js实现淘宝弹性布局方案</a></li>
+<li><a href="http://www.bootcss.com/p/zeptojs/" target="_blank" rel="external">Zepto中文API</a></li>
+<li><a href="http://www.qdfuns.com/notes/23659/5e3cd2904a56f5e6b86c4d49e90e0f34.html?winzoom=1" target="_blank" rel="external">从淘宝适配布局谈移动端适配</a></li>
+</ul>
+<h2 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h2><ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/Sections_and_Outlines_of_an_HTML5_document" target="_blank" rel="external">HTML5的文档节段和纲要</a></li>
+<li><a href="http://tool.oschina.net/commons?type=2" target="_blank" rel="external">HTML占位符对照表</a></li>
+</ul>
+<h2 id="JS"><a href="#JS" class="headerlink" title="JS"></a>JS</h2><ul>
+<li><a href="http://es6.ruanyifeng.com/" target="_blank" rel="external">ECMAScript 6 入门</a></li>
+<li><a href="http://www.cnblogs.com/fingerdancing/archive/2013/04/30/jsPlugin.html" target="_blank" rel="external">js插件编写规范</a></li>
+<li><a href="http://www.css88.com/archives/4821" target="_blank" rel="external">jQuery插件开发入门</a></li>
+<li><a href="http://www.gulpjs.com.cn/docs/writing-a-plugin/" target="_blank" rel="external">gulp编写插件</a></li>
+<li><a href="http://www.css88.com/archives/4821" target="_blank" rel="external">jQuery插件开发入门</a></li>
+<li><a href="http://www.gulpjs.com.cn/" target="_blank" rel="external">gulpjs官网</a></li>
+<li><a href="http://lzw.me/pages/ecmascript/" target="_blank" rel="external">EcmaScript5.1</a></li>
+<li><a href="https://segmentfault.com/a/1190000005128101" target="_blank" rel="external">https://segmentfault.com/a/1190000005128101</a></li>
+<li><a href="https://github.com/Platform-CUF/use-gulp" target="_blank" rel="external">gulp学习资料整理</a></li>
+<li><a href="http://webpackdoc.com/" target="_blank" rel="external">webpack中文指南</a></li>
+</ul>
+<h3 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h3><ul>
+<li><a href="http://www.cnblogs.com/ifantastic/p/4648329.html" target="_blank" rel="external">CommonJS 模块规范 1.1.1</a></li>
+<li><a href="http://justineo.github.io/singles/writing-modular-js/" target="_blank" rel="external">使用 AMD、CommonJS 及 ES Harmony 编写模块化的 JavaScript</a></li>
+<li><a href="http://requirejs.org/docs/whyamd.html" target="_blank" rel="external">why amd</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2015/05/commonjs-in-browser.html" target="_blank" rel="external">浏览器加载 CommonJS 模块的原理与实现</a></li>
+<li><a href="http://blog.chinaunix.net/uid-26672038-id-4112229.html" target="_blank" rel="external">JavaSript模块规范 - AMD规范与CMD规范介绍 </a></li>
+</ul>
+<h2 id="浏览器"><a href="#浏览器" class="headerlink" title="浏览器"></a>浏览器</h2><ul>
+<li><a href="http://fex.baidu.com/blog/2014/05/what-happen/?qq-pf-to=pcqq.c2c" target="_blank" rel="external">从输入 URL 到页面加载完成的过程中都发生了什么事情？</a></li>
+<li><a href="http://www.jianshu.com/p/cf36d48652f4" target="_blank" rel="external">Chrome 开发者工具中文指南</a></li>
+<li><a href="http://blog.csdn.net/rogeryi/article/details/23686609" target="_blank" rel="external">How Rendering Work (in WebKit and Blink)</a></li>
+<li><a href="http://blog.csdn.net/rogeryi/article/details/17657779" target="_blank" rel="external">浏览器渲染发展的一些思考</a></li>
+<li><a href="http://blog.csdn.net/luoshengyang/article/details/50615628" target="_blank" rel="external">Chromium网页Render Object Tree创建过程分析</a></li>
+<li><a href="http://blog.csdn.net/luoshengyang/article/details/50648792" target="_blank" rel="external">Chromium网页Render Layer Tree创建过程分析</a></li>
+<li><a href="http://blog.csdn.net/luoshengyang/article/details/50661553" target="_blank" rel="external">Chromium网页Graphics Layer Tree创建过程分析</a></li>
+</ul>
+<h2 id="React"><a href="#React" class="headerlink" title="React"></a>React</h2><ul>
+<li><a href="http://reactnative.cn/" target="_blank" rel="external">RN中文网</a></li>
+</ul>
+<h2 id="node"><a href="#node" class="headerlink" title="node"></a>node</h2><ul>
+<li><a href="http://nodeschool.io/zh-cn/" target="_blank" rel="external">nodeschool</a></li>
+<li><a href="https://www.zhihu.com/question/21567720" target="_blank" rel="external">如何系统地学习Node.js？</a></li>
+<li><a href="https://github.com/jimuyouyou/node-interview-questions#%E8%B5%B7%E6%BA%90" target="_blank" rel="external">node-interview-questions</a></li>
+<li><a href="http://www.runoob.com/nodejs/nodejs-tutorial.html" target="_blank" rel="external">Node.js 教程</a></li>
+<li><a href="http://expressjs.jser.us/api" target="_blank" rel="external">express API</a></li>
+<li><a href="https://cnodejs.org/topic/504b4924e2b84515770103dd" target="_blank" rel="external">Mongoose学习参考文档</a></li>
+<li><a href="http://www.cnblogs.com/huangxincheng/archive/2012/02/18/2356595.html" target="_blank" rel="external">8天学通MongoDB——第一天 基础入门</a></li>
+<li><a href="http://www.cnblogs.com/xuanhun/p/3922847.html" target="_blank" rel="external">在express站点中使用ejs模板引擎</a></li>
+</ul>
+<h2 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h2><ul>
+<li><a href="http://www.bootcss.com/" target="_blank" rel="external">bootcss</a></li>
+<li><a href="http://www.bootcss.com/p/websafecolors/" target="_blank" rel="external">WEB安全色</a></li>
+</ul>
+<h2 id="个人"><a href="#个人" class="headerlink" title="个人"></a>个人</h2><ul>
+<li><a href="https://github.com/xujiao1989" target="_blank" rel="external">github</a></li>
+<li><a href="http://www.xujiaosite.com/" target="_blank" rel="external">个人博客</a></li>
+</ul>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
+<li><a href="http://npm.taobao.org/" target="_blank" rel="external">淘宝 NPM 镜像</a></li>
+<li><a href="https://leetcode.com/" target="_blank" rel="external">leetcode</a></li>
+<li><a href="http://caniuse.com/" target="_blank" rel="external">can i use</a></li>
+<li><a href="http://www.iconfont.cn/plus" target="_blank" rel="external">阿里巴巴的iconfont</a></li>
+</ul>
+<h2 id="图片素材"><a href="#图片素材" class="headerlink" title="图片素材"></a>图片素材</h2><ul>
+<li><a href="http://www.58pic.com/" target="_blank" rel="external">千图网</a></li>
+<li><a href="http://588ku.com/?h=bd" target="_blank" rel="external">千库网</a></li>
+</ul>
+<h3 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h3><ul>
+<li><a href="http://theme-next.iissnan.com/" target="_blank" rel="external">NexT使用文档</a></li>
+<li><a href="http://www.jianshu.com/p/05289a4bc8b2" target="_blank" rel="external">如何搭建一个独立博客——简明Github Pages与Hexo教程</a></li>
+<li><a href="https://segmentfault.com/a/1190000004947261" target="_blank" rel="external">手把手教你使用Hexo + Github Pages搭建个人独立博客</a></li>
+<li><a href="https://notes.wanghao.work/2015-10-21-%E4%B8%BANexT%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0%E9%98%85%E8%AF%BB%E9%87%8F%E7%BB%9F%E8%AE%A1%E5%8A%9F%E8%83%BD.html#%E9%85%8D%E7%BD%AELeanCloud" target="_blank" rel="external">为NexT主题添加文章阅读量统计功能</a></li>
+<li><a href="https://cart.godaddy.com/EmptyCart.aspx?isc=cjc2off30" target="_blank" rel="external">godaddy域名购买</a></li>
+<li><a href="https://www.dnspod.cn/Login" target="_blank" rel="external">DNS注册</a></li>
+</ul>
+<h2 id="牛人博客"><a href="#牛人博客" class="headerlink" title="牛人博客"></a>牛人博客</h2><ul>
+<li><a href="http://www.haorooms.com/" target="_blank" rel="external">Haorooms</a></li>
+<li><a href="http://www.whycss.com/" target="_blank" rel="external">前端网址导航</a></li>
+<li><a href="http://www.liaoxuefeng.com/" target="_blank" rel="external">廖雪峰的官方网站</a></li>
+<li><a href="http://www.whycss.com/" target="_blank" rel="external">前端网址导航</a></li>
+<li><a href="http://www.haorooms.com/" target="_blank" rel="external">Haorooms</a></li>
+<li><a href="http://www.whycss.com/" target="_blank" rel="external">前端网址导航</a></li>
+<li><a href="http://www.qdfuns.com/" target="_blank" rel="external">前端网</a></li>
+<li><a href="http://fex.baidu.com/" target="_blank" rel="external">百度FEX</a></li>
+<li><a href="http://fe.meituan.com/" target="_blank" rel="external">美团FE博客</a></li>
+<li><a href="http://fe.meituan.com/yui3-practice.html" target="_blank" rel="external">YUI3在美团的实践</a></li>
+<li><a href="http://scrat.io/#!/index" target="_blank" rel="external">scrat的webapp模块化开发体系</a></li>
+<li><a href="http://www.ruanyifeng.com/home.html" target="_blank" rel="external">阮一峰个人博客</a></li>
+<li><a href="http://www.sdifenzhou.com/" target="_blank" rel="external">史蒂夫周-mac软件破解</a></li>
+<li><a href="http://2017.miaov.com/" target="_blank" rel="external">妙味课堂</a></li>
+<li><a href="http://fex.baidu.com/" target="_blank" rel="external">百度FEX</a></li>
+<li><a href="https://lifesinger.wordpress.com/" target="_blank" rel="external">玉伯的博客</a></li>
+<li><a href="https://blog.thankbabe.com/collection/" target="_blank" rel="external">好用的工具导航</a></li>
+</ul>
 
-HTML
-HTML5的文档节段和纲要
-HTML占位符对照表
-
-JS
-ECMAScript 6 入门
-js插件编写规范
-jQuery插件开发入门
-gulp编写插件
-jQuery插件开发入门
-g
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/02/个人成长/前端资料总结.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
         
       
     </div>
@@ -591,6 +1029,8 @@ g
 
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -613,192 +1053,17 @@ g
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2017/02/前端面试题/javascript实现对象的深度克隆.html">
+    <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2017/02/版本控制/2017-02-13-git学习笔记.html">
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="徐大胖">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/uploads/avater.jpeg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="徐姣的个人博客">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="徐姣的个人博客" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="徐姣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avater.jpeg">
     </span>
-  </span>
 
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/02/前端面试题/javascript实现对象的深度克隆.html" itemprop="url">
-                  js实现对象的深度克隆
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-14T17:11:27+08:00">
-                2017-02-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javascript/" itemprop="url" rel="index">
-                    <span itemprop="name">javascript</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/02/前端面试题/javascript实现对象的深度克隆.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/2017/02/前端面试题/javascript实现对象的深度克隆.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2017/02/前端面试题/javascript实现对象的深度克隆.html" class="leancloud_visitors" data-flag-title="js实现对象的深度克隆">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          变量访问的方式在JavaScript中，访问变量可以通过值访问也可以通过引用访问。
-
-按值访问：直接读取值的本身
-
-按引用访问：读取引用地址，根据地址查找真实值。引用类型的值是保存在内存中的对象，在JavaScript中不允许直接访问内存中的位置。所以在操作对象时，实际上操作的是在操作对象的引用而不
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/02/前端面试题/javascript实现对象的深度克隆.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2017/02/版本控制/2017-02-13-git学习笔记.html">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="徐大胖">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/uploads/avater.jpeg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="徐姣的个人博客">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="徐姣的个人博客" src="">
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="徐姣的个人博客">
     </span>
-  </span>
 
     
       <header class="post-header">
@@ -827,7 +1092,7 @@ g
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-13T15:49:00+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-13T15:49:00+08:00">
                 2017-02-13
               </time>
             
@@ -876,19 +1141,8 @@ g
           
 
           
+          
 
-          
-          
-             <span id="/2017/02/版本控制/2017-02-13-git学习笔记.html" class="leancloud_visitors" data-flag-title="git学习笔记">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
           
 
           
@@ -908,18 +1162,74 @@ g
       
         
           
-          强制从远程拉取最新代码git reset --hard remote http://,,,,/origin/master
-git init将当前的文件夹加入git的版本控制,该文件夹下默认会生成一个隐藏的.git文件夹,里面保存着各个分支各个版本的代码
-git status查看文件是否被修改
-git
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/02/版本控制/2017-02-13-git学习笔记.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <h3 id="强制从远程拉取最新代码"><a href="#强制从远程拉取最新代码" class="headerlink" title="强制从远程拉取最新代码"></a>强制从远程拉取最新代码</h3><pre><code>git reset --hard remote http://,,,,/origin/master
+</code></pre><h3 id="git-init"><a href="#git-init" class="headerlink" title="git init"></a>git init</h3><p>将当前的文件夹加入git的版本控制,该文件夹下默认会生成一个隐藏的.git文件夹,里面保存着各个分支各个版本的代码</p>
+<h3 id="git-status"><a href="#git-status" class="headerlink" title="git status"></a>git status</h3><p>查看文件是否被修改</p>
+<h3 id="git-diff"><a href="#git-diff" class="headerlink" title="git diff"></a>git diff</h3><p>查看文件修改内容</p>
+<h3 id="git-reflog"><a href="#git-reflog" class="headerlink" title="git reflog"></a>git reflog</h3><p>用来记录每一次的提交 </p>
+<h3 id="撤销工作区的修改-未add和commit的"><a href="#撤销工作区的修改-未add和commit的" class="headerlink" title="撤销工作区的修改(未add和commit的)"></a>撤销工作区的修改(未add和commit的)</h3><p>git checkout –file / git checkout – .</p>
+<h3 id="回退版本-git-reset"><a href="#回退版本-git-reset" class="headerlink" title="回退版本-git reset"></a>回退版本-git reset</h3><ul>
+<li><p>参数</p>
+<ul>
+<li>hard</li>
+<li>soft</li>
+<li>mixed</li>
+</ul>
+</li>
+<li><p>git reset –hard commit_id  </p>
+<p> git reset –hard：彻底回退到某个版本，本地的源码也会变为上一个版本的内容</p>
+</li>
+</ul>
+<h3 id="git-rm-file"><a href="#git-rm-file" class="headerlink" title="git rm file"></a>git rm file</h3><p> 删除一个文件</p>
+<h3 id="git-分支"><a href="#git-分支" class="headerlink" title="git 分支"></a>git 分支</h3><ul>
+<li>在本地,工作区只有一个,所以工作区所有的修改,只要没有提交到对应的分支上,会体现在所有的分支</li>
+<li>git add 将工作区的内容提交到暂存区</li>
+<li>git commit 将暂存区的内容提交到当前分支</li>
+<li>常用分支命令<ul>
+<li>git branch:查看分支</li>
+<li>git checkout branch-name: 切换分支</li>
+<li>git checkout -b name: 创建并且切换分支</li>
+<li>git branch -d branch-name: 删除分支</li>
+<li>git merge xxx:  将xxx分支的内容合并到当前分支</li>
+</ul>
+</li>
+</ul>
+<h3 id="git-stash"><a href="#git-stash" class="headerlink" title="git stash"></a>git stash</h3><ul>
+<li>暂时存储当前工区的内容</li>
+<li>存储后,任何分支都没有之前的修改,因为没有add commit</li>
+<li>git stash操作的区域仍然是工作区,所以所有的分支都能读到暂存的内容</li>
+<li>暂存的常用命令<ul>
+<li>git stash list: 查看所有的stash内容</li>
+<li>git stash apply: 恢复stash内容</li>
+<li>git stash drop: 删除stash的内容</li>
+<li>git stash pop: 恢复并且删除stash的内容</li>
+</ul>
+</li>
+</ul>
+<h3 id="git-tag"><a href="#git-tag" class="headerlink" title="git tag"></a>git tag</h3><p>打标签,方便回滚,这个主要哦针对一个完整功能上线时打一个tag,方便回滚到上一个功能(类似于-m的作用,只是-m针对每一次的提交)</p>
+<ul>
+<li>git tag: 控制台打印所有的标签</li>
+<li>git tag -l ‘V0.1*’: 搜索符合模式的tag</li>
+<li>打标签的常用命令<ul>
+<li>切换标签: git checkout tagname</li>
+<li>git tag -g v0.1.1.9fbc3d0 :给特定的commit打tag</li>
+<li>标签的发布: git push origin -tags # 说明</li>
+</ul>
+</li>
+</ul>
+<h3 id="将本地文件夹关联远程仓库"><a href="#将本地文件夹关联远程仓库" class="headerlink" title="将本地文件夹关联远程仓库"></a>将本地文件夹关联远程仓库</h3><p>git remote add origin git@<a href="http://xujiao1989/xxx" target="_blank" rel="external">http://xujiao1989/xxx</a></p>
+<h3 id="关于-gitignore"><a href="#关于-gitignore" class="headerlink" title="关于.gitignore"></a>关于.gitignore</h3><ul>
+<li>只能忽略那些原来没有被trace的文件</li>
+<li><p>如何解决添加规则后不生效的问题</p>
+<p>   git rm –cached file</p>
+</li>
+</ul>
+<h3 id="TIPS"><a href="#TIPS" class="headerlink" title="TIPS"></a>TIPS</h3><ul>
+<li>git跟踪的是修改,而不是文件</li>
+<li>在git当中,HEAD表示的是当前版本,上一个版本是HEAD^,上上个版本是HEAD^^,所以回退到上一个版本可以是git reset –hard HEAD^(这里也可以是特定的提交)</li>
+</ul>
+
+          
         
       
     </div>
@@ -934,6 +1244,8 @@ git
 
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -956,20 +1268,17 @@ git
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2017/02/前端面试题/JavaScript面试题.html">
+    <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2017/02/前端面试题/JavaScript面试题.html">
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="徐大胖">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/uploads/avater.jpeg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="徐姣的个人博客">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="徐姣的个人博客" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="徐姣">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avater.jpeg">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="徐姣的个人博客">
+    </span>
 
     
       <header class="post-header">
@@ -998,7 +1307,7 @@ git
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-13T15:10:00+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-13T15:10:00+08:00">
                 2017-02-13
               </time>
             
@@ -1047,19 +1356,8 @@ git
           
 
           
+          
 
-          
-          
-             <span id="/2017/02/前端面试题/JavaScript面试题.html" class="leancloud_visitors" data-flag-title="前端面试题">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
           
 
           
@@ -1079,17 +1377,59 @@ git
       
         
           
+            <ul>
+<li><p>使用正则表达式精确匹配出如下字符串中加粗部分的 “3052202501”。ptui_loginuin=3052202501%20;pt2gguin=o3052202501;uin=o<strong>3052202501</strong>;ptisp=ctc</p>
+<pre><code>如果配合其他的字符的话,可以知道,加粗的那个&quot;3052202501&quot;
+var rg1 = /uin=o(\d{10})/g;
+var match = rg1.exec(str);
+var index = parseInt(match.index)+5
+console.log(&quot;匹配的字符串的位置在:&quot;+index);
+console.log(&quot;匹配到的字符串为:&quot;+match[1]);
+</code></pre><ul>
+<li><p>完成方法count(str)，传入字符串，返回字符串中出现次数最多的字符及次数</p>
+<p>  function count(str){</p>
+<pre><code>    var length = str.length;
+    if(length ==0){
+        return;
+    }
+    var max = 1;
+    var maxChar = str[0];
+    var obj = {};
+    for(var i = 0;i&lt;length;i++){
+        if(str[i] in obj){
+            obj[str[i]] ++;
+            if(max &lt; obj[str[i]]){
+                max = obj[str[i]];
+                maxChar = str[i];
+            }
+        }else{
+            obj[str[i]] = 1;
+        }
+    }
+   return {
+       maxNum : max,
+       maxChar :maxChar
+   }
+}
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>假设你有一个函数rand5()，产生[0, 5)之间的随机整数，每个数字概率1/5，如何使用这个函数产生[0, 7)之间的随机整数，每个数字概率1/7</p>
+<ul>
+<li>正确的方法是利用rand5()函数生成1-25之间的数字，然后将其中的1-21映射成1-7，丢弃22-25。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>完成方法subset(arr1,arr2)，传入两个数组，判断数组arr1是否为数组arr2的子集</p>
+</li>
+<li><p>现在有一个基准数组 records，先要求你维护其子集 selection 数组（初始为空），维护操作包含删除和插入。 插入：给定 records 数组中的一个元素，插入到 selection 中。删除：给定 records 数组中的一个元素，把它从 selection 中删除。现在要求你：实现 insert() 和 remove() 方法来实现以上操作。设计一个算法，保证每次维护操作后，保持 selection 数组中的元素的偏序关系与 records 数组中的保持一致，分析你算法的复杂度。</p>
+</li>
+</ul>
+
           
-使用正则表达式精确匹配出如下字符串中加粗部分的 “3052202501”。ptui_loginuin=3052202501%20;pt2gguin=o3052202501;uin=o3052202501;ptisp=ctc
-如果配合其他的字符的话,可以知道,加粗的那个&quot;305220250
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/02/前端面试题/JavaScript面试题.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
@@ -1104,6 +1444,8 @@ git
 
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1125,7 +1467,7 @@ git
   </nav>
 
 
-
+          
           </div>
           
 
@@ -1155,12 +1497,14 @@ git
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avater.jpeg"
-               alt="徐大胖" />
-          <p class="site-author-name" itemprop="name">徐大胖</p>
-          <p class="site-description motion-element" itemprop="description"></p>
+               alt="徐姣" />
+          <p class="site-author-name" itemprop="name">徐姣</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
         </div>
         <nav class="site-state motion-element">
-        
+
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
@@ -1171,8 +1515,10 @@ git
           
 
           
+            
+            
             <div class="site-state-item site-state-categories">
-              <a href="/categories">
+              <a href="/categories/index.html">
                 <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               </a>
@@ -1180,8 +1526,10 @@ git
           
 
           
+            
+            
             <div class="site-state-item site-state-tags">
-              <a href="/tags">
+              <a href="/tags/index.html">
                 <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">标签</span>
               </a>
@@ -1193,26 +1541,6 @@ git
         
 
         <div class="links-of-author motion-element">
-          
-            
-              <span class="links-of-author-item">
-                <a href="https://github.com/xujiao1989" target="_blank" title="GitHub">
-                  
-                    <i class="fa fa-fw fa-github"></i>
-                  
-                  GitHub
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://weibo.com/u/5687991874" target="_blank" title="微博">
-                  
-                    <i class="fa fa-fw fa-weibo"></i>
-                  
-                  微博
-                </a>
-              </span>
-            
           
         </div>
 
@@ -1229,6 +1557,8 @@ git
 
       
 
+      
+
     </div>
   </aside>
 
@@ -1238,16 +1568,29 @@ git
     </main>
 
     <footer id="footer" class="footer">
-      <div class="footer-inner" style="text-align:center">
+      <div class="footer-inner">
         <div class="copyright" >
   
-  &copy;  建站时间:2017/01/13  
-
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Powered By-徐大胖</span>
+  <span class="author" itemprop="copyrightHolder">徐姣</span>
 </div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
 
         
 
@@ -1255,9 +1598,13 @@ git
       </div>
     </footer>
 
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
   </div>
 
   
@@ -1303,21 +1650,21 @@ git
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v="></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v="></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
 
 
 
   
-  
-
   
 
   
 
+  
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v="></script>
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
 
 
 
@@ -1342,10 +1689,6 @@ git
 
   
     
-      
-      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-      <script src="/js/src/hook-duoshuo.js?v="></script>
-    
     
     <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
     <script src="/js/src/hook-duoshuo.js"></script>
@@ -1362,124 +1705,20 @@ git
 
 
 
-  
-  
 
   
-
   
 
   
-  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
-  <script>AV.initialize("OzIqbtsfjdGVRsy9GN3gx7sx-gzGzoHsz", "bk2OnWM6cnGl3tBwtxAd0M0k");</script>
-  <script>
-    function showTime(Counter) {
-      var query = new AV.Query(Counter);
-      var entries = [];
-      var $visitors = $(".leancloud_visitors");
-
-      $visitors.each(function () {
-        entries.push( $(this).attr("id").trim() );
-      });
-
-      query.containedIn('url', entries);
-      query.find()
-        .done(function (results) {
-          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
-
-          if (results.length === 0) {
-            $visitors.find(COUNT_CONTAINER_REF).text(0);
-            return;
-          }
-
-          for (var i = 0; i < results.length; i++) {
-            var item = results[i];
-            var url = item.get('url');
-            var time = item.get('time');
-            var element = document.getElementById(url);
-
-            $(element).find(COUNT_CONTAINER_REF).text(time);
-          }
-          for(var i = 0; i < entries.length; i++) {
-            var url = entries[i];
-            var element = document.getElementById(url);
-            var countSpan = $(element).find(COUNT_CONTAINER_REF);
-            if( countSpan.text() == '') {
-              countSpan.text(0);
-            }
-          }
-        })
-        .fail(function (object, error) {
-          console.log("Error: " + error.code + " " + error.message);
-        });
-    }
-
-    function addCount(Counter) {
-      var $visitors = $(".leancloud_visitors");
-      var url = $visitors.attr('id').trim();
-      var title = $visitors.attr('data-flag-title').trim();
-      var query = new AV.Query(Counter);
-
-      query.equalTo("url", url);
-      query.find({
-        success: function(results) {
-          if (results.length > 0) {
-            var counter = results[0];
-            counter.fetchWhenSave(true);
-            counter.increment("time");
-            counter.save(null, {
-              success: function(counter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.get('time'));
-              },
-              error: function(counter, error) {
-                console.log('Failed to save Visitor num, with error message: ' + error.message);
-              }
-            });
-          } else {
-            var newcounter = new Counter();
-            /* Set ACL */
-            var acl = new AV.ACL();
-            acl.setPublicReadAccess(true);
-            acl.setPublicWriteAccess(true);
-            newcounter.setACL(acl);
-            /* End Set ACL */
-            newcounter.set("title", title);
-            newcounter.set("url", url);
-            newcounter.set("time", 1);
-            newcounter.save(null, {
-              success: function(newcounter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-              },
-              error: function(newcounter, error) {
-                console.log('Failed to create');
-              }
-            });
-          }
-        },
-        error: function(error) {
-          console.log('Error:' + error.code + " " + error.message);
-        }
-      });
-    }
-
-    $(function() {
-      var Counter = AV.Object.extend("Counter");
-      if ($('.leancloud_visitors').length == 1) {
-        addCount(Counter);
-      } else if ($('.post-title-link').length > 1) {
-        showTime(Counter);
-      }
-    });
-  </script>
-
-
 
   
 
   
 
+  
+
+
+  
 
 </body>
 </html>
