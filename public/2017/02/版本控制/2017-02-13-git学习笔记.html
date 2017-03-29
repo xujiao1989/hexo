@@ -87,31 +87,28 @@
 
 
 
-<meta name="description" content="强制从远程拉取最新代码git reset --hard remote http://,,,,/origin/master
-git init将当前的文件夹加入git的版本控制,该文件夹下默认会生成一个隐藏的.git文件夹,里面保存着各个分支各个版本的代码
-git status查看文件是否被修改
-git diff查看文件修改内容
-git reflog用来记录每一次的提交 
-撤销工作区的修改(未add和">
+<meta name="description" content="强制从远程拉取最新代码git reset --hard remote remote address
+已经拉取远程代码，现在需要clone某一个分支git checkout remote/branch-name
+将本地创建的分支提交至远程
+远程新分支: git push origin new branch name,可以是本地分支名
+远程老分支: git push origin 本地分支名：远程分支">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git学习笔记">
 <meta property="og:url" content="https://xujiao1989.github.io/blog/2017/02/版本控制/2017-02-13-git学习笔记.html">
 <meta property="og:site_name" content="徐姣的个人博客">
-<meta property="og:description" content="强制从远程拉取最新代码git reset --hard remote http://,,,,/origin/master
-git init将当前的文件夹加入git的版本控制,该文件夹下默认会生成一个隐藏的.git文件夹,里面保存着各个分支各个版本的代码
-git status查看文件是否被修改
-git diff查看文件修改内容
-git reflog用来记录每一次的提交 
-撤销工作区的修改(未add和">
-<meta property="og:updated_time" content="2017-03-13T00:32:30.000Z">
+<meta property="og:description" content="强制从远程拉取最新代码git reset --hard remote remote address
+已经拉取远程代码，现在需要clone某一个分支git checkout remote/branch-name
+将本地创建的分支提交至远程
+远程新分支: git push origin new branch name,可以是本地分支名
+远程老分支: git push origin 本地分支名：远程分支">
+<meta property="og:updated_time" content="2017-03-21T03:09:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git学习笔记">
-<meta name="twitter:description" content="强制从远程拉取最新代码git reset --hard remote http://,,,,/origin/master
-git init将当前的文件夹加入git的版本控制,该文件夹下默认会生成一个隐藏的.git文件夹,里面保存着各个分支各个版本的代码
-git status查看文件是否被修改
-git diff查看文件修改内容
-git reflog用来记录每一次的提交 
-撤销工作区的修改(未add和">
+<meta name="twitter:description" content="强制从远程拉取最新代码git reset --hard remote remote address
+已经拉取远程代码，现在需要clone某一个分支git checkout remote/branch-name
+将本地创建的分支提交至远程
+远程新分支: git push origin new branch name,可以是本地分支名
+远程老分支: git push origin 本地分支名：远程分支">
 
 
 
@@ -397,8 +394,13 @@ git reflog用来记录每一次的提交
       
 
       
-        <h3 id="强制从远程拉取最新代码"><a href="#强制从远程拉取最新代码" class="headerlink" title="强制从远程拉取最新代码"></a>强制从远程拉取最新代码</h3><pre><code>git reset --hard remote http://,,,,/origin/master
-</code></pre><h3 id="git-init"><a href="#git-init" class="headerlink" title="git init"></a>git init</h3><p>将当前的文件夹加入git的版本控制,该文件夹下默认会生成一个隐藏的.git文件夹,里面保存着各个分支各个版本的代码</p>
+        <h3 id="强制从远程拉取最新代码"><a href="#强制从远程拉取最新代码" class="headerlink" title="强制从远程拉取最新代码"></a>强制从远程拉取最新代码</h3><pre><code>git reset --hard remote remote address
+</code></pre><h3 id="已经拉取远程代码，现在需要clone某一个分支"><a href="#已经拉取远程代码，现在需要clone某一个分支" class="headerlink" title="已经拉取远程代码，现在需要clone某一个分支"></a>已经拉取远程代码，现在需要clone某一个分支</h3><p>git checkout remote/branch-name</p>
+<h3 id="将本地创建的分支提交至远程"><a href="#将本地创建的分支提交至远程" class="headerlink" title="将本地创建的分支提交至远程"></a>将本地创建的分支提交至远程</h3><ul>
+<li>远程新分支: git push origin new branch name,可以是本地分支名</li>
+<li>远程老分支: git push origin 本地分支名：远程分支名</li>
+</ul>
+<h3 id="git-init"><a href="#git-init" class="headerlink" title="git init"></a>git init</h3><p>将当前的文件夹加入git的版本控制,该文件夹下默认会生成一个隐藏的.git文件夹,里面保存着各个分支各个版本的代码</p>
 <h3 id="git-status"><a href="#git-status" class="headerlink" title="git status"></a>git status</h3><p>查看文件是否被修改</p>
 <h3 id="git-diff"><a href="#git-diff" class="headerlink" title="git diff"></a>git diff</h3><p>查看文件修改内容</p>
 <h3 id="git-reflog"><a href="#git-reflog" class="headerlink" title="git reflog"></a>git reflog</h3><p>用来记录每一次的提交 </p>
@@ -422,6 +424,7 @@ git reflog用来记录每一次的提交
 <li>git commit 将暂存区的内容提交到当前分支</li>
 <li>常用分支命令<ul>
 <li>git branch:查看分支</li>
+<li>git branch -a：查看远程分支</li>
 <li>git checkout branch-name: 切换分支</li>
 <li>git checkout -b name: 创建并且切换分支</li>
 <li>git branch -d branch-name: 删除分支</li>
@@ -603,7 +606,7 @@ git reflog用来记录每一次的提交
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -614,7 +617,7 @@ git reflog用来记录每一次的提交
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -625,7 +628,7 @@ git reflog用来记录每一次的提交
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

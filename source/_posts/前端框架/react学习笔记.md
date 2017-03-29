@@ -14,6 +14,14 @@ categories: 前端框架
 
 react不是一个传统的MVC/MVVM的框架，它主要集中在view层面上。
 
+
+
+
+
+
+
+
+
 ## react环境配置
 
 ### babel
@@ -36,14 +44,7 @@ babel是一个多用途的JavaScript编译器，把最新版本的JavaScript变�
 
 大体经历了三个阶段：全局变量+命名空间--AMD&COMMONJS--ES6
 
-```javascript
-    
-    import bar from './bar';
 
-    export default function() {
-      
-    };
-``` 
 > 单JavaScript入口组件
 
 基于webpack等打包工具的流程，我们将平等的对待一切资源，最后打包成一个可执行的js文件作为组件的入口。
@@ -53,7 +54,17 @@ react推荐通过webpack或者browserify进行应用的构建，搭配对应的l
 
 
 
-test
+## 学习资料
+
++ 《react全栈》这本书
+
+
+## 学习路线
+
++ 2017年3月22日
+    + 《react全栈》第五章
+    + [react设计思想](http://cn.redux.js.org/docs/react-redux/api.html)
+ 
 
 ---
 做一个勤于思考的人

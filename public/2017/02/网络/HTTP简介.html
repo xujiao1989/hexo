@@ -97,14 +97,12 @@
 <meta property="og:description" content="前端工程师在面试过程中不可避免的会被问到是否知道http，讲真，似乎我们没有细究过http也好好的开发了很长一段时间。那为何越是大公司越会很注重你是否了解http呢。站在我们前端开发人员的角度，前后端通信几乎都是基于HTTP的，我们发送http请求，由RD接受请求处理后返回我们需要的资源。我们更深入的了解http到底是为了什么：
 
 更好的定位问题：我们发送一个请求之后，可以根据请求返回的状态码定位">
-<meta property="og:image" content="https://xujiao1989.github.io/blog/images/post-data.png">
-<meta property="og:updated_time" content="2017-03-13T00:32:30.000Z">
+<meta property="og:updated_time" content="2017-03-21T10:29:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTTP学习总结">
 <meta name="twitter:description" content="前端工程师在面试过程中不可避免的会被问到是否知道http，讲真，似乎我们没有细究过http也好好的开发了很长一段时间。那为何越是大公司越会很注重你是否了解http呢。站在我们前端开发人员的角度，前后端通信几乎都是基于HTTP的，我们发送http请求，由RD接受请求处理后返回我们需要的资源。我们更深入的了解http到底是为了什么：
 
 更好的定位问题：我们发送一个请求之后，可以根据请求返回的状态码定位">
-<meta name="twitter:image" content="https://xujiao1989.github.io/blog/images/post-data.png">
 
 
 
@@ -430,8 +428,10 @@ entity-body
 <li>通过查看首部，看资源是否被修改了        </li>
 </ul>
 </li>
-<li>POST：向服务器发送需要处理的数据，<strong>有实体</strong><br> 在chrome的面板里，能看到POST请求的如下信息<br> <img src="/images/post-data.png" alt="POST请求带的数据">                </li>
-<li>PUT:将请求的主体部分放在服务器上，<strong>有实体</strong><br>PUT请求让服务器用PUT请求带的主体部分来创建一个由它所请求的url命名的新文档，如果文档已经存在，则覆盖它。PUT请求容许用户修改服务器的内容，所以从安全性角度来讲，应该要用户登录。        </li>
+<li><p>POST：向服务器发送需要处理的数据，<strong>有实体</strong></p>
+</li>
+<li><p>PUT:将请求的主体部分放在服务器上，<strong>有实体</strong><br>PUT请求让服务器用PUT请求带的主体部分来创建一个由它所请求的url命名的新文档，如果文档已经存在，则覆盖它。PUT请求容许用户修改服务器的内容，所以从安全性角度来讲，应该要用户登录。        </p>
+</li>
 <li>TRACE：对可能经过的代理服务器传送到服务器上去的报文进行追踪，没有实体<br>客户端发一个请求到达服务器时，可能会经过很多的代理服务器、防护墙、网关等等，中间每一个环节都有可能改变原来的HTTP请求。TRACE方法，容许客户端在最终发送请求到服务器端时，看看它变成了什么样子。最后一站的服务器会返回一个相关的响应，并在主体中携带上原始的请求报文。        <ul>
 <li>优点：可以用于查看代理和其他的应用程序对用户请求的影响</li>
 <li>缺点：它假定了中间程序对不同方法的请求处理方式是一致的。说到底我们还是不能保证中间代理和网关等对用户请求处理方式是一致的</li>
@@ -644,7 +644,7 @@ entity-body
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -655,7 +655,7 @@ entity-body
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -666,7 +666,7 @@ entity-body
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

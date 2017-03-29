@@ -18,6 +18,8 @@
     "hexo-server": "^0.2.0"
   },
   "devDependencies": {
+    "hexo": "^3.2.2",
+    "hexo-asset-image": "0.0.3",
     "hexo-cli": "^1.0.2"
   }
 }
