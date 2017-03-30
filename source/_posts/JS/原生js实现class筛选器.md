@@ -23,9 +23,6 @@ categories: JS
     + getElementsByTagName
     + getElementById
 
-3. 如何解决遍历节点所造成的性能问题
-    + 考虑查找算法的时间复杂度和空间复杂度
-
 ## 思路
 
 1. 获取到符合要求的dom节点（node下的tag），是一个HTML Collection，是一个类数组，length属性缓存下来，查找代价比较大
