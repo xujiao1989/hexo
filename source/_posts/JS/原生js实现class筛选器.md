@@ -14,7 +14,7 @@ categories: JS
 ## 思考
 
 1. 我希望接口使用的方式如：getElementsByClassName(classname,parentId,tagname); 
-    + classname为我们要筛选的class值，数组类型，如[tab,tab-item]
+    + classname为我们要筛选的class值，数组类型，如["tab","tab-item"]
     + parentId为父元素的id，可选参数
     + tagname为标签名，可选参数
     + 返回一个包含匹配成功的节点的数组
@@ -33,7 +33,7 @@ categories: JS
 ## 实现和效果
 
 ```javascript
-    function getElementsByClassName(parentId,tag,classname){
+    function getElementsByClassName(classname,parentId,tag){
         var parentNode = parentId && document.getElementById(parentId) || document,
                 tagName = tag || '*',
                 classLength = classname.length,//获取我们需要筛选class的个数
@@ -119,7 +119,7 @@ categories: JS
 当我们使用上面的方法时会出现一个奇怪的现象，我现在还没搞明白，生气~~~
 
 ```javascript
-var a = getElementsByClassName(document,"div",["aaa","ccc"]);
+var a = getElementsByClassName(["aaa","ccc"],document,"div");
 console.log(a);
 
 ```
