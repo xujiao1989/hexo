@@ -75,16 +75,16 @@ categories: JS
 
 ## 问题总结
 
-1. 关于while{}循环的问题
+#### 1.关于while{}循环的问题
 
 ```javascript
-        var k = 0;
+        var k=0;
         while(classReg[k].test(elemTestClassName)){
+            console.log(classReg[k]+":"+elemTestClassName+":"+(classReg[k].test(elemTestClassName)));
             //测试成功进来
-            console.log(elemTestClassName+"测试第"+k+"个正则通过");
-            if(k === classLength){
+            if(k === classLength-1){
                 //如果通过所有测试，说明这个dom结果满足要求，我们push到结果中
-                result.push[elemTest];
+                result[result.length] = elemTest;
                 break;
             }
             k++;
@@ -92,25 +92,44 @@ categories: JS
         
 ```
 
-上面的逻辑在执行过程中报错了`Uncaught TypeError: Cannot read property 'test' of undefined`，原因在于，while会执行一遍classReg[k].test(elemTestClassName)，而此时classReg[k]已经是undefined了。
+上面的逻辑在执行过程中报错了`Uncaught TypeError: Cannot read property 'test' of undefined`，原因在于，循环结束时while还是执行一遍classReg[k].test(elemTestClassName)，而此时classReg[k]已经是undefined了。
 所以应该在while加上判断
 
 ```javascript
-        var k = 0;
-        while(classReg[k] && classReg[k].test(elemTestClassName)){
-            //测试成功进来
-            console.log(elemTestClassName+"测试第"+k+"个正则通过");
-            if(k === classLength){
-                //如果通过所有测试，说明这个dom结果满足要求，我们push到结果中
-                result.push[elemTest];
-                break;
-            }
-            k++;
-        }
+      var k=0;
+      while(classReg[k] && classReg[k].test(elemTestClassName)){
+          console.log(classReg[k]+":"+elemTestClassName+":"+(classReg[k].test(elemTestClassName)));
+          //测试成功进来
+          if(k === classLength-1){
+              //如果通过所有测试，说明这个dom结果满足要求，我们push到结果中
+              result[result.length] = elemTest;
+              break;
+          }
+          k++;
+      }
 ```
 
+#### 2.实例
+
+```html
+<div id="container">
+    <span class="aaa zzz ccc">1</span>
+    <div id="div1" class="aaa    bbb   ccc">2</div>
+</div>
+
+<div id="div2" class="aaa ccc bbb">3</div>
+```
+当我们使用上面的方法时会出现一个奇怪的现象，我现在还没搞明白，生气~~~
+
+```javascript
+var a = getElementsByClassName(document,"div",["aaa","ccc"]);
+console.log(a);
+
+```
+
+看到while循环体中的`console.log(elemTestClassName+"测试第"+k+"个正则通过");`了吗？加上这个console时，就能正确打印出两个dom节点[div#div1.aaa.bbb.ccc, div#div2.aaa.ccc.bbb]，注释掉的话，就只能找到[div#div1.aaa.bbb.ccc]。已疯！！！
 
 
----
+--------------
 做一个勤于思考的人
 
