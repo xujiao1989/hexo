@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="JS,ǰ�˿���,���˳ɳ�," />
+  <meta name="keywords" content="前端开发,个人成长,JS," />
 
 
 
@@ -87,19 +87,28 @@
 
 
 
-<meta name="description" content="��can i use�п��Բ鵽���Ǿ���ʹ�õ�getElementsByClassName��
-��������˼������">
+<meta name="description" content="可以从can i use网站查到getElementsByClassName方法兼容到IE9+（包含IE9），所以我们在前端面试中会经常被问到如何用原生的js去实现这个借口。
+思考
+我希望接口使用的方式如：getElementsByClassName(classname,parentId,tagname); 
+
+classname为我们要筛选的class值，string类型，如“tab tab-i">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ԭ��jsʵ��classɸѡ��">
+<meta property="og:title" content="原生js实现class筛选器">
 <meta property="og:url" content="https://xujiao1989.github.io/blog/2017/03/JS/原生js实现class筛选器.html">
 <meta property="og:site_name" content="徐姣的个人博客">
-<meta property="og:description" content="��can i use�п��Բ鵽���Ǿ���ʹ�õ�getElementsByClassName��
-��������˼������">
-<meta property="og:updated_time" content="2017-03-30T07:02:06.942Z">
+<meta property="og:description" content="可以从can i use网站查到getElementsByClassName方法兼容到IE9+（包含IE9），所以我们在前端面试中会经常被问到如何用原生的js去实现这个借口。
+思考
+我希望接口使用的方式如：getElementsByClassName(classname,parentId,tagname); 
+
+classname为我们要筛选的class值，string类型，如“tab tab-i">
+<meta property="og:updated_time" content="2017-03-30T07:30:56.283Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ԭ��jsʵ��classɸѡ��">
-<meta name="twitter:description" content="��can i use�п��Բ鵽���Ǿ���ʹ�õ�getElementsByClassName��
-��������˼������">
+<meta name="twitter:title" content="原生js实现class筛选器">
+<meta name="twitter:description" content="可以从can i use网站查到getElementsByClassName方法兼容到IE9+（包含IE9），所以我们在前端面试中会经常被问到如何用原生的js去实现这个借口。
+思考
+我希望接口使用的方式如：getElementsByClassName(classname,parentId,tagname); 
+
+classname为我们要筛选的class值，string类型，如“tab tab-i">
 
 
 
@@ -131,7 +140,7 @@
 
 
 
-  <title> ԭ��jsʵ��classɸѡ�� | 徐姣的个人博客 </title>
+  <title> 原生js实现class筛选器 | 徐姣的个人博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -291,7 +300,7 @@
             
             
               
-                ԭ��jsʵ��classɸѡ��
+                原生js实现class筛选器
               
             
           </h1>
@@ -356,7 +365,7 @@
 
           
           
-             <span id="/2017/03/JS/原生js实现class筛选器.html" class="leancloud_visitors" data-flag-title="ԭ��jsʵ��classɸѡ��">
+             <span id="/2017/03/JS/原生js实现class筛选器.html" class="leancloud_visitors" data-flag-title="原生js实现class筛选器">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -385,8 +394,29 @@
       
 
       
-        <p>��<a href="http://caniuse.com/" target="_blank" rel="external">can i use</a>�п��Բ鵽���Ǿ���ʹ�õ�getElementsByClassName��</p>
-<p>��������˼������</p>
+        <p>可以从<a href="http://caniuse.com/" target="_blank" rel="external">can i use</a>网站查到getElementsByClassName方法兼容到IE9+（包含IE9），所以我们在前端面试中会经常被问到如何用原生的js去实现这个借口。</p>
+<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><ol>
+<li><p>我希望接口使用的方式如：getElementsByClassName(classname,parentId,tagname); </p>
+<ul>
+<li>classname为我们要筛选的class值，string类型，如“tab tab-item”不同className用空格隔开</li>
+<li>parentId为父元素的id，可选参数</li>
+<li>tagname为标签名，可选参数</li>
+</ul>
+</li>
+<li><p>尽可能多的使用已经存在的方法</p>
+<ul>
+<li>getElementsByTagName</li>
+<li>getElementById</li>
+</ul>
+</li>
+<li><p>如何解决遍历节点所造成的性能问题</p>
+<ul>
+<li>考虑查找算法的时间复杂度和空间复杂度</li>
+</ul>
+</li>
+</ol>
+<hr>
+<p>做一个勤于思考的人</p>
 
       
     </div>
@@ -431,11 +461,11 @@
       
         <div class="post-tags">
           
+            <a href="/tags/前端开发/" rel="tag"># 前端开发</a>
+          
+            <a href="/tags/个人成长/" rel="tag"># 个人成长</a>
+          
             <a href="/tags/JS/" rel="tag"># JS</a>
-          
-            <a href="/tags/j�˿���/" rel="tag"># ǰ�˿���</a>
-          
-            <a href="/tags/���˳ɳ�/" rel="tag"># ���˳ɳ�</a>
           
         </div>
       
@@ -483,7 +513,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="/2017/03/JS/原生js实现class筛选器.html"
-           data-title="ԭ��jsʵ��classɸѡ��" data-url="https://xujiao1989.github.io/blog//2017/03/JS/原生js实现class筛选器.html">
+           data-title="原生js实现class筛选器" data-url="https://xujiao1989.github.io/blog//2017/03/JS/原生js实现class筛选器.html">
       </div>
     
   </div>
@@ -545,7 +575,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
