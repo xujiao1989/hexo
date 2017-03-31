@@ -26,8 +26,8 @@ categories: JS
 ## 思路
 
 1. 获取到符合要求的dom节点（node下的tag），是一个HTML Collection，是一个类数组，length属性缓存下来，查找代价比较大
-2. 我们获取到dom节点的className通常是一个string类型的如“tab tab-item tab-active”,但是也可以是"tab tab-active tab-item"
-3. 我们使用正则匹配，将className拆成多个className正则，测试tab正则，测试tab-item的正则等
+2. 我们获取到dom节点的className通常是一个string类型的。并且class容许顺序不一致。如“tab tab-item tab-active”与"tab tab-active tab-item"可以匹配的一样的css规则
+3. 我们使用正则匹配，将className拆成多个className正则。因为我们匹配css时需要每个className都必须匹配通过。（拆开也是因为class书写可以无序）
 4. dom节点的className进行正则匹配，通过所有匹配的则返回该节点
 
 ## 实现和效果
