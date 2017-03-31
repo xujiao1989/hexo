@@ -105,7 +105,7 @@
 获取本地的cookie：document.cookie;我们可以打印出来发现，cookie的格式为：name=xujiao; age=18; isVip=xsxdjc;
 通过正则的exec()方法，匹配到isVip=xsxdjc这段文字
 我们知道的是，正则中的小括号表示子匹配模式，匹配成功后保存到exec()返回的数组">
-<meta property="og:updated_time" content="2017-03-31T05:05:55.188Z">
+<meta property="og:updated_time" content="2017-03-31T05:53:35.981Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端面试题--第一套">
 <meta name="twitter:description" content="1. 利用正则实现一个方法，取到”isvip”的cookie值
@@ -446,7 +446,6 @@
 </ul>
 <p>正确的实现是：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</div><div class="line">http.createServer(<span class="function"><span class="keyword">function</span> (<span class="params">request, response</span>) </span>&#123;</div><div class="line">    response.writeHead(<span class="number">200</span>, &#123;<span class="string">'Content-Type'</span>: <span class="string">'text/plain'</span>&#125;);</div><div class="line">    response.end(<span class="string">'我是一台服务器\n'</span>);</div><div class="line">&#125;).listen(<span class="number">8080</span>);</div><div class="line"><span class="built_in">console</span>.log(<span class="string">'Server running at http://127.0.0.1:8080/'</span>);</div></pre></td></tr></table></figure>
-<p>关于http模块的详细了解可以查看博客<a href="">node学习笔记–http模块</a></p>
 <h4 id="7-实现一个函数function-add-a-b-能够处理超出js处理范围两个的和（可能是负数）"><a href="#7-实现一个函数function-add-a-b-能够处理超出js处理范围两个的和（可能是负数）" class="headerlink" title="7. 实现一个函数function add(a,b){},能够处理超出js处理范围两个的和（可能是负数）"></a>7. 实现一个函数function add(a,b){},能够处理超出js处理范围两个的和（可能是负数）</h4><hr>
 <p>做一个勤于思考的人</p>
 
@@ -508,8 +507,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/CSS/css实现垂直居中.html" rel="next" title="css实现垂直居中">
-                <i class="fa fa-chevron-left"></i> css实现垂直居中
+              <a href="/2017/03/JS/new操作到底做了什么.html" rel="next" title="new操作到底做了什么">
+                <i class="fa fa-chevron-left"></i> new操作到底做了什么
               </a>
             
           </div>
@@ -518,8 +517,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/03/JS/原生js实现class筛选器.html" rel="prev" title="原生js实现class筛选器">
-                原生js实现class筛选器 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/03/CSS/css实现垂直居中.html" rel="prev" title="css实现垂直居中">
+                css实现垂直居中 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -587,7 +586,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -598,7 +597,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -609,7 +608,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
