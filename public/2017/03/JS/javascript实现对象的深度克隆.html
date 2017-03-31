@@ -107,7 +107,7 @@
 
 
 函数中的传参方式在JavaScript的函数传参数方式只能按值传递（不管传递的变">
-<meta property="og:updated_time" content="2017-03-30T13:49:31.188Z">
+<meta property="og:updated_time" content="2017-03-30T13:53:36.132Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js实现对象的深度克隆">
 <meta name="twitter:description" content="变量访问的方式在JavaScript中，访问变量可以通过值访问也可以通过引用访问。
@@ -429,9 +429,14 @@
 <li>[object Array]</li>
 </ul>
 <p>也就是返回值是一个字符串，可以通过以下方法获取具体的类型</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">objType</span>(<span class="params">obj</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> obj = <span class="built_in">Object</span>.prototype.toString.call(obj).substring(<span class="number">8</span>);</div><div class="line">    <span class="keyword">return</span> obj.substring(<span class="number">0</span>,obj.length<span class="number">-1</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//获取值分别是：Function、Object、Array</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">objType</span>(<span class="params">obj</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> obj = <span class="built_in">Object</span>.prototype.toString.call(obj).substring(<span class="number">8</span>);</div><div class="line">    <span class="keyword">return</span> obj.substring(<span class="number">0</span>,obj.length<span class="number">-1</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//获取值分别是：Function、Object、Array</span></div><div class="line">           </div><div class="line"><span class="string">``</span><span class="string">`  </span></div><div class="line"></div><div class="line">	    </div><div class="line">+ 函数的复制我们怎么去理解：函数是一个对象,函数名是指向对象的名称。</div><div class="line">  </div><div class="line">`<span class="string">``</span>javascript</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">text</span>(<span class="params"></span>)</span>&#123;</div><div class="line">       <span class="built_in">console</span>.log(<span class="string">"a"</span>);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>函数的复制我们怎么去理解：函数是一个对象,函数名是指向对象的名称。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">text</span>(<span class="params"></span>)</span>&#123;</div><div class="line">   <span class="built_in">console</span>.log(<span class="string">"a"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
 <p>这里,我们可以理解,以上的声明在内存中开辟了一个空间,保存了一个方法,这个方法包含一个打印功能。然后 变量text包含执行这个方法的地址。所以,var b = text;操作,就是将方法的地址复制给函数b。</p>
 <ul>
 <li>在JavaScript中,函数不存在重载,也就是不存在某个函数被修改了的情况(只是断开了指向)。</li>
@@ -513,6 +518,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/node学习笔记/node学习笔记--http模块.html" rel="prev" title="node学习笔记--http模块">
+                node学习笔记--http模块 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -601,7 +610,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

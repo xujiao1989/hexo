@@ -105,7 +105,7 @@
 获取本地的cookie：document.cookie;我们可以打印出来发现，cookie的格式为：name=xujiao; age=18; isVip=xsxdjc;
 通过正则的exec()方法，匹配到isVip=xsxdjc这段文字
 我们知道的是，正则中的小括号表示子匹配模式，匹配成功后保存到exec()返回的数组">
-<meta property="og:updated_time" content="2017-03-29T06:25:07.934Z">
+<meta property="og:updated_time" content="2017-03-31T05:05:55.188Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端面试题--第一套">
 <meta name="twitter:description" content="1. 利用正则实现一个方法，取到”isvip”的cookie值
@@ -400,7 +400,7 @@
       
 
       
-        <h5 id="1-利用正则实现一个方法，取到”isvip”的cookie值"><a href="#1-利用正则实现一个方法，取到”isvip”的cookie值" class="headerlink" title="1. 利用正则实现一个方法，取到”isvip”的cookie值"></a>1. 利用正则实现一个方法，取到”isvip”的cookie值</h5><blockquote>
+        <h4 id="1-利用正则实现一个方法，取到”isvip”的cookie值"><a href="#1-利用正则实现一个方法，取到”isvip”的cookie值" class="headerlink" title="1. 利用正则实现一个方法，取到”isvip”的cookie值"></a>1. 利用正则实现一个方法，取到”isvip”的cookie值</h4><blockquote>
 <p>实现思路：</p>
 </blockquote>
 <ul>
@@ -409,33 +409,45 @@
 <li>我们知道的是，正则中的小括号表示子匹配模式，匹配成功后保存到exec()返回的数组中</li>
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">/**需要注意：</span></div><div class="line">（1）利用RegExp动态创建正则</div><div class="line"> (2)使用\\w转义</div><div class="line"> (3)(\\w*)中*需要放到括号内，否则匹配到的只是一个字符</div><div class="line"> (4) 需要使用^开头，否则可能会匹配到，scdsisVip=xsxdjc</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getCookie</span>(<span class="params">name</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> cookies = <span class="built_in">document</span>.cookie,</div><div class="line">        reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"^"</span>+name+<span class="string">"=(\\w*)"</span>,<span class="string">"ig"</span>),   </div><div class="line">        match = reg.exec(cookies); </div><div class="line">    <span class="keyword">return</span> match &amp;&amp; match[<span class="number">1</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h5 id="2-利用css实现垂直居中（兼容IE6）"><a href="#2-利用css实现垂直居中（兼容IE6）" class="headerlink" title="2. 利用css实现垂直居中（兼容IE6）"></a>2. 利用css实现垂直居中（兼容IE6）</h5><h5 id="3-至少写出3中js的设计模式，并且做出详细说明（越多越好）"><a href="#3-至少写出3中js的设计模式，并且做出详细说明（越多越好）" class="headerlink" title="3. 至少写出3中js的设计模式，并且做出详细说明（越多越好）"></a>3. 至少写出3中js的设计模式，并且做出详细说明（越多越好）</h5><h5 id="4-详细说明TCP的三次握手，并配合手绘图"><a href="#4-详细说明TCP的三次握手，并配合手绘图" class="headerlink" title="4. 详细说明TCP的三次握手，并配合手绘图"></a>4. 详细说明TCP的三次握手，并配合手绘图</h5><h5 id="5-实现一个函数function-on-elem-type-handler-完成事件注册，保证this指向始终是elem，要求兼容IE8"><a href="#5-实现一个函数function-on-elem-type-handler-完成事件注册，保证this指向始终是elem，要求兼容IE8" class="headerlink" title="5. 实现一个函数function on(elem,type,handler){}完成事件注册，保证this指向始终是elem，要求兼容IE8"></a>5. 实现一个函数function on(elem,type,handler){}完成事件注册，保证this指向始终是elem，要求兼容IE8</h5><p>我们事件注册的方式有两种：addEventListener，attachEvent。</p>
+<h4 id="2-利用css实现垂直居中（兼容IE6）"><a href="#2-利用css实现垂直居中（兼容IE6）" class="headerlink" title="2. 利用css实现垂直居中（兼容IE6）"></a>2. 利用css实现垂直居中（兼容IE6）</h4><h4 id="3-至少写出3中js的设计模式，并且做出详细说明（越多越好）"><a href="#3-至少写出3中js的设计模式，并且做出详细说明（越多越好）" class="headerlink" title="3. 至少写出3中js的设计模式，并且做出详细说明（越多越好）"></a>3. 至少写出3中js的设计模式，并且做出详细说明（越多越好）</h4><h4 id="4-详细说明TCP的三次握手，并配合手绘图"><a href="#4-详细说明TCP的三次握手，并配合手绘图" class="headerlink" title="4. 详细说明TCP的三次握手，并配合手绘图"></a>4. 详细说明TCP的三次握手，并配合手绘图</h4><h4 id="5-实现一个函数function-on-elem-type-handler-完成事件注册，保证this指向始终是elem，要求兼容IE8"><a href="#5-实现一个函数function-on-elem-type-handler-完成事件注册，保证this指向始终是elem，要求兼容IE8" class="headerlink" title="5. 实现一个函数function on(elem,type,handler){}完成事件注册，保证this指向始终是elem，要求兼容IE8"></a>5. 实现一个函数function on(elem,type,handler){}完成事件注册，保证this指向始终是elem，要求兼容IE8</h4><p>我们事件注册的方式有两种：addEventListener，attachEvent。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">on</span>(<span class="params">elem,type,handle</span>)</span>&#123;</div><div class="line">    <span class="keyword">if</span>(<span class="built_in">window</span>.addEventListener)&#123;</div><div class="line">        elem.addEventListener(type,handle)</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        elem.attachEvent(<span class="string">"on"</span>+type,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">            handle.apply(elem);</div><div class="line">        &#125;)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>需要注意的地方</p>
-</blockquote>
-<p>一开始使用bind实现的，但是bind只支持IE9+，ff4+，chrome7+支持此方法，opera和safari不支持（MDN上的说明）。所以换了apply或者call实现。如果用bind就不需要外面在包一层function了，因为bind返回的就是一个函数</p>
-<blockquote>
-<p>addEventListener和attachEvent的区别</p>
-</blockquote>
+<ol>
+<li><p>需要注意的地方</p>
+<p> 一开始使用bind实现的，但是bind只支持IE9+，ff4+，chrome7+支持此方法，opera和safari不支持（MDN上的说明）。所以换了apply或者call实现。如果用bind就不需要外面在包一层function了，因为bind返回的就是一个函数</p>
+</li>
+<li><p>addEventListener和attachEvent的区别</p>
+</li>
+</ol>
 <ul>
-<li><p><code>兼容性</code></p>
-<p>  addEventListener：是DOM2级事件注册方式（标准），但是只支持IE9+(包含IE9)以及其他浏览器。attachEvent：IE事件注册方式，IE8-</p>
+<li><p><code>兼容性</code>： addEventListener：是DOM2级事件注册方式（标准），但是只支持IE9+(包含IE9)以及其他浏览器。attachEvent：IE事件注册方式，IE8-</p>
 </li>
-<li><p><code>this的指向</code></p>
-<p>  在addEventListener的处理函数中this指向被绑定元素，而attachEvent始终指向window</p>
+<li><p><code>this的指向</code>： 在addEventListener的处理函数中this指向被绑定元素，而attachEvent始终指向window</p>
 </li>
-<li><p><code>代码执行顺序</code></p>
-<p>  addEventListener按照绑定事件的顺序执行，而attachEvent与绑定事件的顺序相反执行</p>
+<li><p><code>代码执行顺序</code>：addEventListener按照绑定事件的顺序执行，而attachEvent与绑定事件的顺序相反执行</p>
 </li>
-<li><p><code>参数个数</code></p>
-<p>  addEventListener有三个参数，第三个参数表示在哪个阶段捕获事件（false表示冒泡阶段），而attachEvent只支持事件冒泡</p>
+<li><p><code>参数个数</code>：addEventListener有三个参数，第三个参数表示在哪个阶段捕获事件（false表示冒泡阶段），而attachEvent只支持事件冒泡</p>
 </li>
-<li><p><code>事件类型</code></p>
-<p>  addEventListener的事件类型如：click,attachEvent的事件类型是:”on”+click</p>
+<li><p><code>事件类型</code>：addEventListener的事件类型如：click,attachEvent的事件类型是:”on”+click</p>
 </li>
 </ul>
-<h5 id="6-利用node实现一个服务器，端口8080，返回”我是一台服务器”"><a href="#6-利用node实现一个服务器，端口8080，返回”我是一台服务器”" class="headerlink" title="6. 利用node实现一个服务器，端口8080，返回”我是一台服务器”"></a>6. 利用node实现一个服务器，端口8080，返回”我是一台服务器”</h5><h5 id="7-实现一个函数function-add-a-b-能够处理超出js处理范围两个的和（可能是负数）"><a href="#7-实现一个函数function-add-a-b-能够处理超出js处理范围两个的和（可能是负数）" class="headerlink" title="7. 实现一个函数function add(a,b){},能够处理超出js处理范围两个的和（可能是负数）"></a>7. 实现一个函数function add(a,b){},能够处理超出js处理范围两个的和（可能是负数）</h5><hr>
+<h4 id="6-利用node实现一个服务器，端口8080，返回”我是一台服务器”"><a href="#6-利用node实现一个服务器，端口8080，返回”我是一台服务器”" class="headerlink" title="6. 利用node实现一个服务器，端口8080，返回”我是一台服务器”"></a>6. 利用node实现一个服务器，端口8080，返回”我是一台服务器”</h4><p>在做笔试的时候看到这个题目差点没当场把自己砸死，送分题呀，可是我并不记得API。当时我就在卷子上认真的写着：</p>
+<p>我并没有用过node，我觉得首先node提供了一个http的核心模块，这个模块应该提供了一个类似于createServer的方法（没错，我猜对了方法），接下来我们应该提供一些参数，供服务器使用<br>比如port:端口，url:拦截的链接，response就是返回数据</p>
+<p>我写的是</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</div><div class="line">http.createServer(&#123;</div><div class="line">    <span class="attr">port</span>:<span class="number">8080</span>,</div><div class="line">    <span class="attr">url</span>:<span class="string">"127.0.0.1"</span>,</div><div class="line">    <span class="attr">response</span>:<span class="string">"我是一台服务器"</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>为什么要把我的错误的答案写上呢，其实这说明了什么，我没有认真的思考过web服务器的角色和http请求的过程</p>
+<ol>
+<li>web服务器的角色是什么：<br>用于处理用户的请求，并作出响应（拦截用户的http请求，根据请求所带来的一系列信息，给出一点的响应）</li>
+<li>http响应过程是什么<br>在学习http的过程中，我们要学什么，请求报文呀，请求方法，响应头、状态码等等，为什么会有这些东西存在，说明这些在我http交流中充当着非常重要的角色，而我在上面的思考web服务器的时候<br>却并没有考虑这些东西。</li>
+</ol>
+<ul>
+<li>我的createServer只获取了参数，没做任何处理，你就是服务器呀，还准备让谁去做这件事情</li>
+<li>你去取request了吗？并没有，那怎么分析请求呢</li>
+<li>你返回数据的时候写响应头了吗？并没有，那怎么知道我的请求是否合法，你的状态码响应头什么的都怎么给呢</li>
+</ul>
+<p>正确的实现是：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</div><div class="line">http.createServer(<span class="function"><span class="keyword">function</span> (<span class="params">request, response</span>) </span>&#123;</div><div class="line">    response.writeHead(<span class="number">200</span>, &#123;<span class="string">'Content-Type'</span>: <span class="string">'text/plain'</span>&#125;);</div><div class="line">    response.end(<span class="string">'我是一台服务器\n'</span>);</div><div class="line">&#125;).listen(<span class="number">8080</span>);</div><div class="line"><span class="built_in">console</span>.log(<span class="string">'Server running at http://127.0.0.1:8080/'</span>);</div></pre></td></tr></table></figure>
+<p>关于http模块的详细了解可以查看博客<a href="">node学习笔记–http模块</a></p>
+<h4 id="7-实现一个函数function-add-a-b-能够处理超出js处理范围两个的和（可能是负数）"><a href="#7-实现一个函数function-add-a-b-能够处理超出js处理范围两个的和（可能是负数）" class="headerlink" title="7. 实现一个函数function add(a,b){},能够处理超出js处理范围两个的和（可能是负数）"></a>7. 实现一个函数function add(a,b){},能够处理超出js处理范围两个的和（可能是负数）</h4><hr>
 <p>做一个勤于思考的人</p>
 
       
@@ -496,8 +508,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/JS/new操作到底做了什么.html" rel="next" title="new操作到底做了什么">
-                <i class="fa fa-chevron-left"></i> new操作到底做了什么
+              <a href="/2017/03/CSS/css实现垂直居中.html" rel="next" title="css实现垂直居中">
+                <i class="fa fa-chevron-left"></i> css实现垂直居中
               </a>
             
           </div>
@@ -506,8 +518,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/03/CSS/css实现垂直居中.html" rel="prev" title="css实现垂直居中">
-                css实现垂直居中 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/03/JS/原生js实现class筛选器.html" rel="prev" title="原生js实现class筛选器">
+                原生js实现class筛选器 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -597,7 +609,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

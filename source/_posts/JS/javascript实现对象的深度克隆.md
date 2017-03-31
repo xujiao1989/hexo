@@ -59,24 +59,23 @@ categories: javascript
  
   也就是返回值是一个字符串，可以通过以下方法获取具体的类型
   
-```javascript
-function objType(obj) {
-    var obj = Object.prototype.toString.call(obj).substring(8);
-    return obj.substring(0,obj.length-1);
-}
-
-//获取值分别是：Function、Object、Array
-           
-```  
-
+  ```javascript
+      function objType(obj) {
+          var obj = Object.prototype.toString.call(obj).substring(8);
+          return obj.substring(0,obj.length-1);
+      }
+      
+      //获取值分别是：Function、Object、Array   
+  ```
 	    
 + 函数的复制我们怎么去理解：函数是一个对象,函数名是指向对象的名称。
-  
-```javascript
-    function text(){
-       console.log("a");
-    }
-```
+
+  ```javascript
+      function text(){
+         console.log("a");
+      }
+  ```
+
             
             
 这里,我们可以理解,以上的声明在内存中开辟了一个空间,保存了一个方法,这个方法包含一个打印功能。然后 变量text包含执行这个方法的地址。所以,var b = text;操作,就是将方法的地址复制给函数b。
