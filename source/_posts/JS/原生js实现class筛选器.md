@@ -153,6 +153,7 @@ console.log(a);
 
 + [RegExp.test() returns different result for same str](http://stackoverflow.com/questions/13586786/regexp-test-returns-different-result-for-same-str-depending-on-how-where-i)
 + [JavaScript RegExp.test() 函数详解](http://www.365mini.com/page/javascript-regexp-test.htm)
+
 --------------------------
 做一个勤于思考的人
 
