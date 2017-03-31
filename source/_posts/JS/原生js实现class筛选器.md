@@ -124,9 +124,35 @@ console.log(a);
 
 ```
 
-看到while循环体中的`console.log(elemTestClassName+"测试第"+k+"个正则通过");`了吗？加上这个console时，就能正确打印出两个dom节点[div#div1.aaa.bbb.ccc, div#div2.aaa.ccc.bbb]，注释掉的话，就只能找到[div#div1.aaa.bbb.ccc]。已疯！！！
+看到while循环体中的`console.log(classReg[k]+":"+elemTestClassName+":"+(classReg[k].test(elemTestClassName)))`了吗？加上这个console时，就能正确打印出两个dom节点[div#div1.aaa.bbb.ccc, div#div2.aaa.ccc.bbb]，注释掉的话，就只能找到[div#div1.aaa.bbb.ccc]。已疯！！！
 
+## 关于上面问题的解决
 
---------------
+非常感谢小宁宝宝的推荐，一个人思考真的容易陷入死胡同。
+
+因为我在实例化正则的时候，加了全局标志“g”,那么第一次查找成功后，下一次匹配就从成功后的位置开始。而我的console里面改变了lastIndex的值，所以解决方案有两个
+
+1. 删除全局标志“g”。这是最根本的原因
+2. 不删除的话，那么就手动将每次的lastIndex置为0
+
+```javascript
+    while(classReg[k] && (classReg[k].test(elemTestClassName))){
+      // console.log(classReg[k]+":"+elemTestClassName+":"+(classReg[k].test(elemTestClassName)));
+        classReg[k].lastIndex = 0;
+        //测试成功进来
+        if(k === classLength-1){
+            //如果通过所有测试，说明这个dom结果满足要求，我们push到结果中
+            result[result.length] = elemTest;
+            break;
+        }
+        k++;
+    }
+```
+
+推荐阅读：
+
++ [RegExp.test() returns different result for same str](http://stackoverflow.com/questions/13586786/regexp-test-returns-different-result-for-same-str-depending-on-how-where-i)
++ [JavaScript RegExp.test() 函数详解](http://www.365mini.com/page/javascript-regexp-test.htm)
+--------------------------
 做一个勤于思考的人
 
