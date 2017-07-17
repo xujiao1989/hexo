@@ -97,7 +97,7 @@
 <meta property="og:description" content="前端工程师在面试过程中不可避免的会被问到是否知道http，讲真，似乎我们没有细究过http也好好的开发了很长一段时间。那为何越是大公司越会很注重你是否了解http呢。站在我们前端开发人员的角度，前后端通信几乎都是基于HTTP的，我们发送http请求，由RD接受请求处理后返回我们需要的资源。我们更深入的了解http到底是为了什么：
 
 更好的定位问题：我们发送一个请求之后，可以根据请求返回的状态码定位">
-<meta property="og:updated_time" content="2017-03-21T10:29:13.000Z">
+<meta property="og:updated_time" content="2017-07-17T06:14:59.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTTP学习总结">
 <meta name="twitter:description" content="前端工程师在面试过程中不可避免的会被问到是否知道http，讲真，似乎我们没有细究过http也好好的开发了很长一段时间。那为何越是大公司越会很注重你是否了解http呢。站在我们前端开发人员的角度，前后端通信几乎都是基于HTTP的，我们发送http请求，由RD接受请求处理后返回我们需要的资源。我们更深入的了解http到底是为了什么：
@@ -395,13 +395,13 @@
 <li><code>用更好的方式去沟通：</code>不同的业务场景选用不同的方法沟通不仅仅提高可读性，也可以提高安全性、服务器处理的效率</li>
 <li><code>应付面试：</code>很重要<br>其实主要内容我还是从《HTTP权威指南》上抄的~</li>
 </ul>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>http说的通俗一点，相当于客户端和服务器端的沟通语言。那么http协议简单来说包括哪些内容呢：</p>
+<h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h2><p>http说的通俗一点，相当于客户端和服务器端的沟通语言。那么http协议简单来说包括哪些内容呢：</p>
 <ol>
 <li>如何沟通：http报文，告诉客户端如何提出要求，服务器端应该怎样分析客户端的请求并给出响应的反应</li>
 <li>沟通的高效性：http缓存、长连接等</li>
 <li>沟通的安全性：https、客户端识别、cookie机制<br>站在前端的角度来讲，我们常用的客户端是浏览器，服务器端可以是任何提供服务一个机器（废话）。</li>
 </ol>
-<h2 id="如何沟通–http报文结构"><a href="#如何沟通–http报文结构" class="headerlink" title="如何沟通–http报文结构"></a>如何沟通–http报文结构</h2><p>这个部分主要讲解客户端和服务器端应该遵循什么样的规范来沟通。他们都得遵循http报文规范。</p>
+<h2 id="2-如何沟通–http报文结构"><a href="#2-如何沟通–http报文结构" class="headerlink" title="2. 如何沟通–http报文结构"></a>2. 如何沟通–http报文结构</h2><p>这个部分主要讲解客户端和服务器端应该遵循什么样的规范来沟通。他们都得遵循http报文规范。</p>
 <ul>
 <li>http报文是什么：简单的格式化数据块</li>
 <li><p>http报文包含3个部分</p>
@@ -409,17 +409,17 @@
 <li>起始行：对报文进行描述</li>
 <li>首部：包含一些属性</li>
 <li><p>主体（可以没有）：包含数据主体</p>
-<h5 id="请求报文格式"><a href="#请求报文格式" class="headerlink" title="请求报文格式"></a>请求报文格式</h5><p>method request-url version<br>headers</p>
+<h5 id="2-1-请求报文格式"><a href="#2-1-请求报文格式" class="headerlink" title="2.1 请求报文格式"></a>2.1 请求报文格式</h5><p>method request-url version<br>headers</p>
 <p>entity-body</p>
 </li>
 </ul>
 </li>
 </ul>
-<h5 id="响应报文格式"><a href="#响应报文格式" class="headerlink" title="响应报文格式"></a>响应报文格式</h5><pre><code>version status reason-phrase
+<h5 id="2-2-响应报文格式"><a href="#2-2-响应报文格式" class="headerlink" title="2.2 响应报文格式"></a>2.2 响应报文格式</h5><pre><code>version status reason-phrase
 headers
 
 entity-body
-</code></pre><h2 id="method请求的方法"><a href="#method请求的方法" class="headerlink" title="method请求的方法"></a>method请求的方法</h2><p>HTTP规范总共定义了<strong>7个</strong>请求方法，为了告诉客户端，客户端想要执行什么动作。但不是每个服务器都实现了以下的方法。<strong>HTTP1.1协议要求实现GET和HEAD方法</strong></p>
+</code></pre><h2 id="3-method请求的方法"><a href="#3-method请求的方法" class="headerlink" title="3. method请求的方法"></a>3. method请求的方法</h2><p>HTTP规范总共定义了<strong>7个</strong>请求方法，为了告诉客户端，客户端想要执行什么动作。但不是每个服务器都实现了以下的方法。<strong>HTTP1.1协议要求实现GET和HEAD方法</strong></p>
 <ol>
 <li>GET:从服务器端获取资源，没有实体<br>HTTP1.1要求实现GET方法</li>
 <li>HEAD：从服务器获取资源的首部，没有实体<br>与GET方法很类似，但是服务器在响应中只返回首部，不会返回实体的主体部分。HTTP1.1要求实现GET方法。HEAD方法可以用来：        <ul>
@@ -441,14 +441,14 @@ entity-body
 <li>DELETE：从服务器上删除一份文档，没有实体<br>请求服务器端删除一个资源，但是不能保证这个请求一定会被执行，因为HTTP的规范容许服务器在不通知客户端的情况下撤销请求。        </li>
 <li>扩展方法<br>HTTP被设计成字段可拓展的，这样可以向下兼容。但是我并不想看这块。</li>
 </ol>
-<h2 id="请求的URL简单介绍"><a href="#请求的URL简单介绍" class="headerlink" title="请求的URL简单介绍"></a>请求的URL简单介绍</h2><p>URL提供了统一的资源命名方式：方案：//服务器位置//路径。URL的语法会由于方案的不同而不同,几乎没有哪个URL中包含了所以所有的组件：scheme://user:pwd@host:port/path;params?query#frag</p>
+<h2 id="4-请求的URL简单介绍"><a href="#4-请求的URL简单介绍" class="headerlink" title="4. 请求的URL简单介绍"></a>4. 请求的URL简单介绍</h2><p>URL提供了统一的资源命名方式：方案：//服务器位置//路径。URL的语法会由于方案的不同而不同,几乎没有哪个URL中包含了所以所有的组件：scheme://user:pwd@host:port/path;params?query#frag</p>
 <ol>
 <li>params参数<br>一个URL中可以有多个参数，参数为键值对，各个参数之间以及参数与URL其他部分之间用逗号分隔        </li>
 <li>query<br>查询组件的内容没有通用的格式，用字符“？”将其与URL的其余部分分隔开</li>
 </ol>
-<h5 id="方案：例如HTTP-FTP-SMTP"><a href="#方案：例如HTTP-FTP-SMTP" class="headerlink" title="方案：例如HTTP/FTP/SMTP"></a>方案：例如HTTP/FTP/SMTP</h5><p>方案名不区分大小写,告诉应用程序应该使用什么协议        </p>
-<h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><p>格式类似于HTTP/1.1,HTTP/2.0,是为了服务器和客户端之间相互了解各自的能力和报文的格式。版本号说明了应用程序支持的最高的HTTP版本。版本号不会被当做小数来处理，所以HTTP2.22比HTTP2.3的版本要高，因为22&gt;3</p>
-<h2 id="状态码"><a href="#状态码" class="headerlink" title="状态码"></a>状态码</h2><p>状态码配合原因短语一起告诉客户端他的请求处于什么状态,目前有5个种类的状态码</p>
+<h5 id="4-1-方案：例如HTTP-FTP-SMTP"><a href="#4-1-方案：例如HTTP-FTP-SMTP" class="headerlink" title="4.1 方案：例如HTTP/FTP/SMTP"></a>4.1 方案：例如HTTP/FTP/SMTP</h5><p>方案名不区分大小写,告诉应用程序应该使用什么协议        </p>
+<h2 id="5-版本"><a href="#5-版本" class="headerlink" title="5. 版本"></a>5. 版本</h2><p>格式类似于HTTP/1.1,HTTP/2.0,是为了服务器和客户端之间相互了解各自的能力和报文的格式。版本号说明了应用程序支持的最高的HTTP版本。版本号不会被当做小数来处理，所以HTTP2.22比HTTP2.3的版本要高，因为22&gt;3</p>
+<h2 id="6-状态码"><a href="#6-状态码" class="headerlink" title="6. 状态码"></a>6. 状态码</h2><p>状态码配合原因短语一起告诉客户端他的请求处于什么状态,目前有5个种类的状态码</p>
 <ul>
 <li>100~199:信息类状态码(目前实现了2个)</li>
 <li>200~299:成功类状态码(目前实现了7个)</li>
@@ -456,12 +456,12 @@ entity-body
 <li>400~499:客户端失败状态码(目前实现了18个)</li>
 <li>500~599:服务器端状态码(目前实现了6个)</li>
 </ul>
-<h5 id="信息类状态码"><a href="#信息类状态码" class="headerlink" title="信息类状态码"></a>信息类状态码</h5><p>这类型状态码是http1.1引入的,都比较新也比较受争议,所以目前只实现了2个:</p>
+<h5 id="6-1-信息类状态码"><a href="#6-1-信息类状态码" class="headerlink" title="6.1 信息类状态码"></a>6.1 信息类状态码</h5><p>这类型状态码是http1.1引入的,都比较新也比较受争议,所以目前只实现了2个:</p>
 <ol>
 <li>100 Continue<br>说明服务器端已经收到部分请求,请求客户端继续。那么为什么我们需要这个状态码: http客户端应用程序要发给服务器一个实体的主体,但是在发送前想知道服务器端是否接受服务器端只有接受到带有值为100 continue的expires请求头时才会返回100状态码,</li>
 <li>101 switching protocols<br>说明服务器根据客户端的请示,将协议切换成update首部所列的协议</li>
 </ol>
-<h5 id="成功类状态码"><a href="#成功类状态码" class="headerlink" title="成功类状态码"></a>成功类状态码</h5><p>目前已经实现了7个(200~206)</p>
+<h5 id="6-2-成功类状态码"><a href="#6-2-成功类状态码" class="headerlink" title="6.2 成功类状态码"></a>6.2 成功类状态码</h5><p>目前已经实现了7个(200~206)</p>
 <ol>
 <li>200 OK<br>请求没有问题,响应的实体主体部分包含请求的资源</li>
 <li>201 created<br>主要用来创建服务器端请求(PUT)<br>服务器在返回改状态码前必须已经创建好对象<br>响应的主体部分应该包含各组引用了已创建的资源的URL</li>
@@ -477,7 +477,7 @@ entity-body
 <li>ETag</li>
 <li>Content-Location</li>
 </ul>
-<h5 id="重定向类状态码-目前实现了7个"><a href="#重定向类状态码-目前实现了7个" class="headerlink" title="重定向类状态码(目前实现了7个)"></a>重定向类状态码(目前实现了7个)</h5><ol>
+<h5 id="6-3-重定向类状态码-目前实现了7个"><a href="#6-3-重定向类状态码-目前实现了7个" class="headerlink" title="6.3 重定向类状态码(目前实现了7个)"></a>6.3 重定向类状态码(目前实现了7个)</h5><ol>
 <li>300 Multiple Choice<br>请求的url对应多个资源(中文、英文等)会返回该状态码<br>服务器可以在响应的location首部给出首选的URL</li>
 <li>301 Moved permanently<br>表示请求的资源已经转移<br>响应的location头部应该包含资源的新URL</li>
 <li>302 Found<br>与301类似,客户端使用响应的location首部来临时定位资源<br>以后还是会使用来的URL定位资源</li>
@@ -487,7 +487,7 @@ entity-body
 <li>306 未使用</li>
 <li>307 Temporary Redirect<br>临时的重定向,类似于301,但响应中给出的是临时的url<br>以后还是使用老的url来访问资源</li>
 </ol>
-<h5 id="服务器端错误状态码"><a href="#服务器端错误状态码" class="headerlink" title="服务器端错误状态码"></a>服务器端错误状态码</h5><p>目前实现了6个</p>
+<h5 id="6-4-服务器端错误状态码"><a href="#6-4-服务器端错误状态码" class="headerlink" title="6.4 服务器端错误状态码"></a>6.4 服务器端错误状态码</h5><p>目前实现了6个</p>
 <ol>
 <li>500 Internal server error<br>遇到妨碍服务器提供服务的内部错误时返回</li>
 <li>501 Not implemented<br>客户端发起的请求超出了服务器的能力范围,例如使用了服务器不支持的方法</li>
@@ -496,7 +496,7 @@ entity-body
 <li>504 gateway timeout<br>类似于408,这里的响应来自于网关或者代理<br>在等服务器等待请求进行响应时超时了</li>
 <li>505 http version not support</li>
 </ol>
-<h2 id="学习时间线"><a href="#学习时间线" class="headerlink" title="学习时间线"></a>学习时间线</h2><h5 id="2017-02-27"><a href="#2017-02-27" class="headerlink" title="2017-02-27"></a>2017-02-27</h5><ul>
+<h2 id="7-学习时间线"><a href="#7-学习时间线" class="headerlink" title="7. 学习时间线"></a>7. 学习时间线</h2><h5 id="2017-02-27"><a href="#2017-02-27" class="headerlink" title="2017-02-27"></a>2017-02-27</h5><ul>
 <li>http简介</li>
 <li>http报文结构</li>
 <li>url</li>
@@ -505,7 +505,8 @@ entity-body
 <h5 id="2017-03-01"><a href="#2017-03-01" class="headerlink" title="2017-03-01"></a>2017-03-01</h5><ul>
 <li>状态码 (信息类状态码、成功类状态码、重定向类状态码、服务器端错误状态码)</li>
 </ul>
-<h2 id="鸡汤"><a href="#鸡汤" class="headerlink" title="鸡汤"></a>鸡汤</h2><p>做一个勤于思考的人~</p>
+<hr>
+<p>做一个勤于思考的人~</p>
 
       
     </div>
@@ -644,7 +645,7 @@ entity-body
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -666,7 +667,7 @@ entity-body
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

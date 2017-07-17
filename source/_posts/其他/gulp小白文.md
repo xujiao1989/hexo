@@ -9,9 +9,9 @@ tags:
 categories: 其他
 ---
 
-## 关于gulp
+## 1. 关于gulp
 
-### gulp是什么
+### 1.1 gulp是什么
 
 gulp是一款提高我们开发效率的工具。比如：
 
@@ -22,7 +22,7 @@ gulp是一款提高我们开发效率的工具。比如：
 而这一切并不是gulp本身完成的，而是一系列的gulp插件来帮忙完成的。
 
 
-### gulp环境简单配置
+### 1.2 gulp环境简单配置
 
 + 首先你得有node环境（去下载node并安装好，内置了npm包管理工具）
 + 切到工程目录下，npm init 根据提示初始化package.json文件，如下图所示操作，会在项目目录下生成一个package.json文件(package.json文件也可以手动添加)
@@ -60,7 +60,7 @@ gulp是一款提高我们开发效率的工具。比如：
 
 好吧，关于gulp的接口只有那么几个，自己去看一看
 
-### 我自己的学习经验就是：
+### 1.3 我自己的学习经验就是：
 
 + 正确认识gulp: 它并不是一个什么多么难的新知识，只要我们根据要求配合插件可以实现非常强大的功能。
 
@@ -70,27 +70,30 @@ gulp是一款提高我们开发效率的工具。比如：
 
 
 	
-## 比较好的gulp插件
+## 1.4 比较好的gulp插件
 
 + autoprefixer: 自动添加css兼容前缀
 + run-sequence：让任务船型执行
 + [这里很多资料，不骗你](https://github.com/Platform-CUF/use-gulp)
 
-## 项目中使用ES6的模块
+## 2. 项目中使用ES6的模块
 
-	buildjs :(fromPath,toPath,name)=>{
-		return browserify({
-			entries: [fromPath],
-			debug: true, // 告知Browserify在运行同时生成内联sourcemap用于调试
-		}).transform("babelify", {presets: ["es2015"]})//转为ES5
-			.bundle()//打包
-			.pipe(source(name ? name : "app.js" ))
-			.pipe(buffer()) // 缓存文件内容
-			.pipe(gulp.dest(toPath));
-	}
+```javascript
+buildjs :(fromPath,toPath,name)=>{
+    return browserify({
+        entries: [fromPath],
+        debug: true, // 告知Browserify在运行同时生成内联sourcemap用于调试
+    }).transform("babelify", {presets: ["es2015"]})//转为ES5
+        .bundle()//打包
+        .pipe(source(name ? name : "app.js" ))
+        .pipe(buffer()) // 缓存文件内容
+        .pipe(gulp.dest(toPath));
+}
+```
 
 
-## 参考文章
+
+## 3. 参考文章
 
 + [使用 gulp 搭建前端环境之CommonJs & ES6 模块化(中级篇)](http://div.io/topic/1506)
 

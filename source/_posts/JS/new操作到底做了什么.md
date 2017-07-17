@@ -9,7 +9,7 @@ tags:
 categories: JS
 ---
   
-## new操作做了哪些
+## 1. new操作做了哪些
 
 
 ```javascript
@@ -25,31 +25,31 @@ function F(name,age){
    }
  }
 
- var f = new F()；
+ var f = new F();
  console.log(f);
 ```
     
  
 new调用函数（实例化）执行了5项操作
 
-#### 第一步：创建一个新的对象
+#### 1.1 第一步：创建一个新的对象
 
 ```javascript
 var f = new Object();
 ```
 
     
-#### 第二步：创建原型链接
+#### 1.2 第二步：创建原型链接
 ```javascript
 f._proto_ = F.prototyte;
 f._proto_ === F.prototype // true
 ```
       
-#### 第三步：绑定this
+#### 1.3 第三步：绑定this
 
 让F中的的this指向f上
 
-#### 第四步：执行构造函数中的代码，也就是为新对象添加属性
+#### 1.4 第四步：执行构造函数中的代码，也就是为新对象添加属性
 
 ```javascript
 f.name = undefined, 
@@ -59,24 +59,24 @@ f.name = undefined,
 }
 ```
        
-#### 第五步：返回新对象
+#### 1.5 第五步：返回新对象
   + 如果返回的对象是值类型，就丢弃，返回这个新对象
      return 1;是无效的，控制台打印的是对象f
   + 如果是引用类型，这返回这个引用类型，取代新对象
      return {a:1,b:2}会取代f
 
-## call、apply、bind
+## 2. call、apply、bind
 
 三者的作用都是改变this指向的，并且参第一个参数都是this要指向的对象，都可以利用后续参数传参
 
-### 区别在于：
+### 2.1 区别在于：
 
 + call和apply本质上功能一致，都是直接执行了，但是传参的方式不一样
     + obj.call(obj1,arg1,arg2),
     + obj.apply(obj1,[arg1,arg2])
 + bind没有直接执行，而是返回一个函数，我们可以链式一直玩下去~
 
-## 继承
+## 3. 继承
        
 上面扯了那么多似乎都跟继承没什么关系，我理解的是，什么是继承，继承就是能够使用其他对象的属性和方法，管你用什么方法。
 那么有几种方法可以让我们使用别的对象的方法和属性呢。
@@ -108,9 +108,9 @@ f.name = undefined,
 
 看到了吗  b是从xx的实例，可是它居然能使用parson的say方法，可不就是继承吗   
 
-## 小知识     
+## 4. 小知识     
 
-### Object.create()了解
+### 4.1 Object.create()了解
 + 是es5的新特性
 + 有两个参数，第二个参数可选（描述性）
 ```javascript
@@ -127,7 +127,7 @@ object.create(null)
 //创建一个很空的对象，他的原型都是空的，区别new object
 ```
         
-### _ proto _ 和prototype的区别
+### 4.2 _ proto _ 和prototype的区别
 
 + **JS中对象**:具有属性__proto__，可称为隐式原型，一个对象的隐式原型指向构造该对象的**构造函数的原型**，这也保证了实例能够访问在构造函数原型中定义的属性和方法。
   
@@ -175,7 +175,7 @@ function F(name,age){
 ```
     
   
-## 其他
+## 5. 其他
 
 + 构造函数的首字母一般大写
 + 值类型赋值是值的复制

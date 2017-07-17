@@ -87,25 +87,16 @@
 
 
 
-<meta name="description" content="使用正则表达式精确匹配出如下字符串中加粗部分的 “3052202501”。ptui_loginuin=3052202501%20;pt2gguin=o3052202501;uin=o3052202501;ptisp=ctc
-如果配合其他的字符的话,可以知道,加粗的那个&amp;quot;3052202501&amp;quot;
-var rg1 = /uin=o(\d{10})/g;
-var match = rg">
+<meta name="description" content="1. 使用正则表达式精确匹配出如下字符串中加粗部分的 “3052202501”。ptui_loginuin=3052202501%20;pt2gguin=o3052202501;uin=o3052202501;ptisp=ctc123456// 如果配合其他的字符的话,可以知道,加粗的那个&quot;3052202501&quot;var rg1 = /uin=o(\d&amp;#123;10&amp;#125;)/g;var ma">
 <meta property="og:type" content="article">
-<meta property="og:title" content="前端面试题">
+<meta property="og:title" content="前端面试题-第二套">
 <meta property="og:url" content="https://xujiao1989.github.io/blog/2017/02/前端面试题/前端面试题-第二套.html">
 <meta property="og:site_name" content="徐姣的个人博客">
-<meta property="og:description" content="使用正则表达式精确匹配出如下字符串中加粗部分的 “3052202501”。ptui_loginuin=3052202501%20;pt2gguin=o3052202501;uin=o3052202501;ptisp=ctc
-如果配合其他的字符的话,可以知道,加粗的那个&amp;quot;3052202501&amp;quot;
-var rg1 = /uin=o(\d{10})/g;
-var match = rg">
-<meta property="og:updated_time" content="2017-04-09T06:33:28.000Z">
+<meta property="og:description" content="1. 使用正则表达式精确匹配出如下字符串中加粗部分的 “3052202501”。ptui_loginuin=3052202501%20;pt2gguin=o3052202501;uin=o3052202501;ptisp=ctc123456// 如果配合其他的字符的话,可以知道,加粗的那个&quot;3052202501&quot;var rg1 = /uin=o(\d&amp;#123;10&amp;#125;)/g;var ma">
+<meta property="og:updated_time" content="2017-07-17T06:22:15.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="前端面试题">
-<meta name="twitter:description" content="使用正则表达式精确匹配出如下字符串中加粗部分的 “3052202501”。ptui_loginuin=3052202501%20;pt2gguin=o3052202501;uin=o3052202501;ptisp=ctc
-如果配合其他的字符的话,可以知道,加粗的那个&amp;quot;3052202501&amp;quot;
-var rg1 = /uin=o(\d{10})/g;
-var match = rg">
+<meta name="twitter:title" content="前端面试题-第二套">
+<meta name="twitter:description" content="1. 使用正则表达式精确匹配出如下字符串中加粗部分的 “3052202501”。ptui_loginuin=3052202501%20;pt2gguin=o3052202501;uin=o3052202501;ptisp=ctc123456// 如果配合其他的字符的话,可以知道,加粗的那个&quot;3052202501&quot;var rg1 = /uin=o(\d&amp;#123;10&amp;#125;)/g;var ma">
 
 
 
@@ -137,7 +128,7 @@ var match = rg">
 
 
 
-  <title> 前端面试题 | 徐姣的个人博客 </title>
+  <title> 前端面试题-第二套 | 徐姣的个人博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -297,7 +288,7 @@ var match = rg">
             
             
               
-                前端面试题
+                前端面试题-第二套
               
             
           </h1>
@@ -362,7 +353,7 @@ var match = rg">
 
           
           
-             <span id="/2017/02/前端面试题/前端面试题-第二套.html" class="leancloud_visitors" data-flag-title="前端面试题">
+             <span id="/2017/02/前端面试题/前端面试题-第二套.html" class="leancloud_visitors" data-flag-title="前端面试题-第二套">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -391,58 +382,10 @@ var match = rg">
       
 
       
-        <ul>
-<li><p>使用正则表达式精确匹配出如下字符串中加粗部分的 “3052202501”。ptui_loginuin=3052202501%20;pt2gguin=o3052202501;uin=o<strong>3052202501</strong>;ptisp=ctc</p>
-<pre><code>如果配合其他的字符的话,可以知道,加粗的那个&quot;3052202501&quot;
-var rg1 = /uin=o(\d{10})/g;
-var match = rg1.exec(str);
-var index = parseInt(match.index)+5
-console.log(&quot;匹配的字符串的位置在:&quot;+index);
-console.log(&quot;匹配到的字符串为:&quot;+match[1]);
-</code></pre><ul>
-<li><p>完成方法count(str)，传入字符串，返回字符串中出现次数最多的字符及次数</p>
-<p>  function count(str){</p>
-<pre><code>    var length = str.length;
-    if(length ==0){
-        return;
-    }
-    var max = 1;
-    var maxChar = str[0];
-    var obj = {};
-    for(var i = 0;i&lt;length;i++){
-        if(str[i] in obj){
-            obj[str[i]] ++;
-            if(max &lt; obj[str[i]]){
-                max = obj[str[i]];
-                maxChar = str[i];
-            }
-        }else{
-            obj[str[i]] = 1;
-        }
-    }
-   return {
-       maxNum : max,
-       maxChar :maxChar
-   }
-}
-</code></pre></li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p>假设你有一个函数rand5()，产生[0, 5)之间的随机整数，每个数字概率1/5，如何使用这个函数产生[0, 7)之间的随机整数，每个数字概率1/7</p>
-<ul>
-<li>正确的方法是利用rand5()函数生成1-25之间的数字，然后将其中的1-21映射成1-7，丢弃22-25。</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p>完成方法subset(arr1,arr2)，传入两个数组，判断数组arr1是否为数组arr2的子集</p>
-</li>
-<li><p>现在有一个基准数组 records，先要求你维护其子集 selection 数组（初始为空），维护操作包含删除和插入。 插入：给定 records 数组中的一个元素，插入到 selection 中。删除：给定 records 数组中的一个元素，把它从 selection 中删除。现在要求你：实现 insert() 和 remove() 方法来实现以上操作。设计一个算法，保证每次维护操作后，保持 selection 数组中的元素的偏序关系与 records 数组中的保持一致，分析你算法的复杂度。</p>
-</li>
-</ul>
-
+        <h4 id="1-使用正则表达式精确匹配出如下字符串中加粗部分的-“3052202501”。ptui-loginuin-3052202501-20-pt2gguin-o3052202501-uin-o3052202501-ptisp-ctc"><a href="#1-使用正则表达式精确匹配出如下字符串中加粗部分的-“3052202501”。ptui-loginuin-3052202501-20-pt2gguin-o3052202501-uin-o3052202501-ptisp-ctc" class="headerlink" title="1. 使用正则表达式精确匹配出如下字符串中加粗部分的 “3052202501”。ptui_loginuin=3052202501%20;pt2gguin=o3052202501;uin=o3052202501;ptisp=ctc"></a>1. 使用正则表达式精确匹配出如下字符串中加粗部分的 “3052202501”。ptui_loginuin=3052202501%20;pt2gguin=o3052202501;uin=o<strong>3052202501</strong>;ptisp=ctc</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 如果配合其他的字符的话,可以知道,加粗的那个"3052202501"</span></div><div class="line"><span class="keyword">var</span> rg1 = <span class="regexp">/uin=o(\d&#123;10&#125;)/g</span>;</div><div class="line"><span class="keyword">var</span> match = rg1.exec(str);</div><div class="line"><span class="keyword">var</span> index = <span class="built_in">parseInt</span>(match.index)+<span class="number">5</span></div><div class="line"><span class="built_in">console</span>.log(<span class="string">"匹配的字符串的位置在:"</span>+index);</div><div class="line"><span class="built_in">console</span>.log(<span class="string">"匹配到的字符串为:"</span>+match[<span class="number">1</span>]);</div></pre></td></tr></table></figure>
+<h4 id="2-完成方法count-str-，传入字符串，返回字符串中出现次数最多的字符及次数"><a href="#2-完成方法count-str-，传入字符串，返回字符串中出现次数最多的字符及次数" class="headerlink" title="2. 完成方法count(str)，传入字符串，返回字符串中出现次数最多的字符及次数"></a>2. 完成方法count(str)，传入字符串，返回字符串中出现次数最多的字符及次数</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">count</span>(<span class="params">str</span>)</span>&#123;</div><div class="line">               <span class="keyword">var</span> length = str.length;</div><div class="line">               <span class="keyword">if</span>(length ==<span class="number">0</span>)&#123;</div><div class="line">                   <span class="keyword">return</span>;</div><div class="line">               &#125;</div><div class="line">               <span class="keyword">var</span> max = <span class="number">1</span>;</div><div class="line">               <span class="keyword">var</span> maxChar = str[<span class="number">0</span>];</div><div class="line">               <span class="keyword">var</span> obj = &#123;&#125;;</div><div class="line">               <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>;i&lt;length;i++)&#123;</div><div class="line">                   <span class="keyword">if</span>(str[i] <span class="keyword">in</span> obj)&#123;</div><div class="line">                       obj[str[i]] ++;</div><div class="line">                       <span class="keyword">if</span>(max &lt; obj[str[i]])&#123;</div><div class="line">                           max = obj[str[i]];</div><div class="line">                           maxChar = str[i];</div><div class="line">                       &#125;</div><div class="line">                   &#125;<span class="keyword">else</span>&#123;</div><div class="line">                       obj[str[i]] = <span class="number">1</span>;</div><div class="line">                   &#125;</div><div class="line">               &#125;</div><div class="line">              <span class="keyword">return</span> &#123;</div><div class="line">                  <span class="attr">maxNum</span> : max,</div><div class="line">                  <span class="attr">maxChar</span> :maxChar</div><div class="line">              &#125;</div><div class="line">           &#125;</div></pre></td></tr></table></figure>
+<h4 id="3-假设你有一个函数rand5-，产生-0-5-之间的随机整数，每个数字概率1-5，如何使用这个函数产生-0-7-之间的随机整数，每个数字概率1-7"><a href="#3-假设你有一个函数rand5-，产生-0-5-之间的随机整数，每个数字概率1-5，如何使用这个函数产生-0-7-之间的随机整数，每个数字概率1-7" class="headerlink" title="3. 假设你有一个函数rand5()，产生[0, 5)之间的随机整数，每个数字概率1/5，如何使用这个函数产生[0, 7)之间的随机整数，每个数字概率1/7"></a>3. 假设你有一个函数rand5()，产生[0, 5)之间的随机整数，每个数字概率1/5，如何使用这个函数产生[0, 7)之间的随机整数，每个数字概率1/7</h4><p>正确的方法是利用rand5()函数生成1-25之间的数字，然后将其中的1-21映射成1-7，丢弃22-25。</p>
+<h4 id="4-完成方法subset-arr1-arr2-，传入两个数组，判断数组arr1是否为数组arr2的子集"><a href="#4-完成方法subset-arr1-arr2-，传入两个数组，判断数组arr1是否为数组arr2的子集" class="headerlink" title="4. 完成方法subset(arr1,arr2)，传入两个数组，判断数组arr1是否为数组arr2的子集"></a>4. 完成方法subset(arr1,arr2)，传入两个数组，判断数组arr1是否为数组arr2的子集</h4><h4 id="5-现在有一个基准数组-records，先要求你维护其子集-selection-数组（初始为空），维护操作包含删除和插入。-插入：给定-records-数组中的一个元素，插入到-selection-中。删除：给定-records-数组中的一个元素，把它从-selection-中删除。现在要求你：实现-insert-和-remove-方法来实现以上操作。设计一个算法，保证每次维护操作后，保持-selection-数组中的元素的偏序关系与-records-数组中的保持一致，分析你算法的复杂度。"><a href="#5-现在有一个基准数组-records，先要求你维护其子集-selection-数组（初始为空），维护操作包含删除和插入。-插入：给定-records-数组中的一个元素，插入到-selection-中。删除：给定-records-数组中的一个元素，把它从-selection-中删除。现在要求你：实现-insert-和-remove-方法来实现以上操作。设计一个算法，保证每次维护操作后，保持-selection-数组中的元素的偏序关系与-records-数组中的保持一致，分析你算法的复杂度。" class="headerlink" title="5. 现在有一个基准数组 records，先要求你维护其子集 selection 数组（初始为空），维护操作包含删除和插入。 插入：给定 records 数组中的一个元素，插入到 selection 中。删除：给定 records 数组中的一个元素，把它从 selection 中删除。现在要求你：实现 insert() 和 remove() 方法来实现以上操作。设计一个算法，保证每次维护操作后，保持 selection 数组中的元素的偏序关系与 records 数组中的保持一致，分析你算法的复杂度。"></a>5. 现在有一个基准数组 records，先要求你维护其子集 selection 数组（初始为空），维护操作包含删除和插入。 插入：给定 records 数组中的一个元素，插入到 selection 中。删除：给定 records 数组中的一个元素，把它从 selection 中删除。现在要求你：实现 insert() 和 remove() 方法来实现以上操作。设计一个算法，保证每次维护操作后，保持 selection 数组中的元素的偏序关系与 records 数组中的保持一致，分析你算法的复杂度。</h4>
       
     </div>
 
@@ -542,7 +485,7 @@ console.log(&quot;匹配到的字符串为:&quot;+match[1]);
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="/2017/02/前端面试题/前端面试题-第二套.html"
-           data-title="前端面试题" data-url="https://xujiao1989.github.io/blog//2017/02/前端面试题/前端面试题-第二套.html">
+           data-title="前端面试题-第二套" data-url="https://xujiao1989.github.io/blog//2017/02/前端面试题/前端面试题-第二套.html">
       </div>
     
   </div>
@@ -582,7 +525,7 @@ console.log(&quot;匹配到的字符串为:&quot;+match[1]);
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -604,7 +547,7 @@ console.log(&quot;匹配到的字符串为:&quot;+match[1]);
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

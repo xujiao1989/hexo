@@ -11,7 +11,7 @@ categories: JS
 可以从[can i use](http://caniuse.com/)网站查到getElementsByClassName方法兼容到IE9+（包含IE9），所以我们在前端面试中会经常被问到如何用原生的js去实现这个借口。
 
 
-## 思考
+## 1. 思考
 
 1. 我希望接口使用的方式如：getElementsByClassName(classname,parentId,tagname); 
     + classname为我们要筛选的class值，数组类型，如["tab","tab-item"]
@@ -23,14 +23,14 @@ categories: JS
     + getElementsByTagName
     + getElementById
 
-## 思路
+## 2. 思路
 
 1. 获取到符合要求的dom节点（node下的tag），是一个HTML Collection，是一个类数组，length属性缓存下来，查找代价比较大
 2. 我们获取到dom节点的className通常是一个string类型的。并且class容许顺序不一致。如“tab tab-item tab-active”与"tab tab-active tab-item"可以匹配的一样的css规则
 3. 我们使用正则匹配，将className拆成多个className正则。因为我们匹配css时需要每个className都必须匹配通过。（拆开也是因为class书写可以无序）
 4. dom节点的className进行正则匹配，通过所有匹配的则返回该节点
 
-## 实现和效果
+## 3. 实现和效果
 
 ```javascript
     function getElementsByClassName(classname,parentId,tag){
@@ -70,9 +70,9 @@ categories: JS
     }
 ```
 
-## 问题总结
+## 4. 问题总结
 
-#### 1.关于while{}循环的问题
+#### 4.1 关于while{}循环的问题
 
 ```javascript
         var k=0;
@@ -106,7 +106,7 @@ categories: JS
       }
 ```
 
-#### 2.实例
+#### 4.2 实例
 
 ```html
 <div id="container">
@@ -126,7 +126,7 @@ console.log(a);
 
 看到while循环体中的`console.log(classReg[k]+":"+elemTestClassName+":"+(classReg[k].test(elemTestClassName)))`了吗？加上这个console时，就能正确打印出两个dom节点[div#div1.aaa.bbb.ccc, div#div2.aaa.ccc.bbb]，注释掉的话，就只能找到[div#div1.aaa.bbb.ccc]。已疯！！！
 
-## 关于上面问题的解决
+## 5. 关于上面问题的解决
 
 非常感谢小宁宝宝的推荐，一个人思考真的容易陷入死胡同。
 
@@ -149,7 +149,7 @@ console.log(a);
     }
 ```
 
-推荐阅读：
+## 6. 推荐阅读：
 
 + [RegExp.test() returns different result for same str](http://stackoverflow.com/questions/13586786/regexp-test-returns-different-result-for-same-str-depending-on-how-where-i)
 + [JavaScript RegExp.test() 函数详解](http://www.365mini.com/page/javascript-regexp-test.htm)

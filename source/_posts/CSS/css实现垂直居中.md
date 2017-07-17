@@ -141,7 +141,7 @@ categories: CSS
 
 ![css垂直居中示例图4](/images/csstest4.PNG)
 
-## 参考文章
+## 5. 参考文章
 
 + [张鑫旭的深入理解CSS系列](http://www.imooc.com/u/197450/courses?sort=publish)
 + [子容器垂直居中于父容器的方案](https://segmentfault.com/a/1190000000381042)

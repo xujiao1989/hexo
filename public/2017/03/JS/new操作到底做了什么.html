@@ -87,16 +87,16 @@
 
 
 
-<meta name="description" content="new操作做了哪些1234567891011121314function F(name,age)&amp;#123;    this.name = name;    this.age = age;    this.say = function()&amp;#123;       console.log(this.name+&quot;/&quot;+this.age)    &amp;#125;   return &amp;#123;      a">
+<meta name="description" content="1. new操作做了哪些1234567891011121314function F(name,age)&amp;#123;    this.name = name;    this.age = age;    this.say = function()&amp;#123;       console.log(this.name+&quot;/&quot;+this.age)    &amp;#125;   return &amp;#123;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="new操作到底做了什么">
 <meta property="og:url" content="https://xujiao1989.github.io/blog/2017/03/JS/new操作到底做了什么.html">
 <meta property="og:site_name" content="徐姣的个人博客">
-<meta property="og:description" content="new操作做了哪些1234567891011121314function F(name,age)&amp;#123;    this.name = name;    this.age = age;    this.say = function()&amp;#123;       console.log(this.name+&quot;/&quot;+this.age)    &amp;#125;   return &amp;#123;      a">
-<meta property="og:updated_time" content="2017-03-28T01:18:04.000Z">
+<meta property="og:description" content="1. new操作做了哪些1234567891011121314function F(name,age)&amp;#123;    this.name = name;    this.age = age;    this.say = function()&amp;#123;       console.log(this.name+&quot;/&quot;+this.age)    &amp;#125;   return &amp;#123;">
+<meta property="og:updated_time" content="2017-07-17T06:11:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="new操作到底做了什么">
-<meta name="twitter:description" content="new操作做了哪些1234567891011121314function F(name,age)&amp;#123;    this.name = name;    this.age = age;    this.say = function()&amp;#123;       console.log(this.name+&quot;/&quot;+this.age)    &amp;#125;   return &amp;#123;      a">
+<meta name="twitter:description" content="1. new操作做了哪些1234567891011121314function F(name,age)&amp;#123;    this.name = name;    this.age = age;    this.say = function()&amp;#123;       console.log(this.name+&quot;/&quot;+this.age)    &amp;#125;   return &amp;#123;">
 
 
 
@@ -382,18 +382,18 @@
       
 
       
-        <h2 id="new操作做了哪些"><a href="#new操作做了哪些" class="headerlink" title="new操作做了哪些"></a>new操作做了哪些</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params">name,age</span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = name;</div><div class="line">    <span class="keyword">this</span>.age = age;</div><div class="line">    <span class="keyword">this</span>.say = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">       <span class="built_in">console</span>.log(<span class="keyword">this</span>.name+<span class="string">"/"</span>+<span class="keyword">this</span>.age)</div><div class="line">    &#125;</div><div class="line">   <span class="keyword">return</span> &#123;</div><div class="line">      <span class="attr">a</span>:<span class="number">1</span>,</div><div class="line">      <span class="attr">b</span>:<span class="number">2</span></div><div class="line">   &#125;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> <span class="keyword">var</span> f = <span class="keyword">new</span> F()；</div><div class="line"> <span class="built_in">console</span>.log(f);</div></pre></td></tr></table></figure>
+        <h2 id="1-new操作做了哪些"><a href="#1-new操作做了哪些" class="headerlink" title="1. new操作做了哪些"></a>1. new操作做了哪些</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params">name,age</span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = name;</div><div class="line">    <span class="keyword">this</span>.age = age;</div><div class="line">    <span class="keyword">this</span>.say = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">       <span class="built_in">console</span>.log(<span class="keyword">this</span>.name+<span class="string">"/"</span>+<span class="keyword">this</span>.age)</div><div class="line">    &#125;</div><div class="line">   <span class="keyword">return</span> &#123;</div><div class="line">      <span class="attr">a</span>:<span class="number">1</span>,</div><div class="line">      <span class="attr">b</span>:<span class="number">2</span></div><div class="line">   &#125;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> <span class="keyword">var</span> f = <span class="keyword">new</span> F();</div><div class="line"> <span class="built_in">console</span>.log(f);</div></pre></td></tr></table></figure>
 <p>new调用函数（实例化）执行了5项操作</p>
-<h4 id="第一步：创建一个新的对象"><a href="#第一步：创建一个新的对象" class="headerlink" title="第一步：创建一个新的对象"></a>第一步：创建一个新的对象</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> f = <span class="keyword">new</span> <span class="built_in">Object</span>();</div></pre></td></tr></table></figure>
-<h4 id="第二步：创建原型链接"><a href="#第二步：创建原型链接" class="headerlink" title="第二步：创建原型链接"></a>第二步：创建原型链接</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">f._proto_ = F.prototyte;</div><div class="line">f._proto_ === F.prototype <span class="comment">// true</span></div></pre></td></tr></table></figure>
-<h4 id="第三步：绑定this"><a href="#第三步：绑定this" class="headerlink" title="第三步：绑定this"></a>第三步：绑定this</h4><p>让F中的的this指向f上</p>
-<h4 id="第四步：执行构造函数中的代码，也就是为新对象添加属性"><a href="#第四步：执行构造函数中的代码，也就是为新对象添加属性" class="headerlink" title="第四步：执行构造函数中的代码，也就是为新对象添加属性"></a>第四步：执行构造函数中的代码，也就是为新对象添加属性</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">f.name = <span class="literal">undefined</span>, </div><div class="line">   f.age = <span class="literal">undefined</span>,</div><div class="line">   f.say= <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">   <span class="built_in">console</span>.log(<span class="keyword">this</span>.name+<span class="string">"/"</span>+<span class="keyword">this</span>.age)<span class="comment">//这里this指向f</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="第五步：返回新对象"><a href="#第五步：返回新对象" class="headerlink" title="第五步：返回新对象"></a>第五步：返回新对象</h4><ul>
+<h4 id="1-1-第一步：创建一个新的对象"><a href="#1-1-第一步：创建一个新的对象" class="headerlink" title="1.1 第一步：创建一个新的对象"></a>1.1 第一步：创建一个新的对象</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> f = <span class="keyword">new</span> <span class="built_in">Object</span>();</div></pre></td></tr></table></figure>
+<h4 id="1-2-第二步：创建原型链接"><a href="#1-2-第二步：创建原型链接" class="headerlink" title="1.2 第二步：创建原型链接"></a>1.2 第二步：创建原型链接</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">f._proto_ = F.prototyte;</div><div class="line">f._proto_ === F.prototype <span class="comment">// true</span></div></pre></td></tr></table></figure>
+<h4 id="1-3-第三步：绑定this"><a href="#1-3-第三步：绑定this" class="headerlink" title="1.3 第三步：绑定this"></a>1.3 第三步：绑定this</h4><p>让F中的的this指向f上</p>
+<h4 id="1-4-第四步：执行构造函数中的代码，也就是为新对象添加属性"><a href="#1-4-第四步：执行构造函数中的代码，也就是为新对象添加属性" class="headerlink" title="1.4 第四步：执行构造函数中的代码，也就是为新对象添加属性"></a>1.4 第四步：执行构造函数中的代码，也就是为新对象添加属性</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">f.name = <span class="literal">undefined</span>, </div><div class="line">   f.age = <span class="literal">undefined</span>,</div><div class="line">   f.say= <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">   <span class="built_in">console</span>.log(<span class="keyword">this</span>.name+<span class="string">"/"</span>+<span class="keyword">this</span>.age)<span class="comment">//这里this指向f</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="1-5-第五步：返回新对象"><a href="#1-5-第五步：返回新对象" class="headerlink" title="1.5 第五步：返回新对象"></a>1.5 第五步：返回新对象</h4><ul>
 <li>如果返回的对象是值类型，就丢弃，返回这个新对象<br> return 1;是无效的，控制台打印的是对象f</li>
 <li>如果是引用类型，这返回这个引用类型，取代新对象<br> return {a:1,b:2}会取代f</li>
 </ul>
-<h2 id="call、apply、bind"><a href="#call、apply、bind" class="headerlink" title="call、apply、bind"></a>call、apply、bind</h2><p>三者的作用都是改变this指向的，并且参第一个参数都是this要指向的对象，都可以利用后续参数传参</p>
-<h3 id="区别在于："><a href="#区别在于：" class="headerlink" title="区别在于："></a>区别在于：</h3><ul>
+<h2 id="2-call、apply、bind"><a href="#2-call、apply、bind" class="headerlink" title="2. call、apply、bind"></a>2. call、apply、bind</h2><p>三者的作用都是改变this指向的，并且参第一个参数都是this要指向的对象，都可以利用后续参数传参</p>
+<h3 id="2-1-区别在于："><a href="#2-1-区别在于：" class="headerlink" title="2.1 区别在于："></a>2.1 区别在于：</h3><ul>
 <li>call和apply本质上功能一致，都是直接执行了，但是传参的方式不一样<ul>
 <li>obj.call(obj1,arg1,arg2),</li>
 <li>obj.apply(obj1,[arg1,arg2])</li>
@@ -401,7 +401,7 @@
 </li>
 <li>bind没有直接执行，而是返回一个函数，我们可以链式一直玩下去~</li>
 </ul>
-<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>上面扯了那么多似乎都跟继承没什么关系，我理解的是，什么是继承，继承就是能够使用其他对象的属性和方法，管你用什么方法。<br>那么有几种方法可以让我们使用别的对象的方法和属性呢。</p>
+<h2 id="3-继承"><a href="#3-继承" class="headerlink" title="3. 继承"></a>3. 继承</h2><p>上面扯了那么多似乎都跟继承没什么关系，我理解的是，什么是继承，继承就是能够使用其他对象的属性和方法，管你用什么方法。<br>那么有几种方法可以让我们使用别的对象的方法和属性呢。</p>
 <ul>
 <li><p>看上面的new操作第四步做了什么，执行了构造函数里面的代码，相当于复制了一份，那么相当于可以使用F中的属性和方法了。<br>从这个层面上看，构造函数是实现继承的一个方式。</p>
 <ul>
@@ -414,12 +414,12 @@
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"> <span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name,age</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = name;</div><div class="line">    <span class="keyword">this</span>.age = age;</div><div class="line">    <span class="keyword">this</span>.say=<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name+<span class="string">"/"</span>+<span class="keyword">this</span>.age);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">   </div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">xx</span>(<span class="params">name,age</span>)</span>&#123;</div><div class="line">    Person.apply(<span class="keyword">this</span>,<span class="built_in">arguments</span>);</div><div class="line">&#125;</div><div class="line">   </div><div class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> xx(<span class="string">"我"</span>,<span class="string">"18"</span>);</div><div class="line">b.say();</div></pre></td></tr></table></figure>
 <p>看到了吗  b是从xx的实例，可是它居然能使用parson的say方法，可不就是继承吗   </p>
-<h2 id="小知识"><a href="#小知识" class="headerlink" title="小知识"></a>小知识</h2><h3 id="Object-create-了解"><a href="#Object-create-了解" class="headerlink" title="Object.create()了解"></a>Object.create()了解</h3><ul>
+<h2 id="4-小知识"><a href="#4-小知识" class="headerlink" title="4. 小知识"></a>4. 小知识</h2><h3 id="4-1-Object-create-了解"><a href="#4-1-Object-create-了解" class="headerlink" title="4.1 Object.create()了解"></a>4.1 Object.create()了解</h3><ul>
 <li>是es5的新特性</li>
 <li>有两个参数，第二个参数可选（描述性）<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//可以看下object.create的实现</span></div><div class="line"><span class="keyword">if</span> (!<span class="built_in">Object</span>.create) &#123;</div><div class="line">  <span class="built_in">Object</span>.create = <span class="function"><span class="keyword">function</span> (<span class="params">o</span>) </span>&#123;</div><div class="line">     <span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>) </span>&#123;&#125;  <span class="comment">//定义了一个隐式的构造函数</span></div><div class="line">     F.prototype = o;</div><div class="line">     <span class="keyword">return</span> <span class="keyword">new</span> F();  <span class="comment">//其实还是通过new来实现的</span></div><div class="line"> &#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">object.create(<span class="literal">null</span>)</div><div class="line"><span class="comment">//创建一个很空的对象，他的原型都是空的，区别new object</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="proto-和prototype的区别"><a href="#proto-和prototype的区别" class="headerlink" title=" proto  和prototype的区别"></a><em> proto </em> 和prototype的区别</h3><ul>
+<h3 id="4-2-proto-和prototype的区别"><a href="#4-2-proto-和prototype的区别" class="headerlink" title="4.2  proto  和prototype的区别"></a>4.2 <em> proto </em> 和prototype的区别</h3><ul>
 <li><p><strong>JS中对象</strong>:具有属性<strong>proto</strong>，可称为隐式原型，一个对象的隐式原型指向构造该对象的<strong>构造函数的原型</strong>，这也保证了实例能够访问在构造函数原型中定义的属性和方法。</p>
 </li>
 <li><p>函数是个特殊的对象，除了和其他对象一样有上述<em>proto</em>属性之外，还有自己特有的属性——<strong>原型属性（prototype)</strong>，这个属性是一个指针，指向一个函数的原型对象，这个对象的用途就是包含所有实例共享的属性和方法（我们把这个对象叫做原型对象）。原型对象也有一个属性，叫constructor，这个属性包含了一个指针，指回原构造函数。        </p>
@@ -430,7 +430,7 @@
 <li>constructor：constructor不需要手动创建，它是对象原型上的一个属性。Object.prototype.constructor，返回一个<strong>指向创建了该对象原型的函数引用</strong>。需要注意的是，该属性的值是那个函数本身，该属性为只读。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//对于上面的例子：</span></div><div class="line"><span class="built_in">console</span>.log(F.constructor)</div><div class="line"><span class="comment">//Function() &#123; [native code] &#125;</span></div><div class="line"> <span class="built_in">console</span>.log(f.constructor);</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params">name,age</span>)</span>&#123;</div><div class="line">     <span class="keyword">this</span>.name = name;</div><div class="line">     <span class="keyword">this</span>.age = age;</div><div class="line">     <span class="keyword">this</span>.say = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name+<span class="string">"/"</span>+<span class="keyword">this</span>.age)</div><div class="line">     &#125;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
+<h2 id="5-其他"><a href="#5-其他" class="headerlink" title="5. 其他"></a>5. 其他</h2><ul>
 <li>构造函数的首字母一般大写</li>
 <li>值类型赋值是值的复制</li>
 <li>对象类型的赋值不仅是值的复制也是引用的复制<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</div><div class="line"><span class="keyword">var</span> b = a;</div><div class="line">b.push(<span class="number">4</span>);</div><div class="line"><span class="comment">//a[1,2,3,4] b[1,2,3,4]</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</div><div class="line">    b = a;<span class="comment">//值和引用都给了b</span></div><div class="line">    b = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];<span class="comment">// a[1,2,3] b[1,2,3,4]</span></div></pre></td></tr></table></figure>
@@ -501,8 +501,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/CSS/移动端布局方案--个人总结.html" rel="next" title="移动端布局方案--个人总结">
-                <i class="fa fa-chevron-left"></i> 移动端布局方案--个人总结
+              <a href="/2017/03/其他/gulp小白文.html" rel="next" title="gulp小白文">
+                <i class="fa fa-chevron-left"></i> gulp小白文
               </a>
             
           </div>
@@ -580,7 +580,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -602,7 +602,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
