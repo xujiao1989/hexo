@@ -58,11 +58,11 @@ theme: next
 
 deploy:
 
-     type: git
+  type: git
 
-     repo: https://github.com/xujiao1989/blog.git
+  repo: https://github.com/xujiao1989/blog.git
 
-     branch: master
+  branch: master
 
 
 
