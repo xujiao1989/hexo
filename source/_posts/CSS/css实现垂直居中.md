@@ -17,8 +17,8 @@ categories: CSS
  <div class="parent">
        <span class="con">我是内容我是内容我是内容
        </span>
-     <img class="con" src="./img/csstest1.png">
-     <img class="con" src="./img/csstest1.png">
+     <img class="con" src="/images/csstest1.png">
+     <img class="con" src="/images/csstest1.png">
  </div>
 ```
 
@@ -96,7 +96,7 @@ categories: CSS
         height:140px;
         width:70%;
         background: yellow;
-        position: absolute; 
+        position: absolute;
         top:0;
         bottom:0;
         left:0;

@@ -27,11 +27,11 @@ gulp是一款提高我们开发效率的工具。比如：
 + 首先你得有node环境（去下载node并安装好，内置了npm包管理工具）
 + 切到工程目录下，npm init 根据提示初始化package.json文件，如下图所示操作，会在项目目录下生成一个package.json文件(package.json文件也可以手动添加)
 	
-    ![package.json](/images/gulp1.png)
+    ![package.json](..//images/gulp1.png)
     
 	生成的package.json文件如下图所示
 	
-	![package.json](/images/gulp2.png)
+	![package.json](..//images/gulp2.png)
 
 + 安装gulp 
 
