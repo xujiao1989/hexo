@@ -60,7 +60,7 @@ deploy:
 
   type: git
 
-  repo: https://github.com/xujiao1989/blog.git
+  repo: https://github.com/xujiao1989/xujiaoblog.github.io.git
 
   branch: master
 
