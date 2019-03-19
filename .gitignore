@@ -1,5 +1,11 @@
-node_modules
 .DS_Store
-.idea
-npm-debug.log
+Thumbs.db
+db.json
+*.log
+public/
+.deploy*/
+
+node_modules
+node_modules/
+.ideaxs
 themes
