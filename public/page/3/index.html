@@ -259,7 +259,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2017/03/JS/new操作到底做了什么.html">
+    <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2019/03/JS/javascript实现对象的深度克隆.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="徐姣">
@@ -278,7 +278,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/03/JS/new操作到底做了什么.html" itemprop="url">new操作到底做了什么</a></h1>
+                <a class="post-title-link" href="/2019/03/JS/javascript实现对象的深度克隆.html" itemprop="url">js实现对象的深度克隆</a></h1>
         
 
         <div class="post-meta">
@@ -290,8 +290,469 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-25T00:00:00+08:00">
-                2017-03-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-14T21:38:53+08:00">
+                2019-03-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">javascript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/JS/javascript实现对象的深度克隆.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/2019/03/JS/javascript实现对象的深度克隆.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="1-变量访问的方式"><a href="#1-变量访问的方式" class="headerlink" title="1. 变量访问的方式"></a>1. 变量访问的方式</h2><p>在JavaScript中，访问变量可以通过<strong>值访问</strong>也可以通过<strong>引用访问</strong>。</p>
+<ul>
+<li><p><code>按值访问：</code>直接读取值的本身</p>
+</li>
+<li><p><code>按引用访问：</code>读取引用地址，根据地址查找真实值。引用类型的值是保存在内存中的对象，在JavaScript中不允许直接访问内存中的位置。所以在操作对象时，实际上操作的是在操作对象的引用而不是实际的对象。</p>
+</li>
+</ul>
+<h2 id="2-函数中的传参方式"><a href="#2-函数中的传参方式" class="headerlink" title="2. 函数中的传参方式"></a>2. 函数中的传参方式</h2><p>在JavaScript的函数传参数方式只能<code>按值传递</code>（不管传递的变量是值类型还是引用类型）。也就是将传递的参数复制给函数的一个局部变量（arguments）。</p>
+<p>值复制和引用复制：</p>
+<ul>
+<li><code>值复制:</code>将值本身复制给arguments的一个元素，参数不会影响原变量</li>
+<li><code>引用复制:</code>将值得地址复制给arguments的一个元素，参数会影响到原来的变量</li>
+</ul>
+<h2 id="3-如何实现一个对象的深度克隆"><a href="#3-如何实现一个对象的深度克隆" class="headerlink" title="3. 如何实现一个对象的深度克隆"></a>3. 如何实现一个对象的深度克隆</h2><h3 id="3-1-为什么要深度克隆一个对象"><a href="#3-1-为什么要深度克隆一个对象" class="headerlink" title="3.1 为什么要深度克隆一个对象"></a>3.1 为什么要深度克隆一个对象</h3><p>在日常中对一个对象的复制都只是对其引用的复制，两者之间还是会相互影响，如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="keyword">var</span> b = a;</span><br><span class="line">b.push(<span class="number">5</span>);</span><br><span class="line"><span class="built_in">console</span>.log(a);<span class="comment">// [1, 2, 3, 5]，对b的操作影响了a</span></span><br></pre></td></tr></table></figure>
+<p>所以为了是b和a完全一致,但是又不相互影响,就有了深度克隆这一说。</p>
+<h3 id="3-2-获取对象的基本类型"><a href="#3-2-获取对象的基本类型" class="headerlink" title="3.2 获取对象的基本类型"></a>3.2 获取对象的基本类型</h3><p>我们都知道在JavaScript中,基本的数据类型(string/boolean/undefined/null/number)的复制属于值复制,相互之间不会有什么影响。那么我们接下来主要讨论的是对象的复制。</p>
+<ul>
+<li>对象的类型：function、object、Array</li>
+<li><p>如何获取以上的基本类型： Object.prototype.toString.call(para) </p>
+<ul>
+<li>[object Function]</li>
+<li>[object Object]</li>
+<li>[object Array]</li>
+</ul>
+<p>也就是返回值是一个字符串，可以通过以下方法获取具体的类型</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">objType</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> obj = <span class="built_in">Object</span>.prototype.toString.call(obj).substring(<span class="number">8</span>);</span><br><span class="line">    <span class="keyword">return</span> obj.substring(<span class="number">0</span>,obj.length<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//获取值分别是：Function、Object、Array</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>函数的复制我们怎么去理解：函数是一个对象,函数名是指向对象的名称。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">text</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">"a"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这里,我们可以理解,以上的声明在内存中开辟了一个空间,保存了一个方法,这个方法包含一个打印功能。然后 变量text包含执行这个方法的地址。所以,var b = text;操作,就是将方法的地址复制给函数b。</p>
+<ul>
+<li>在JavaScript中,函数不存在重载,也就是不存在某个函数被修改了的情况(只是断开了指向)。</li>
+</ul>
+<h3 id="3-3-具体实现"><a href="#3-3-具体实现" class="headerlink" title="3.3 具体实现"></a>3.3 具体实现</h3><p>这里的实现分为你三个部分,入口函数deepClone,对象的克隆函数,以及数组的克隆函数</p>
+<h4 id="3-3-1-对象的克隆"><a href="#3-3-1-对象的克隆" class="headerlink" title="3.3.1 对象的克隆"></a>3.3.1 对象的克隆</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">cloneObj</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">var</span> tempObj = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">   <span class="keyword">for</span>(key <span class="keyword">in</span> obj)&#123;</span><br><span class="line">       <span class="keyword">switch</span> (objType(obj[key]))&#123;</span><br><span class="line">           <span class="keyword">case</span> <span class="string">"Object"</span>:</span><br><span class="line">               tempObj[key] =cloneObj(obj[key]);</span><br><span class="line">               <span class="keyword">break</span>;</span><br><span class="line">           <span class="keyword">case</span> <span class="string">"Array"</span>:</span><br><span class="line">               tempObj[key] = cloneArr(obj[key]);</span><br><span class="line">               <span class="keyword">break</span>;</span><br><span class="line">           <span class="keyword">default</span>:</span><br><span class="line">               tempObj[key] = obj[key];</span><br><span class="line"></span><br><span class="line">           <span class="keyword">break</span>;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> tempObj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-3-2-数组的克隆"><a href="#3-3-2-数组的克隆" class="headerlink" title="3.3.2 数组的克隆"></a>3.3.2 数组的克隆</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">cloneArr</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> tempArr = <span class="keyword">new</span> <span class="built_in">Array</span>();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">        <span class="keyword">switch</span> (objType(arr[i]))&#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"Object"</span>:</span><br><span class="line">                tempArr.push(cloneObj(arr[key]));</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">"Array"</span>:</span><br><span class="line">                tempArr.push(cloneArr(arr[key]))</span><br><span class="line">                cloneArr(arr[i]);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                tempArr.push(arr[i])</span><br><span class="line">        </span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> tempArr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-3-3-克隆的入口"><a href="#3-3-3-克隆的入口" class="headerlink" title="3.3.3 克隆的入口"></a>3.3.3 克隆的入口</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deepClone</span>(<span class="params">para</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> temp = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">switch</span> (objType(para))&#123;</span><br><span class="line">         <span class="keyword">case</span> <span class="string">"Object"</span>:</span><br><span class="line">             temp = cloneObj(para);</span><br><span class="line">             <span class="keyword">break</span>;</span><br><span class="line">         <span class="keyword">case</span> <span class="string">"Array"</span>:</span><br><span class="line">             temp = cloneArr(para);</span><br><span class="line">             <span class="keyword">break</span>;</span><br><span class="line">         <span class="keyword">default</span>:</span><br><span class="line">             temp = para;</span><br><span class="line">             <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-3-4-测试"><a href="#3-3-4-测试" class="headerlink" title="3.3.4 测试"></a>3.3.4 测试</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> testObj = &#123;</span><br><span class="line">       <span class="string">"name"</span>:<span class="string">"xujiao"</span>,</span><br><span class="line">       <span class="string">"age"</span>:<span class="string">"28"</span>,</span><br><span class="line">       <span class="string">"say"</span>:<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">           <span class="built_in">console</span>.log(<span class="number">123</span>);</span><br><span class="line">       &#125;,</span><br><span class="line">       <span class="string">"arr"</span>:[<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>],</span><br><span class="line">       <span class="string">"obj"</span>:&#123;</span><br><span class="line">         <span class="string">"a"</span>:<span class="number">12</span>,</span><br><span class="line">         <span class="string">"b"</span>:<span class="number">1</span>,</span><br><span class="line">         <span class="string">"c"</span>:<span class="number">3</span></span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">var</span> clonexx = deepClone(testObj);</span><br><span class="line">   clonexx.arr.push(<span class="number">333</span>);</span><br><span class="line">   <span class="built_in">console</span>.log(clonexx);</span><br><span class="line">   <span class="built_in">console</span>.log(testObj);<span class="comment">//对clonexx的操作并没有影响testObj</span></span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2017/04/性能优化/前端性能优化--学习总结.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="徐姣">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avater.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="徐姣的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/04/性能优化/前端性能优化--学习总结.html" itemprop="url">前端性能优化--学习总结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-05T00:00:00+08:00">
+                2017-04-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/性能优化/" itemprop="url" rel="index">
+                    <span itemprop="name">性能优化</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/04/性能优化/前端性能优化--学习总结.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/2017/04/性能优化/前端性能优化--学习总结.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>本文主要是自己在了解前端性能优化过程觉得比较好的文章的总结。</p>
+<h2 id="一、雅虎军规14条"><a href="#一、雅虎军规14条" class="headerlink" title="一、雅虎军规14条"></a>一、雅虎军规14条</h2><p>前端的性能优化已经是老生常谈的话题，面试和实际工作中都会遇到如何去做前端优化。在做优化之前，我们至少要熟知雅虎的14条军规：</p>
+<p><img src="/images/雅虎35.PNG" alt="雅虎军规35条"></p>
+<h4 id="1-1-尽可能的减少http请求"><a href="#1-1-尽可能的减少http请求" class="headerlink" title="1.1 尽可能的减少http请求"></a>1.1 尽可能的减少http请求</h4><p>网速相同的条件下，下载一个100KB的图片比下载两个50KB的图片要快。所以，请减少HTTP请求。</p>
+<ul>
+<li>合并文件（js、css、雪碧图等),并使用css的background-image和background-position属性来实现所需部分的图片</li>
+<li><p>Inline images: 通过编码的字符串将图片内嵌到网页文本中。例如下面的inline image的显示效果为一个勾选的checkbox。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.sample-inline-png</span> &#123;</span><br><span class="line">    <span class="attribute">padding-left</span>: <span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">background</span>: white <span class="built_in">url</span>(<span class="string">'data:image/png;base64,iVBOR....'</span>) no-repeat scroll left top;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>减少http请求次数是性能优化的起点！对提高首次访问效率起到很重要的作用。</p>
+</li>
+</ul>
+<h4 id="1-2-使用CDN"><a href="#1-2-使用CDN" class="headerlink" title="1.2 使用CDN"></a>1.2 使用CDN</h4><p>通过在现有的Internet中增加一层新的网络架构，将网站的内容发布到最接近用户的cache服务器内，通过DNS负载均衡的技术，判断用户来源就近访问cache服务器取得所需的内容，杭州的用户访问近杭州服务器上的内容，北京的访问 近北京服务器上的内容。这样可以有效减少数据在网络上传输的时间，提高速度。</p>
+<h4 id="1-3-添加Expires或者cache-control"><a href="#1-3-添加Expires或者cache-control" class="headerlink" title="1.3 添加Expires或者cache-control"></a>1.3 添加Expires或者cache-control</h4><p>合理使用浏览器缓存来减少http请求次数和大小，使得网页加速装载。</p>
+<h4 id="1-4-启用Gzip压缩"><a href="#1-4-启用Gzip压缩" class="headerlink" title="1.4 启用Gzip压缩"></a>1.4 启用Gzip压缩</h4><p>Gzip的思想就是把文件先在服务器端进行压缩，然后再传输。这样可以显著减少文件传输的大小。传输完毕后浏览器会 重新对压缩过的内容进行解压缩，并执行。目前的浏览器都能“良好”地支持 gzip。不仅浏览器可以识别，而且各大“爬虫”也同样可以识别，各位seoer可以放下心了。而且gzip的压缩比例非常大，一般压缩率为85%，就是 说服务器端100K的页面可以压缩到25K左右再发送到客户端。</p>
+<h4 id="1-5-将css放在页面的上方"><a href="#1-5-将css放在页面的上方" class="headerlink" title="1.5 将css放在页面的上方"></a>1.5 将css放在页面的上方</h4><p>将css放在页面最上面，这是为什么？因为 ie，firefox等浏览器在css全部传输完全之前不会去渲染任何的东西。理由诚如小马哥说得那样很简单。css，全称Cascading Style Sheets (层叠样式表单)。层叠即意味这后面的css可以覆盖前面的css，级别高的css可以覆盖级别低的css。既然前面的可以被覆盖，浏览器在他完全加载完毕之后再去渲染无疑也是合情合理的很多浏览器下，如IE，把样式表放在页面的底部的问题在于它禁止了网页内容的顺序显示。浏览器阻止显示以免重画页面元素，那用户只能看到空白页了。Firefox不会阻止显示，但这意味着当样式表下载后，有些页面元素可能需要重画，这导致闪烁问题。所以我们应该尽快让css加载完毕</p>
+<h4 id="1-6-将脚本移动到底部（包括内联的）"><a href="#1-6-将脚本移动到底部（包括内联的）" class="headerlink" title="1.6 将脚本移动到底部（包括内联的）"></a>1.6 将脚本移动到底部（包括内联的）</h4><ul>
+<li>因为防止script脚本的执行阻塞页面的下载。在页面loading的过程中，当浏览器读到js执行语句的时候一定会把它全部解释完毕后在会接下来读下面的内容。不信你可以写一个js死循环看看页面下面的东西还会不会出来。（setTimeout 和 setInterval的执行有点类似于多线程，在相应的响应时间之前也会继续下面的内容渲染。）浏览器这么做的逻辑是因为js随时可能执行 location.href或是其他可能完全中断此页面过程的函数，即如此，当然得等他执行完毕之后再加载咯。所以放在页面最后，可以有效减少页面可视元素的加载时间。</li>
+<li>脚本引起的第二个问题是它阻塞并行下载数量。HTTP/1.1规范建议浏览器每个主机的并行下载数不超过2个（IE只能为2个，其他浏览器如ff等都是默认设置为2个，不过新出的ie8可以达6个）。因此如果您把图像文件分布到多台机器的话，您可以达到超过2个的并行下载。但是当脚本文件下载时，浏览器不会启动其他的并行下载。</li>
+</ul>
+<h4 id="1-7-避免使用CSS中的expression"><a href="#1-7-避免使用CSS中的expression" class="headerlink" title="1.7 避免使用CSS中的expression"></a>1.7 避免使用CSS中的expression</h4><p>“为了确保有效性，CSS 表达式会进行频繁的求值”，到底有多频繁？就是在你改变窗口大小，滚动页面甚至移动鼠标都会触发表达式进行求值，如此频繁的求值以至于浏览器的性能收到严重的影响；</p>
+<h4 id="1-8-将JavaScript和css独立成外部文件"><a href="#1-8-将JavaScript和css独立成外部文件" class="headerlink" title="1.8 将JavaScript和css独立成外部文件"></a>1.8 将JavaScript和css独立成外部文件</h4><p>这点我想还是很容易理解的。不仅从性能优化上会这么做，用代码易于维护的角度看也应该这么做。把css和js写在页面内容可以减少2次请求，但也增 大了页面的大小。如果已经对css和js做了缓存，那也就没有2次多余的http请求了。当然，我在前面中也说过，有些特殊的页面开发人员还是会选择内联 的css和js文件。</p>
+<h4 id="1-9-减少DNS查询"><a href="#1-9-减少DNS查询" class="headerlink" title="1.9 减少DNS查询"></a>1.9 减少DNS查询</h4><p>在 Internet上域名与IP地址之间是一一对应的，域名（kuqin.com）很好记，但计算机不认识，计算机之间的“相认”还要转成ip地址。在网络 上每台计算机都对应有一个独立的ip地址。在域名和ip地址之间的转换工作称为域名解析，也称DNS查询。一次DNS的解析过程会消耗20-120毫秒的 时间,在dns查询结束之前，浏览器不会下载该域名下的任何东西。所以减少dns查询的时间可以加快页面的加载速度。yahoo的建议一个页面所包含的域 名数尽量控制在2-4个。这就需要对页面整体有一个很好的规划。</p>
+<h4 id="1-10-压缩JavaScript和CSS"><a href="#1-10-压缩JavaScript和CSS" class="headerlink" title="1.10  压缩JavaScript和CSS"></a>1.10  压缩JavaScript和CSS</h4><p>压缩js和css的左右很显然，减少页面字节数。容量小页面加载速度自然也就快。而且压缩除了减少体积以外还可以起到一定的保护左右。</p>
+<h4 id="1-11-避免重定向"><a href="#1-11-避免重定向" class="headerlink" title="1.11 避免重定向"></a>1.11 避免重定向</h4><p>每增加一次重定向就会增加一次web请求，所以因该尽量减少。</p>
+<ul>
+<li>301 Moved Permanently</li>
+</ul>
+<p>被请求的资源已永久移动到新位置，并且将来任何对此资源的引用都应该使用本响应返回的若干个URI之一。如果可能，拥有链接编辑功能的客户端应当自动把请求的地址修改为从服务器反馈回来的地址。除非额外指定，否则这个响应也是可缓存的。 新的永久性的URI应当在响应的Location域中返回。除非这是一个HEAD请求，否则响应的实体中应当包含指向新的URI的超链接及简短说明。如果这不是一个GET或者HEAD请求，因此浏览器禁止自动进行重定向，除非得到用户的确认，因为请求的条件可能因此发生变化。注意：对于某些使用HTTP/1.0协议的浏览器，当它们发送的POST请求得到了一个301响应的话，接下来的重定向请求将会变成GET方式。</p>
+<ul>
+<li>302 Found</li>
+</ul>
+<p>请求的资源现在临时从不同的URI响应请求。由于这样的重定向是临时的，客户端应当继续向原有地址发送以后的请求。只有在Cache-Control或Expires中进行了指定的情况下，这个响应才是可缓存的。 新的临时性的URI应当在响应的Location域中返回。除非这是一个HEAD请求，否则响应的实体中应当包含指向新的URI的超链接及简短说明。如果这不是一个GET或者HEAD请求，那么浏览器禁止自动进行重定向，除非得到用户的确认，因为请求的条件可能因此发生变化。 注意：虽然RFC 1945和RFC 2068规范不允许客户端在重定向时改变请求的方法，但是很多现存的浏览器将302响应视作为303响应，并且使用GET方式访问在Location中规定的URI，而无视原先请求的方法。状态码303和307被添加了进来，用以明确服务器期待客户端进行何种反应。</p>
+<h4 id="1-12-移除重复的脚本"><a href="#1-12-移除重复的脚本" class="headerlink" title="1.12 移除重复的脚本"></a>1.12 移除重复的脚本</h4><p>不仅是从性能上考虑，代码规范上看也是这样。</p>
+<h4 id="1-13-配置实体标签ETags-也是从缓存的角度而言的"><a href="#1-13-配置实体标签ETags-也是从缓存的角度而言的" class="headerlink" title="1.13 配置实体标签ETags(也是从缓存的角度而言的)"></a>1.13 配置实体标签ETags(也是从缓存的角度而言的)</h4><p>HTTP协议规格说明定义ETag为“被请求变量的实体值”, 是一个可以与Web资源关联的记号（token）。典型的Web资源可以一个Web页，但也可能是JSON或XML文档。服务器单独负责判断记号是什么及其含义，并在HTTP响应头中将其传送到客户端。<br>聪明的服务器开发者会把ETags和GET请求的“If-None-Match”头一起使用，这样可利用客户端（例如浏览器）的缓存。因为服务器首先产生ETag，服务器可在稍后使用它来判断页面是否已经被修改。本质上，客户端通过将该记号传回服务器要求服务器验证其（客户端）缓存。</p>
+<p>其过程如下：</p>
+<ul>
+<li>客户端请求一个页面（A）。</li>
+<li>服务器返回页面A，并在给A加上一个ETag。</li>
+<li>客户端展现该页面，并将页面连同ETag一起缓存。</li>
+<li>客户再次请求页面A，并将上次请求时服务器返回的ETag一起传递给服务器。</li>
+<li>服务器检查该ETag，并判断出该页面自上次客户端请求之后还未被修改，直接返回响应304（未修改——Not Modified）和一个空的响应体。</li>
+</ul>
+<h4 id="1-14-使用ajax缓存"><a href="#1-14-使用ajax缓存" class="headerlink" title="1.14 使用ajax缓存"></a>1.14 使用ajax缓存</h4><p>ajax还要去缓存？做ajax请求的时候往往还要增加一个时间戳去避免他缓存。记住“异步”不是“瞬间”这一点很重要。记住，即使AJAX是动态产生的而且只对一个用户起作用，他们依然可以被缓存。</p>
+<blockquote>
+<p>雅虎14条总结起来其实就是以下几个方面：记住5432</p>
+</blockquote>
+<ul>
+<li><p>优化请求次数和请求路径（5个）</p>
+<p>减少http请求、合并js和css代码、使用CDN、避免重定向、减少DNS查询</p>
+</li>
+<li><p>合理利用缓存，减少请求次数（4个）</p>
+<p>使用Expires和cache-control、配置ETags、使用ajax缓存，将js和css独立出来</p>
+</li>
+<li><p>代码层面（3个）</p>
+<p>避免使用css表达式、将css放在页面头部、将js放在页面底部</p>
+</li>
+<li><p>减少文件的体积（2个）</p>
+<p>启用GZip、删除重复代码</p>
+<h2 id="二、我们在工作中如何做优化"><a href="#二、我们在工作中如何做优化" class="headerlink" title="二、我们在工作中如何做优化"></a>二、我们在工作中如何做优化</h2></li>
+</ul>
+<p>对于已有的项目，我们可以利用chrome的network查看页面中资源的加载速度和哪些资源特别的消耗了性能；利用chrome插件pagespeed分析页面，它会针对页面给出详细的分析和推荐解决方案。<br>总的来说，还是要遵循雅虎14条。</p>
+<h4 id="1-1-其他需要考虑的地方"><a href="#1-1-其他需要考虑的地方" class="headerlink" title="1.1 其他需要考虑的地方"></a>1.1 其他需要考虑的地方</h4><ul>
+<li><p>关于图片的优化</p>
+<p>  推荐读下面的几篇文章</p>
+</li>
+<li><p>关于css的优化</p>
+<ul>
+<li>合理的合并css文件</li>
+<li>不要使用css的表达式：</li>
+<li>将样式表放在头部、使用link代替import</li>
+<li>避免使用filters</li>
+</ul>
+</li>
+<li><p>关于js的优化</p>
+<ul>
+<li>避免使用with</li>
+<li>减少dom的访问</li>
+<li>js放在页面底部</li>
+</ul>
+</li>
+<li><p>减少repaint和reflow</p>
+</li>
+<li><p>根据域名划分内容<br>浏览器一般对<strong>同一个域的下载连接数有所限制，按照域名划分下载内容可以浏览器增大并行下载连接，</strong>但是注意控制域名使用在2-4个之间，不然dns查询也是个问题。一般网站规划会将静态资源放在类似于static.example.com，动态内容放在<a href="http://www.example.com上。这样做还有一个好处是可以在静态的域名上避免使用cookie。后面我们会在cookie的规则中提到。" target="_blank" rel="noopener">www.example.com上。这样做还有一个好处是可以在静态的域名上避免使用cookie。后面我们会在cookie的规则中提到。</a></p>
+</li>
+<li><p>减少iframe数量</p>
+<blockquote>
+<p>优点：</p>
+</blockquote>
+<pre><code>可以用来加载速度较慢的内容，例如广告。
+安全沙箱保护。浏览器会对iframe中的内容进行安全控制。
+脚本可以并行下载
+</code></pre><blockquote>
+<p>缺点：</p>
+</blockquote>
+<pre><code>即使iframe内容为空也消耗加载时间
+会阻止页面加载
+没有语义
+</code></pre></li>
+</ul>
+<h2 id="三、推荐阅读"><a href="#三、推荐阅读" class="headerlink" title="三、推荐阅读"></a>三、推荐阅读</h2><ul>
+<li><a href="http://blog.sina.com.cn/s/blog_bf9440220102wwgo.html" target="_blank" rel="noopener">dns-prefetch 对性能提升有多大</a></li>
+<li><a href="前端性能优化----yahoo前端性能团队总结的35条黄金定律">前端性能优化—-yahoo前端性能团队总结的35条黄金定律</a></li>
+<li><a href="http://www.cnblogs.com/wizcabbit/p/web-image-optimization.html" target="_blank" rel="noopener">Web性能优化：图片优化</a></li>
+<li><a href="https://www.zhihu.com/question/21815101" target="_blank" rel="noopener">前端开发中，对图片的优化技巧有哪些？</a></li>
+<li><a href="http://isux.tencent.com/introduction-of-webp.html" target="_blank" rel="noopener">WebP 探寻之路</a></li>
+<li><a href="http://www.cnblogs.com/rubylouvre/archive/2009/07/29/1534330.html" target="_blank" rel="noopener">CSS Expression用法总结</a></li>
+<li><a href="http://www.cnblogs.com/jiajiaobj/archive/2012/06/11/2545291.html" target="_blank" rel="noopener">javascript性能优化-repaint和reflow</a></li>
+<li><a href="http://www.zhangxinxu.com/wordpress/2010/01/%E5%9B%9E%E6%B5%81%E4%B8%8E%E9%87%8D%E7%BB%98%EF%BC%9Acss%E6%80%A7%E8%83%BD%E8%AE%A9javascript%E5%8F%98%E6%85%A2%EF%BC%9F/" target="_blank" rel="noopener">回流与重绘：CSS性能让JavaScript变慢？</a></li>
+<li><a href="http://blog.csdn.net/oscar999/article/details/38379523" target="_blank" rel="noopener">[Web 性能] repaint and reflow (重绘和回流)</a></li>
+<li><a href="http://blog.csdn.net/fumier/article/details/50511174" target="_blank" rel="noopener">优化TTFB</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2015/09/web-page-performance-in-depth.html" target="_blank" rel="noopener">网页性能管理详解</a></li>
+<li><a href="http://harttle.com/2015/08/11/reflow-repaint.html" target="_blank" rel="noopener">减少页面回流与重绘（Reflow &amp; Repaint）</a></li>
+</ul>
+<hr>
+<p>做一个勤于思考的人</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2017/03/JS/原生js实现class筛选器.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="徐姣">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avater.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="徐姣的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/03/JS/原生js实现class筛选器.html" itemprop="url">原生js实现class筛选器</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-30T00:00:00+08:00">
+                2017-03-30
               </time>
             
 
@@ -331,8 +792,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/03/JS/new操作到底做了什么.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/2017/03/JS/new操作到底做了什么.html" itemprop="commentCount"></span>
+                <a href="/2017/03/JS/原生js实现class筛选器.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/2017/03/JS/原生js实现class筛选器.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -362,59 +823,47 @@
       
         
           
-            <h2 id="1-new操作做了哪些"><a href="#1-new操作做了哪些" class="headerlink" title="1. new操作做了哪些"></a>1. new操作做了哪些</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params">name,age</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">    <span class="keyword">this</span>.say = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">       <span class="built_in">console</span>.log(<span class="keyword">this</span>.name+<span class="string">"/"</span>+<span class="keyword">this</span>.age)</span><br><span class="line">    &#125;</span><br><span class="line">   <span class="keyword">return</span> &#123;</span><br><span class="line">      a:<span class="number">1</span>,</span><br><span class="line">      b:<span class="number">2</span></span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">var</span> f = <span class="keyword">new</span> F();</span><br><span class="line"> <span class="built_in">console</span>.log(f);</span><br></pre></td></tr></table></figure>
-<p>new调用函数（实例化）执行了5项操作</p>
-<h4 id="1-1-第一步：创建一个新的对象"><a href="#1-1-第一步：创建一个新的对象" class="headerlink" title="1.1 第一步：创建一个新的对象"></a>1.1 第一步：创建一个新的对象</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> f = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br></pre></td></tr></table></figure>
-<h4 id="1-2-第二步：创建原型链接"><a href="#1-2-第二步：创建原型链接" class="headerlink" title="1.2 第二步：创建原型链接"></a>1.2 第二步：创建原型链接</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f._proto_ = F.prototyte;</span><br><span class="line">f._proto_ === F.prototype <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-<h4 id="1-3-第三步：绑定this"><a href="#1-3-第三步：绑定this" class="headerlink" title="1.3 第三步：绑定this"></a>1.3 第三步：绑定this</h4><p>让F中的的this指向f上</p>
-<h4 id="1-4-第四步：执行构造函数中的代码，也就是为新对象添加属性"><a href="#1-4-第四步：执行构造函数中的代码，也就是为新对象添加属性" class="headerlink" title="1.4 第四步：执行构造函数中的代码，也就是为新对象添加属性"></a>1.4 第四步：执行构造函数中的代码，也就是为新对象添加属性</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">f.name = <span class="literal">undefined</span>, </span><br><span class="line">   f.age = <span class="literal">undefined</span>,</span><br><span class="line">   f.say= <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="keyword">this</span>.name+<span class="string">"/"</span>+<span class="keyword">this</span>.age)<span class="comment">//这里this指向f</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="1-5-第五步：返回新对象"><a href="#1-5-第五步：返回新对象" class="headerlink" title="1.5 第五步：返回新对象"></a>1.5 第五步：返回新对象</h4><ul>
-<li>如果返回的对象是值类型，就丢弃，返回这个新对象<br> return 1;是无效的，控制台打印的是对象f</li>
-<li>如果是引用类型，这返回这个引用类型，取代新对象<br> return {a:1,b:2}会取代f</li>
-</ul>
-<h2 id="2-call、apply、bind"><a href="#2-call、apply、bind" class="headerlink" title="2. call、apply、bind"></a>2. call、apply、bind</h2><p>三者的作用都是改变this指向的，并且参第一个参数都是this要指向的对象，都可以利用后续参数传参</p>
-<h3 id="2-1-区别在于："><a href="#2-1-区别在于：" class="headerlink" title="2.1 区别在于："></a>2.1 区别在于：</h3><ul>
-<li>call和apply本质上功能一致，都是直接执行了，但是传参的方式不一样<ul>
-<li>obj.call(obj1,arg1,arg2),</li>
-<li>obj.apply(obj1,[arg1,arg2])</li>
-</ul>
-</li>
-<li>bind没有直接执行，而是返回一个函数，我们可以链式一直玩下去~</li>
-</ul>
-<h2 id="3-继承"><a href="#3-继承" class="headerlink" title="3. 继承"></a>3. 继承</h2><p>上面扯了那么多似乎都跟继承没什么关系，我理解的是，什么是继承，继承就是能够使用其他对象的属性和方法，管你用什么方法。<br>那么有几种方法可以让我们使用别的对象的方法和属性呢。</p>
+            <p>可以从<a href="http://caniuse.com/" target="_blank" rel="noopener">can i use</a>网站查到getElementsByClassName方法兼容到IE9+（包含IE9），所以我们在前端面试中会经常被问到如何用原生的js去实现这个借口。</p>
+<h2 id="1-思考"><a href="#1-思考" class="headerlink" title="1. 思考"></a>1. 思考</h2><ol>
+<li><p>我希望接口使用的方式如：getElementsByClassName(classname,parentId,tagname); </p>
 <ul>
-<li><p>看上面的new操作第四步做了什么，执行了构造函数里面的代码，相当于复制了一份，那么相当于可以使用F中的属性和方法了。<br>从这个层面上看，构造函数是实现继承的一个方式。</p>
+<li>classname为我们要筛选的class值，数组类型，如[“tab”,”tab-item”]</li>
+<li>parentId为父元素的id，可选参数</li>
+<li>tagname为标签名，可选参数</li>
+<li>返回一个包含匹配成功的节点的数组</li>
+</ul>
+</li>
+<li><p>尽可能多的使用已经存在的方法</p>
 <ul>
-<li>问题是：如果每次继承父元素的属性和方法都得复制父元素的全部代码的话，似不似撒</li>
-<li>解决方法是什么，看new操作第二步干了什么，是的，<strong>proto</strong>属性指向了F的prototype，所以可以把F中通用的方法都移到F.prototype上，这就是传说中的基于原型的继承。</li>
+<li>getElementsByTagName</li>
+<li>getElementById</li>
 </ul>
 </li>
-<li><p>另一个关于继承的方法，是利用改变this指向实现的</p>
-</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name,age</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">    <span class="keyword">this</span>.say=<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name+<span class="string">"/"</span>+<span class="keyword">this</span>.age);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">   </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">xx</span>(<span class="params">name,age</span>)</span>&#123;</span><br><span class="line">    Person.apply(<span class="keyword">this</span>,<span class="built_in">arguments</span>);</span><br><span class="line">&#125;</span><br><span class="line">   </span><br><span class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> xx(<span class="string">"我"</span>,<span class="string">"18"</span>);</span><br><span class="line">b.say();</span><br></pre></td></tr></table></figure>
-<p>看到了吗  b是从xx的实例，可是它居然能使用parson的say方法，可不就是继承吗   </p>
-<h2 id="4-小知识"><a href="#4-小知识" class="headerlink" title="4. 小知识"></a>4. 小知识</h2><h3 id="4-1-Object-create-了解"><a href="#4-1-Object-create-了解" class="headerlink" title="4.1 Object.create()了解"></a>4.1 Object.create()了解</h3><ul>
-<li>是es5的新特性</li>
-<li>有两个参数，第二个参数可选（描述性）<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//可以看下object.create的实现</span></span><br><span class="line"><span class="keyword">if</span> (!<span class="built_in">Object</span>.create) &#123;</span><br><span class="line">  <span class="built_in">Object</span>.create = <span class="function"><span class="keyword">function</span> (<span class="params">o</span>) </span>&#123;</span><br><span class="line">     <span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>) </span>&#123;&#125;  <span class="comment">//定义了一个隐式的构造函数</span></span><br><span class="line">     F.prototype = o;</span><br><span class="line">     <span class="keyword">return</span> <span class="keyword">new</span> F();  <span class="comment">//其实还是通过new来实现的</span></span><br><span class="line"> &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">object.create(<span class="literal">null</span>)</span><br><span class="line"><span class="comment">//创建一个很空的对象，他的原型都是空的，区别new object</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="4-2-proto-和prototype的区别"><a href="#4-2-proto-和prototype的区别" class="headerlink" title="4.2 _ proto _ 和prototype的区别"></a>4.2 _ proto _ 和prototype的区别</h3><ul>
-<li><p><strong>JS中对象</strong>:具有属性<strong>proto</strong>，可称为隐式原型，一个对象的隐式原型指向构造该对象的<strong>构造函数的原型</strong>，这也保证了实例能够访问在构造函数原型中定义的属性和方法。</p>
-</li>
-<li><p>函数是个特殊的对象，除了和其他对象一样有上述<em>proto</em>属性之外，还有自己特有的属性——<strong>原型属性（prototype)</strong>，这个属性是一个指针，指向一个函数的原型对象，这个对象的用途就是包含所有实例共享的属性和方法（我们把这个对象叫做原型对象）。原型对象也有一个属性，叫constructor，这个属性包含了一个指针，指回原构造函数。        </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params">name,age</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">    <span class="keyword">this</span>.say = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">       <span class="built_in">console</span>.log(<span class="keyword">this</span>.name+<span class="string">"/"</span>+<span class="keyword">this</span>.age)</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br><span class="line"><span class="keyword">var</span> f = <span class="keyword">new</span> F();</span><br><span class="line"><span class="built_in">console</span>.log(F.constructor === <span class="built_in">Function</span>);<span class="comment">//F的构造函数是Function</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Function</span>.prototype);<span class="comment">//function()&#123;&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Function</span>.__proto__);<span class="comment">//function()&#123;&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(F.__proto__)<span class="comment">//F.__proto__指向构造函数Function的原型prototype:function()&#123;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(f.constructor === F);<span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(F.prototype);<span class="comment">//Object&#123;&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(f.__proto__);<span class="comment">//f.__proto__指向构造函数F的原型:Object&#123;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(F.prototype);<span class="comment">//Object&#123;&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(f.prototype);<span class="comment">//prototype是方法的属性,f是个普通的对象,没有prototype属性</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li>constructor：constructor不需要手动创建，它是对象原型上的一个属性。Object.prototype.constructor，返回一个<strong>指向创建了该对象原型的函数引用</strong>。需要注意的是，该属性的值是那个函数本身，该属性为只读。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//对于上面的例子：</span></span><br><span class="line"><span class="built_in">console</span>.log(F.constructor)</span><br><span class="line"><span class="comment">//Function() &#123; [native code] &#125;</span></span><br><span class="line"> <span class="built_in">console</span>.log(f.constructor);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params">name,age</span>)</span>&#123;</span><br><span class="line">     <span class="keyword">this</span>.name = name;</span><br><span class="line">     <span class="keyword">this</span>.age = age;</span><br><span class="line">     <span class="keyword">this</span>.say = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name+<span class="string">"/"</span>+<span class="keyword">this</span>.age)</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="5-其他"><a href="#5-其他" class="headerlink" title="5. 其他"></a>5. 其他</h2><ul>
-<li>构造函数的首字母一般大写</li>
-<li>值类型赋值是值的复制</li>
-<li>对象类型的赋值不仅是值的复制也是引用的复制<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="keyword">var</span> b = a;</span><br><span class="line">b.push(<span class="number">4</span>);</span><br><span class="line"><span class="comment">//a[1,2,3,4] b[1,2,3,4]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line">    b = a;<span class="comment">//值和引用都给了b</span></span><br><span class="line">    b = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];<span class="comment">// a[1,2,3] b[1,2,3,4]</span></span><br></pre></td></tr></table></figure>
-</li>
+</ol>
+<h2 id="2-思路"><a href="#2-思路" class="headerlink" title="2. 思路"></a>2. 思路</h2><ol>
+<li>获取到符合要求的dom节点（node下的tag），是一个HTML Collection，是一个类数组，length属性缓存下来，查找代价比较大</li>
+<li>我们获取到dom节点的className通常是一个string类型的。并且class容许顺序不一致。如“tab tab-item tab-active”与”tab tab-active tab-item”可以匹配的一样的css规则</li>
+<li>我们使用正则匹配，将className拆成多个className正则。因为我们匹配css时需要每个className都必须匹配通过。（拆开也是因为class书写可以无序）</li>
+<li>dom节点的className进行正则匹配，通过所有匹配的则返回该节点</li>
+</ol>
+<h2 id="3-实现和效果"><a href="#3-实现和效果" class="headerlink" title="3. 实现和效果"></a>3. 实现和效果</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getElementsByClassName</span>(<span class="params">classname,parentId,tag</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> parentNode = parentId &amp;&amp; <span class="built_in">document</span>.getElementById(parentId) || <span class="built_in">document</span>,</span><br><span class="line">            tagName = tag || <span class="string">'*'</span>,</span><br><span class="line">            classLength = classname.length,<span class="comment">//获取我们需要筛选class的个数</span></span><br><span class="line">            classReg = [];<span class="comment">//匹配class的正则</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;classLength;i++)&#123;</span><br><span class="line">        classReg[i] = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"(^|\\s)"</span>+classname[i]+<span class="string">"(\\s|$)"</span>,<span class="string">"g"</span>);<span class="comment">//生成class匹配正则</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> elems = parentNode.getElementsByTagName(tagName),<span class="comment">//获取到所有满足要求的dom节点</span></span><br><span class="line">            elemLength = elems.length,<span class="comment">//elems是类数组，获取length属性代价比较大，所以缓存下来 3</span></span><br><span class="line">            result = [];<span class="comment">//用于保存匹配成功的节点</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> j = <span class="number">0</span>;j &lt; elemLength;j++)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> elemTest = elems[j],<span class="comment">//获取当前测试的节点</span></span><br><span class="line">                elemTestClassName = elemTest.className;<span class="comment">//获取当前测试节点的class属性，className兼容IE6+</span></span><br><span class="line">        <span class="comment">//接下来开始对elemTestClassName进行匹配，看它是否匹配classReg中所有的规则</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> k=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(classReg[k] &amp;&amp; (classReg[k].test(elemTestClassName)))&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(classReg[k]+<span class="string">":"</span>+elemTestClassName+<span class="string">":"</span>+(classReg[k].test(elemTestClassName)));</span><br><span class="line">            <span class="comment">//测试成功进来</span></span><br><span class="line">            <span class="keyword">if</span>(k === classLength<span class="number">-1</span>)&#123;</span><br><span class="line">                <span class="comment">//如果通过所有测试，说明这个dom结果满足要求，我们push到结果中</span></span><br><span class="line">                result[result.length] = elemTest;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            k++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4-问题总结"><a href="#4-问题总结" class="headerlink" title="4. 问题总结"></a>4. 问题总结</h2><h4 id="4-1-关于while-循环的问题"><a href="#4-1-关于while-循环的问题" class="headerlink" title="4.1 关于while{}循环的问题"></a>4.1 关于while{}循环的问题</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> k=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span>(classReg[k].test(elemTestClassName))&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(classReg[k]+<span class="string">":"</span>+elemTestClassName+<span class="string">":"</span>+(classReg[k].test(elemTestClassName)));</span><br><span class="line">    <span class="comment">//测试成功进来</span></span><br><span class="line">    <span class="keyword">if</span>(k === classLength<span class="number">-1</span>)&#123;</span><br><span class="line">        <span class="comment">//如果通过所有测试，说明这个dom结果满足要求，我们push到结果中</span></span><br><span class="line">        result[result.length] = elemTest;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    k++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的逻辑在执行过程中报错了<code>Uncaught TypeError: Cannot read property &#39;test&#39; of undefined</code>，原因在于，循环结束时while还是执行一遍classReg[k].test(elemTestClassName)，而此时classReg[k]已经是undefined了。<br>所以应该在while加上判断</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> k=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span>(classReg[k] &amp;&amp; classReg[k].test(elemTestClassName))&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(classReg[k]+<span class="string">":"</span>+elemTestClassName+<span class="string">":"</span>+(classReg[k].test(elemTestClassName)));</span><br><span class="line">    <span class="comment">//测试成功进来</span></span><br><span class="line">    <span class="keyword">if</span>(k === classLength<span class="number">-1</span>)&#123;</span><br><span class="line">        <span class="comment">//如果通过所有测试，说明这个dom结果满足要求，我们push到结果中</span></span><br><span class="line">        result[result.length] = elemTest;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    k++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="4-2-实例"><a href="#4-2-实例" class="headerlink" title="4.2 实例"></a>4.2 实例</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"aaa zzz ccc"</span>&gt;</span>1<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"div1"</span> <span class="attr">class</span>=<span class="string">"aaa    bbb   ccc"</span>&gt;</span>2<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"div2"</span> <span class="attr">class</span>=<span class="string">"aaa ccc bbb"</span>&gt;</span>3<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>当我们使用上面的方法时会出现一个奇怪的现象，我现在还没搞明白，生气~~~</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = getElementsByClassName([<span class="string">"aaa"</span>,<span class="string">"ccc"</span>],<span class="built_in">document</span>,<span class="string">"div"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br></pre></td></tr></table></figure>
+<p>看到while循环体中的<code>console.log(classReg[k]+&quot;:&quot;+elemTestClassName+&quot;:&quot;+(classReg[k].test(elemTestClassName)))</code>了吗？加上这个console时，就能正确打印出两个dom节点[div#div1.aaa.bbb.ccc, div#div2.aaa.ccc.bbb]，注释掉的话，就只能找到[div#div1.aaa.bbb.ccc]。已疯！！！</p>
+<h2 id="5-关于上面问题的解决"><a href="#5-关于上面问题的解决" class="headerlink" title="5. 关于上面问题的解决"></a>5. 关于上面问题的解决</h2><p>非常感谢小宁宝宝的推荐，一个人思考真的容易陷入死胡同。</p>
+<p>因为我在实例化正则的时候，加了全局标志“g”,那么第一次查找成功后，下一次匹配就从成功后的位置开始。而我的console里面改变了lastIndex的值，所以解决方案有两个</p>
+<ol>
+<li>删除全局标志“g”。这是最根本的原因</li>
+<li>不删除的话，那么就手动将每次的lastIndex置为0</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(classReg[k] &amp;&amp; (classReg[k].test(elemTestClassName)))&#123;</span><br><span class="line">  <span class="comment">// console.log(classReg[k]+":"+elemTestClassName+":"+(classReg[k].test(elemTestClassName)));</span></span><br><span class="line">    classReg[k].lastIndex = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//测试成功进来</span></span><br><span class="line">    <span class="keyword">if</span>(k === classLength<span class="number">-1</span>)&#123;</span><br><span class="line">        <span class="comment">//如果通过所有测试，说明这个dom结果满足要求，我们push到结果中</span></span><br><span class="line">        result[result.length] = elemTest;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    k++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="6-推荐阅读："><a href="#6-推荐阅读：" class="headerlink" title="6. 推荐阅读："></a>6. 推荐阅读：</h2><ul>
+<li><a href="http://stackoverflow.com/questions/13586786/regexp-test-returns-different-result-for-same-str-depending-on-how-where-i" target="_blank" rel="noopener">RegExp.test() returns different result for same str</a></li>
+<li><a href="http://www.365mini.com/page/javascript-regexp-test.htm" target="_blank" rel="noopener">JavaScript RegExp.test() 函数详解</a></li>
 </ul>
 <hr>
 <p>做一个勤于思考的人</p>
@@ -466,7 +915,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2017/03/其他/gulp小白文.html">
+    <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2017/03/CSS/css实现垂直居中.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="徐姣">
@@ -485,7 +934,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/03/其他/gulp小白文.html" itemprop="url">gulp小白文</a></h1>
+                <a class="post-title-link" href="/2017/03/CSS/css实现垂直居中.html" itemprop="url">css实现垂直居中</a></h1>
         
 
         <div class="post-meta">
@@ -497,8 +946,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-21T00:00:00+08:00">
-                2017-03-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-28T00:00:00+08:00">
+                2017-03-28
               </time>
             
 
@@ -520,8 +969,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/其他/" itemprop="url" rel="index">
-                    <span itemprop="name">其他</span>
+                  <a href="/categories/CSS/" itemprop="url" rel="index">
+                    <span itemprop="name">CSS</span>
                   </a>
                 </span>
 
@@ -538,8 +987,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/03/其他/gulp小白文.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/2017/03/其他/gulp小白文.html" itemprop="commentCount"></span>
+                <a href="/2017/03/CSS/css实现垂直居中.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/2017/03/CSS/css实现垂直居中.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -569,54 +1018,38 @@
       
         
           
-            <h2 id="1-关于gulp"><a href="#1-关于gulp" class="headerlink" title="1. 关于gulp"></a>1. 关于gulp</h2><h3 id="1-1-gulp是什么"><a href="#1-1-gulp是什么" class="headerlink" title="1.1 gulp是什么"></a>1.1 gulp是什么</h3><p>gulp是一款提高我们开发效率的工具。比如：</p>
+            <h2 id="1-方法一（inline-inline-block配合vertical-align）"><a href="#1-方法一（inline-inline-block配合vertical-align）" class="headerlink" title="1. 方法一（inline/inline-block配合vertical-align）"></a>1. 方法一（inline/inline-block配合vertical-align）</h2><p>这种方法应用于子元素都是inline/inline-block level的元素，可以使用vertical-align属性，兼容IE6+ 如果原本元素不是inline level的话，使用display:inline-block兼容到IE8+</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"con"</span>&gt;</span>我是内容我是内容我是内容</span><br><span class="line">      <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">"con"</span> <span class="attr">src</span>=<span class="string">"/images/csstest1.png"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">"con"</span> <span class="attr">src</span>=<span class="string">"/images/csstest1.png"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> <span class="selector-class">.parent</span>&#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#ccc</span>;</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">2</span>;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">30px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.con</span>&#123;</span><br><span class="line">    <span class="attribute">vertical-align</span>: middle;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>根据上面的例子我们可以得到以下所示的样式</p>
+<p><img src="/images/csstest1.PNG" alt="css垂直居中示例图1"></p>
+<p>在这里，span/img都是行内元素，我们可以采用vertical-align实现垂直居中。上面默认情况下，vertical-align是基于基线对其的。</p>
+<p>对于上面的例子，我们也可以对span设置display:inline-block属性，设置高宽后，可以做到span中任意内容的居中效果</p>
+<h2 id="2-方法二（table-cell配合vertical-align）"><a href="#2-方法二（table-cell配合vertical-align）" class="headerlink" title="2.方法二（table-cell配合vertical-align）"></a>2.方法二（table-cell配合vertical-align）</h2><p>使用display:tabel-cell，table-cell也是可以使用vertical-align：middle使得元素垂直居中，但是display:table-cell有兼容性问题，兼容IE8+</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"con"</span>&gt;</span>这是第二个内容这是<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.parent</span>&#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#ccc</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">display</span>: table-cell;</span><br><span class="line">    <span class="attribute">vertical-align</span>: middle;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.con</span>&#123;</span><br><span class="line">    <span class="attribute">width</span>:<span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">height</span>:<span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">2px</span> solid red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>根据上面的例子我们可以得到以下所示的样式</p>
+<p><img src="/images/csstest2.PNG" alt="css垂直居中示例图2"></p>
+<p>这里需要注意的是table-cell设置需要设置在父元素上保证其内容垂直居中，如果你希望con中的文字也居中现在，也可以对con添加上<code>display: table-cell;vertical-align: middle;</code>。为什么没有line-height。line-height对多行文本的垂直居中实现效果并不是很好</p>
 <ul>
-<li>自动帮我们添加浏览器兼容前缀</li>
-<li>自动刷新浏览器</li>
-<li>我们想要使用ES6，gulp还可以帮我们把ES6代码编译转换成浏览器可以用的js</li>
+<li>兼容性：IE6/7不兼容display:table-cell。</li>
+<li>自适应：子容器无法自适应于父容器，高度无法使用百分比单位，因为根据渲染规则，display:table-cell的元素的包含块是它父级的display:table的元素。溢出：父元素就算给定高度，设置overflow，也不会导致溢出隐藏；在子元素溢出的时候，父容器不能保有自身设置的高度，直接会被撑高。</li>
+<li>其他：display:table-cell本身让很多属性无效。</li>
 </ul>
-<p>而这一切并不是gulp本身完成的，而是一系列的gulp插件来帮忙完成的。</p>
-<h3 id="1-2-gulp环境简单配置"><a href="#1-2-gulp环境简单配置" class="headerlink" title="1.2 gulp环境简单配置"></a>1.2 gulp环境简单配置</h3><ul>
-<li>首先你得有node环境（去下载node并安装好，内置了npm包管理工具）</li>
-<li><p>切到工程目录下，npm init 根据提示初始化package.json文件，如下图所示操作，会在项目目录下生成一个package.json文件(package.json文件也可以手动添加)</p>
-<p>  <img src="..//images/gulp1.png" alt="package.json"></p>
-<p>  生成的package.json文件如下图所示</p>
-<p>  <img src="..//images/gulp2.png" alt="package.json"></p>
-</li>
-<li><p>安装gulp </p>
-<pre><code>npm install gulp -g //全局安装
-npm install gulp --save-dev //工程目录下会生成一个node_modules文件，里面保存着开发所需要的依赖
-</code></pre><p>  当你为你的模块安装一个依赖模块时，正常情况下你得先安装他们（在模块根目录下npm install module-name），然后连同版本号手动将他们添加到模块配置文件package.json中的依赖里（devDependencies）–摘自网络</p>
-<ul>
-<li>-save和save-dev可以省掉你手动修改package.json文件的步骤。</li>
-<li>-save 自动把模块和版本号添加到dependencies部分</li>
-<li><p>-save-dve 自动把模块和版本号添加到devdependencies部分</p>
-<p>至于配置文件区分这俩部分， 是用于区别开发依赖模块和产品依赖模块， 以我见过的情况来看 devDepandencies主要是配置测试框架</p>
-</li>
-</ul>
-</li>
-<li><p>开始使用</p>
-<p>  在项目目录下创建一个gulpfile.js文件，这个文件就gulp任务的入口文件,在gulpfile.js文件中添加以下代码段，在项目目录下执行gulp,可以看出命令行输出了“gulp任务执行啦~~~”</p>
-  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>);</span><br><span class="line">gulp.task(<span class="string">"default"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"gulp任务执行啦~~~"</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>好吧，关于gulp的接口只有那么几个，自己去看一看</p>
-<h3 id="1-3-我自己的学习经验就是："><a href="#1-3-我自己的学习经验就是：" class="headerlink" title="1.3 我自己的学习经验就是："></a>1.3 我自己的学习经验就是：</h3><ul>
-<li><p>正确认识gulp: 它并不是一个什么多么难的新知识，只要我们根据要求配合插件可以实现非常强大的功能。</p>
-</li>
-<li><p>重要的是我们要知道有哪些插件，最好的就是我们在使用过程中想要用什么功能（压缩js，合并js，拷贝文件，简直不要太多）就去网上搜一下，各种插件就出来了</p>
-</li>
-<li><p>自己可以根据任务搭建一套手脚架，提高开发效率</p>
-</li>
-</ul>
-<h2 id="1-4-比较好的gulp插件"><a href="#1-4-比较好的gulp插件" class="headerlink" title="1.4 比较好的gulp插件"></a>1.4 比较好的gulp插件</h2><ul>
-<li>autoprefixer: 自动添加css兼容前缀</li>
-<li>run-sequence：让任务船型执行</li>
-<li><a href="https://github.com/Platform-CUF/use-gulp" target="_blank" rel="noopener">这里很多资料，不骗你</a></li>
-</ul>
-<h2 id="2-项目中使用ES6的模块"><a href="#2-项目中使用ES6的模块" class="headerlink" title="2. 项目中使用ES6的模块"></a>2. 项目中使用ES6的模块</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">buildjs :<span class="function">(<span class="params">fromPath,toPath,name</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> browserify(&#123;</span><br><span class="line">        entries: [fromPath],</span><br><span class="line">        debug: <span class="literal">true</span>, <span class="comment">// 告知Browserify在运行同时生成内联sourcemap用于调试</span></span><br><span class="line">    &#125;).transform(<span class="string">"babelify"</span>, &#123;<span class="attr">presets</span>: [<span class="string">"es2015"</span>]&#125;)<span class="comment">//转为ES5</span></span><br><span class="line">        .bundle()<span class="comment">//打包</span></span><br><span class="line">        .pipe(source(name ? name : <span class="string">"app.js"</span> ))</span><br><span class="line">        .pipe(buffer()) <span class="comment">// 缓存文件内容</span></span><br><span class="line">        .pipe(gulp.dest(toPath));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="3-参考文章"><a href="#3-参考文章" class="headerlink" title="3. 参考文章"></a>3. 参考文章</h2><ul>
-<li><a href="http://div.io/topic/1506" target="_blank" rel="noopener">使用 gulp 搭建前端环境之CommonJs &amp; ES6 模块化(中级篇)</a></li>
+<h2 id="3-方法三：（position-absolute来实现）–不兼容IE6-7"><a href="#3-方法三：（position-absolute来实现）–不兼容IE6-7" class="headerlink" title="3. 方法三：（position:absolute来实现）–不兼容IE6/7"></a>3. 方法三：（position:absolute来实现）–不兼容IE6/7</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"con"</span>&gt;</span>这是第二个内容这是<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>利用position：absolute如何保证con始终在parent的中心位置。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.parent</span>&#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#ccc</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">300px</span>;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.con</span>&#123;</span><br><span class="line">    <span class="attribute">height</span>:<span class="number">140px</span>;</span><br><span class="line">    <span class="attribute">width</span>:<span class="number">70%</span>;</span><br><span class="line">    <span class="attribute">background</span>: yellow;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">top</span>:<span class="number">0</span>;</span><br><span class="line">    <span class="attribute">bottom</span>:<span class="number">0</span>;</span><br><span class="line">    <span class="attribute">left</span>:<span class="number">0</span>;</span><br><span class="line">    <span class="attribute">right</span>:<span class="number">0</span>;</span><br><span class="line">    <span class="attribute">margin</span>: auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/csstest3.PNG" alt="css垂直居中示例图3"></p>
+<p>我们经常使用margin:0 auto使得块级元素水平居中。这里<code>position: absolute; top:0;bottom:0;left:0;right: 0;</code>的作用是什么，如果我们把这个删除了，可以发现原生con是水平居中了，在垂直方向上没有生效，这是为什么？？</p>
+<p>原理是：<br>‘top’ + ‘margin-top’ + ‘border-top-width’ + ‘padding-top’ + ‘height’ + ‘padding-bottom’ + ‘border-bottom-width’ + ‘margin-bottom’ + ‘bottom’ = 包含块的高度。</p>
+<h2 id="4-子容器绝对定位，top-50-，负margin（兼容IE6-）"><a href="#4-子容器绝对定位，top-50-，负margin（兼容IE6-）" class="headerlink" title="4. 子容器绝对定位，top:50%，负margin（兼容IE6+）"></a>4. 子容器绝对定位，top:50%，负margin（兼容IE6+）</h2><p>要求子元素定高</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"con"</span>&gt;</span>这是第二个内容这是<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.parent</span>&#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#ccc</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">300px</span>;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.con</span>&#123;</span><br><span class="line">    <span class="attribute">width</span>:<span class="number">140px</span>;</span><br><span class="line">    <span class="attribute">height</span>:<span class="number">140px</span>;</span><br><span class="line">    <span class="attribute">background</span>: yellow;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">top</span>:<span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">margin-top</span>: -<span class="number">70px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/csstest4.PNG" alt="css垂直居中示例图4"></p>
+<h2 id="5-参考文章"><a href="#5-参考文章" class="headerlink" title="5. 参考文章"></a>5. 参考文章</h2><ul>
+<li><a href="http://www.imooc.com/u/197450/courses?sort=publish" target="_blank" rel="noopener">张鑫旭的深入理解CSS系列</a></li>
+<li><a href="https://segmentfault.com/a/1190000000381042" target="_blank" rel="noopener">子容器垂直居中于父容器的方案</a></li>
+<li><a href="https://segmentfault.com/q/1010000000343188#a-1020000000343394" target="_blank" rel="noopener">子容器超过父容器如何垂直居中</a></li>
 </ul>
 <hr>
 <p>做一个勤于思考的人</p>
@@ -668,7 +1101,7 @@ npm install gulp --save-dev //工程目录下会生成一个node_modules文件�
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2017/02/网络/HTTP简介.html">
+    <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2017/03/前端面试题/前端面试题-第一套.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="徐姣">
@@ -687,7 +1120,7 @@ npm install gulp --save-dev //工程目录下会生成一个node_modules文件�
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/02/网络/HTTP简介.html" itemprop="url">HTTP学习总结</a></h1>
+                <a class="post-title-link" href="/2017/03/前端面试题/前端面试题-第一套.html" itemprop="url">前端面试题--第一套</a></h1>
         
 
         <div class="post-meta">
@@ -699,8 +1132,8 @@ npm install gulp --save-dev //工程目录下会生成一个node_modules文件�
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-22T00:00:00+08:00">
-                2017-02-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-28T00:00:00+08:00">
+                2017-03-28
               </time>
             
 
@@ -722,8 +1155,8 @@ npm install gulp --save-dev //工程目录下会生成一个node_modules文件�
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/网络/" itemprop="url" rel="index">
-                    <span itemprop="name">网络</span>
+                  <a href="/categories/前端面试题/" itemprop="url" rel="index">
+                    <span itemprop="name">前端面试题</span>
                   </a>
                 </span>
 
@@ -740,8 +1173,8 @@ npm install gulp --save-dev //工程目录下会生成一个node_modules文件�
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/02/网络/HTTP简介.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/2017/02/网络/HTTP简介.html" itemprop="commentCount"></span>
+                <a href="/2017/03/前端面试题/前端面试题-第一套.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/2017/03/前端面试题/前端面试题-第一套.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -771,596 +1204,77 @@ npm install gulp --save-dev //工程目录下会生成一个node_modules文件�
       
         
           
-            <p>前端工程师在面试过程中不可避免的会被问到是否知道http，讲真，似乎我们没有细究过http也好好的开发了很长一段时间。那为何越是大公司越会很注重你是否了解http呢。<br>站在我们前端开发人员的角度，前后端通信几乎都是基于HTTP的，我们发送http请求，由RD接受请求处理后返回我们需要的资源。我们更深入的了解http到底是为了什么：</p>
+            <h4 id="1-利用正则实现一个方法，取到”isvip”的cookie值"><a href="#1-利用正则实现一个方法，取到”isvip”的cookie值" class="headerlink" title="1. 利用正则实现一个方法，取到”isvip”的cookie值"></a>1. 利用正则实现一个方法，取到”isvip”的cookie值</h4><blockquote>
+<p>实现思路：</p>
+</blockquote>
 <ul>
-<li><code>更好的定位问题：</code>我们发送一个请求之后，可以根据请求返回的状态码定位这次请求是否成功，如果没有成功是谁的问题</li>
-<li><code>让前后端通信更快更安全：</code>在更深入的了解http请求后，我们就知道http通信的瓶颈在哪，有哪些行为会导致此次通信不安全、如何做可以让通信更快</li>
-<li><code>用更好的方式去沟通：</code>不同的业务场景选用不同的方法沟通不仅仅提高可读性，也可以提高安全性、服务器处理的效率</li>
-<li><code>应付面试：</code>很重要<br>其实主要内容我还是从《HTTP权威指南》上抄的~</li>
+<li>获取本地的cookie：document.cookie;我们可以打印出来发现，cookie的格式为：name=xujiao; age=18; isVip=xsxdjc;</li>
+<li>通过正则的exec()方法，匹配到isVip=xsxdjc这段文字</li>
+<li>我们知道的是，正则中的小括号表示子匹配模式，匹配成功后保存到exec()返回的数组中</li>
 </ul>
-<h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h2><p>http说的通俗一点，相当于客户端和服务器端的沟通语言。那么http协议简单来说包括哪些内容呢：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**需要注意：</span></span><br><span class="line"><span class="comment">（1）利用RegExp动态创建正则</span></span><br><span class="line"><span class="comment"> (2)使用\\w转义</span></span><br><span class="line"><span class="comment"> (3)(\\w*)中*需要放到括号内，否则匹配到的只是一个字符</span></span><br><span class="line"><span class="comment"> (4) 需要使用^开头，否则可能会匹配到，scdsisVip=xsxdjc</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getCookie</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> cookies = <span class="built_in">document</span>.cookie,</span><br><span class="line">        reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"^"</span>+name+<span class="string">"=(\\w*)"</span>,<span class="string">"ig"</span>),   </span><br><span class="line">        match = reg.exec(cookies);</span><br><span class="line">    <span class="keyword">return</span> match &amp;&amp; match[<span class="number">1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-利用css实现垂直居中（兼容IE6）"><a href="#2-利用css实现垂直居中（兼容IE6）" class="headerlink" title="2. 利用css实现垂直居中（兼容IE6）"></a>2. 利用css实现垂直居中（兼容IE6）</h4><p>具体的实现可以查看：<a href="http://www.xujiaosite.com/2017/03/CSS/css%E5%AE%9E%E7%8E%B0%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD.html#more" target="_blank" rel="noopener">css实现垂直居中的几种方法</a></p>
+<h4 id="3-至少写出3中js的设计模式，并且做出详细说明（越多越好）"><a href="#3-至少写出3中js的设计模式，并且做出详细说明（越多越好）" class="headerlink" title="3. 至少写出3中js的设计模式，并且做出详细说明（越多越好）"></a>3. 至少写出3中js的设计模式，并且做出详细说明（越多越好）</h4><p>具体可以参考：<a href="http://www.xujiaosite.com/2017/04/JS/JavaScript%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93.html" target="_blank" rel="noopener">JavaScript设计模式学习总结</a></p>
+<h4 id="4-详细说明TCP的三次握手，并配合手绘图-摘自网络"><a href="#4-详细说明TCP的三次握手，并配合手绘图-摘自网络" class="headerlink" title="4. 详细说明TCP的三次握手，并配合手绘图(摘自网络)"></a>4. 详细说明TCP的三次握手，并配合手绘图(摘自网络)</h4><p>开放系统互连参考模型 (Open System Interconnect 简称OSI）–网络的7层模型，网络由下往上分为：物理层、数据链路层、网络层、传输层、会话层、表示层和应用层。而我们常见的IP协议对应于网络层，TCP协议对应于传输层，而HTTP协议对应于应用层。<br>WEB使用HTTP协议作应用层协议，以封装HTTP文本信息，然后使用TCP/IP做传输层协议将它发到网络上。</p>
+<ul>
+<li>什么是TCP连接的三次握手<ul>
+<li>第一次握手：客户端发送syn包(syn=j)到服务器，并进入SYN_SEND状态，等待服务器确认;</li>
+<li>第二次握手：服务器收到syn包，必须确认客户的SYN(ack=j+1)，同时自己也发送一个SYN包(syn=k)，即SYN+ACK包，此时服务器进入SYN_RECV状态;</li>
+<li>第三次握手：客户端收到服务器的SYN+ACK包，向服务器发送确认包ACK(ack=k+1)，此包发送完毕，客户端和服务器进入ESTABLISHED状态，完成三次握手。</li>
+</ul>
+</li>
+</ul>
+<p>握手过程中传送的包里不包含数据，三次握手完毕后，客户端与服务器才正式开始传送数据。理想状态下，TCP连接一旦建立，在通信双方中的任何一方主动关闭连接之前，TCP 连接都将被一直保持下去。断开连接时服务器和客户端均可以主动发起断开TCP连接的请求，断开过程需要经过“四次握手”(过程就不细写了，就是服务器和客户端交互，最终确定断开)</p>
+<pre><code>ACK ： TCP协议规定，只有ACK=1时有效，也规定连接建立后所有发送的报文的ACK必须为1
+SYN(SYNchronization) ： 在连接建立时用来同步序号。当SYN=1而ACK=0时，表明这是一个连接请求报文。对方若同意建立连接，则应在响应报文中使SYN=1和ACK=1. 因此,  SYN置1就表示这是一个连接请求或连接接受报文。
+FIN （finis）即完，终结的意思， 用来释放一个连接。当 FIN = 1 时，表明此报文段的发送方的数据已经发送完毕，并要求释放连接。
+</code></pre><p><img src="/images/TCP.PNG" alt="TCP三次握手">   </p>
+<ul>
+<li>HTTP链接的特点<ul>
+<li>HTTP协议即超文本传送协议(Hypertext Transfer Protocol )，是Web联网的基础，也是手机联网常用的协议之一，HTTP协议是建立在TCP协议之上的一种应用。</li>
+<li>HTTP连接最显著的特点是<strong>客户端发送的每次请求都需要服务器回送响应，在请求结束后，会主动释放连接</strong>。从建立连接到关闭连接的过程称为“一次连接”。</li>
+</ul>
+</li>
+</ul>
+<h4 id="5-实现一个函数function-on-elem-type-handler-完成事件注册，保证this指向始终是elem，要求兼容IE8"><a href="#5-实现一个函数function-on-elem-type-handler-完成事件注册，保证this指向始终是elem，要求兼容IE8" class="headerlink" title="5. 实现一个函数function on(elem,type,handler){}完成事件注册，保证this指向始终是elem，要求兼容IE8"></a>5. 实现一个函数function on(elem,type,handler){}完成事件注册，保证this指向始终是elem，要求兼容IE8</h4><p>我们事件注册的方式有两种：addEventListener，attachEvent。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">on</span>(<span class="params">elem,type,handle</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">window</span>.addEventListener)&#123;</span><br><span class="line">        elem.addEventListener(type,handle)</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        elem.attachEvent(<span class="string">"on"</span>+type,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            handle.apply(elem);</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ol>
-<li>如何沟通：http报文，告诉客户端如何提出要求，服务器端应该怎样分析客户端的请求并给出响应的反应</li>
-<li>沟通的高效性：http缓存、长连接等</li>
-<li>沟通的安全性：https、客户端识别、cookie机制<br>站在前端的角度来讲，我们常用的客户端是浏览器，服务器端可以是任何提供服务一个机器（废话）。</li>
+<li><p>需要注意的地方</p>
+<p> 一开始使用bind实现的，但是bind只支持IE9+，ff4+，chrome7+支持此方法，opera和safari不支持（MDN上的说明）。所以换了apply或者call实现。如果用bind就不需要外面在包一层function了，因为bind返回的就是一个函数</p>
+</li>
+<li><p>addEventListener和attachEvent的区别</p>
+</li>
 </ol>
-<h2 id="2-如何沟通–http报文结构"><a href="#2-如何沟通–http报文结构" class="headerlink" title="2. 如何沟通–http报文结构"></a>2. 如何沟通–http报文结构</h2><p>这个部分主要讲解客户端和服务器端应该遵循什么样的规范来沟通。他们都得遵循http报文规范。</p>
 <ul>
-<li>http报文是什么：简单的格式化数据块</li>
-<li><p>http报文包含3个部分</p>
-<ul>
-<li>起始行：对报文进行描述</li>
-<li>首部：包含一些属性</li>
-<li><p>主体（可以没有）：包含数据主体</p>
-<h5 id="2-1-请求报文格式"><a href="#2-1-请求报文格式" class="headerlink" title="2.1 请求报文格式"></a>2.1 请求报文格式</h5><p>method request-url version<br>headers</p>
-<p>entity-body</p>
+<li><p><code>兼容性</code>： addEventListener：是DOM2级事件注册方式（标准），但是只支持IE9+(包含IE9)以及其他浏览器。attachEvent：IE事件注册方式，IE8-</p>
+</li>
+<li><p><code>this的指向</code>： 在addEventListener的处理函数中this指向被绑定元素，而attachEvent始终指向window</p>
+</li>
+<li><p><code>代码执行顺序</code>：addEventListener按照绑定事件的顺序执行，而attachEvent与绑定事件的顺序相反执行</p>
+</li>
+<li><p><code>参数个数</code>：addEventListener有三个参数，第三个参数表示在哪个阶段捕获事件（false表示冒泡阶段），而attachEvent只支持事件冒泡</p>
+</li>
+<li><p><code>事件类型</code>：addEventListener的事件类型如：click,attachEvent的事件类型是:”on”+click</p>
 </li>
 </ul>
-</li>
-</ul>
-<h5 id="2-2-响应报文格式"><a href="#2-2-响应报文格式" class="headerlink" title="2.2 响应报文格式"></a>2.2 响应报文格式</h5><pre><code>version status reason-phrase
-headers
-
-entity-body
-</code></pre><h2 id="3-method请求的方法"><a href="#3-method请求的方法" class="headerlink" title="3. method请求的方法"></a>3. method请求的方法</h2><p>HTTP规范总共定义了<strong>7个</strong>请求方法，为了告诉客户端，客户端想要执行什么动作。但不是每个服务器都实现了以下的方法。<strong>HTTP1.1协议要求实现GET和HEAD方法</strong></p>
+<h4 id="6-利用node实现一个服务器，端口8080，返回”我是一台服务器”"><a href="#6-利用node实现一个服务器，端口8080，返回”我是一台服务器”" class="headerlink" title="6. 利用node实现一个服务器，端口8080，返回”我是一台服务器”"></a>6. 利用node实现一个服务器，端口8080，返回”我是一台服务器”</h4><p>在做笔试的时候看到这个题目差点没当场把自己砸死，送分题呀，可是我并不记得API。当时我就在卷子上认真的写着：</p>
+<p>我并没有用过node，我觉得首先node提供了一个http的核心模块，这个模块应该提供了一个类似于createServer的方法（没错，我猜对了方法），接下来我们应该提供一些参数，供服务器使用<br>比如port:端口，url:拦截的链接，response就是返回数据</p>
+<p>我写的是</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line">http.createServer(&#123;</span><br><span class="line">    port:<span class="number">8080</span>,</span><br><span class="line">    url:<span class="string">"127.0.0.1"</span>,</span><br><span class="line">    response:<span class="string">"我是一台服务器"</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>为什么要把我的错误的答案写上呢，其实这说明了什么，我没有认真的思考过web服务器的角色和http请求的过程</p>
 <ol>
-<li>GET:从服务器端获取资源，没有实体<br>HTTP1.1要求实现GET方法</li>
-<li>HEAD：从服务器获取资源的首部，没有实体<br>与GET方法很类似，但是服务器在响应中只返回首部，不会返回实体的主体部分。HTTP1.1要求实现GET方法。HEAD方法可以用来：        <ul>
-<li>在不获取资源的情况下，知道资源的情况（资源的类型）</li>
-<li>通过查看资源的状态码，了解资源的存在情况</li>
-<li>通过查看首部，看资源是否被修改了        </li>
-</ul>
-</li>
-<li><p>POST：向服务器发送需要处理的数据，<strong>有实体</strong></p>
-</li>
-<li><p>PUT:将请求的主体部分放在服务器上，<strong>有实体</strong><br>PUT请求让服务器用PUT请求带的主体部分来创建一个由它所请求的url命名的新文档，如果文档已经存在，则覆盖它。PUT请求容许用户修改服务器的内容，所以从安全性角度来讲，应该要用户登录。        </p>
-</li>
-<li>TRACE：对可能经过的代理服务器传送到服务器上去的报文进行追踪，没有实体<br>客户端发一个请求到达服务器时，可能会经过很多的代理服务器、防护墙、网关等等，中间每一个环节都有可能改变原来的HTTP请求。TRACE方法，容许客户端在最终发送请求到服务器端时，看看它变成了什么样子。最后一站的服务器会返回一个相关的响应，并在主体中携带上原始的请求报文。        <ul>
-<li>优点：可以用于查看代理和其他的应用程序对用户请求的影响</li>
-<li>缺点：它假定了中间程序对不同方法的请求处理方式是一致的。说到底我们还是不能保证中间代理和网关等对用户请求处理方式是一致的</li>
-</ul>
-</li>
-<li>OPTIONS：决定（”决定二字”如何来理解？）可以在服务器上执行哪些方式，没有实体<br>OPTIONS方式是希望服务器告诉我们，我们可以使用哪些方法，或者说对特殊资源支持哪些方法。            </li>
-<li>DELETE：从服务器上删除一份文档，没有实体<br>请求服务器端删除一个资源，但是不能保证这个请求一定会被执行，因为HTTP的规范容许服务器在不通知客户端的情况下撤销请求。        </li>
-<li>扩展方法<br>HTTP被设计成字段可拓展的，这样可以向下兼容。但是我并不想看这块。</li>
-</ol>
-<h2 id="4-请求的URL简单介绍"><a href="#4-请求的URL简单介绍" class="headerlink" title="4. 请求的URL简单介绍"></a>4. 请求的URL简单介绍</h2><p>URL提供了统一的资源命名方式：方案：//服务器位置//路径。URL的语法会由于方案的不同而不同,几乎没有哪个URL中包含了所以所有的组件：scheme://user:pwd@host:port/path;params?query#frag</p>
-<ol>
-<li>params参数<br>一个URL中可以有多个参数，参数为键值对，各个参数之间以及参数与URL其他部分之间用逗号分隔        </li>
-<li>query<br>查询组件的内容没有通用的格式，用字符“？”将其与URL的其余部分分隔开</li>
-</ol>
-<h5 id="4-1-方案：例如HTTP-FTP-SMTP"><a href="#4-1-方案：例如HTTP-FTP-SMTP" class="headerlink" title="4.1 方案：例如HTTP/FTP/SMTP"></a>4.1 方案：例如HTTP/FTP/SMTP</h5><p>方案名不区分大小写,告诉应用程序应该使用什么协议        </p>
-<h2 id="5-版本"><a href="#5-版本" class="headerlink" title="5. 版本"></a>5. 版本</h2><p>格式类似于HTTP/1.1,HTTP/2.0,是为了服务器和客户端之间相互了解各自的能力和报文的格式。版本号说明了应用程序支持的最高的HTTP版本。版本号不会被当做小数来处理，所以HTTP2.22比HTTP2.3的版本要高，因为22&gt;3</p>
-<h2 id="6-状态码"><a href="#6-状态码" class="headerlink" title="6. 状态码"></a>6. 状态码</h2><p>状态码配合原因短语一起告诉客户端他的请求处于什么状态,目前有5个种类的状态码</p>
-<ul>
-<li>100~199:信息类状态码(目前实现了2个)</li>
-<li>200~299:成功类状态码(目前实现了7个)</li>
-<li>300~399:重定向类状态码(目前实现了7个)</li>
-<li>400~499:客户端失败状态码(目前实现了18个)</li>
-<li>500~599:服务器端状态码(目前实现了6个)</li>
-</ul>
-<h5 id="6-1-信息类状态码"><a href="#6-1-信息类状态码" class="headerlink" title="6.1 信息类状态码"></a>6.1 信息类状态码</h5><p>这类型状态码是http1.1引入的,都比较新也比较受争议,所以目前只实现了2个:</p>
-<ol>
-<li>100 Continue<br>说明服务器端已经收到部分请求,请求客户端继续。那么为什么我们需要这个状态码: http客户端应用程序要发给服务器一个实体的主体,但是在发送前想知道服务器端是否接受服务器端只有接受到带有值为100 continue的expires请求头时才会返回100状态码,</li>
-<li>101 switching protocols<br>说明服务器根据客户端的请示,将协议切换成update首部所列的协议</li>
-</ol>
-<h5 id="6-2-成功类状态码"><a href="#6-2-成功类状态码" class="headerlink" title="6.2 成功类状态码"></a>6.2 成功类状态码</h5><p>目前已经实现了7个(200~206)</p>
-<ol>
-<li>200 OK<br>请求没有问题,响应的实体主体部分包含请求的资源</li>
-<li>201 created<br>主要用来创建服务器端请求(PUT)<br>服务器在返回改状态码前必须已经创建好对象<br>响应的主体部分应该包含各组引用了已创建的资源的URL</li>
-<li>202 Accept<br>请求已经被接受,但是服务器还未对该请求做任何处理也不能保证服务器能完成这个请求<br>返回的实体主体部分包含对该请求的状态描述,或者也可以加上对请求完成时间的估计</li>
-<li>203 None-Authoritative Information<br>实体的信息不是来自于服务器端,而是来自于资源的一个副本<br>如中间节点上有一份资源副本,但无法或者对发送资源进行验证就可以发送这个状态码</li>
-<li>204 No content<br>响应中包含起始行和首部,但是每天实体的主体部分<br>主要用于浏览器不转为显示新文档的情况下对其进行更新</li>
-<li>205 Reset content<br>也是主要用于浏览器<br>用于告知浏览器清空所以得HTML元素</li>
-<li>206 partial content<br>成功的执行了一个range请求<br>206响应必须包含以下几个响应</li>
+<li>web服务器的角色是什么：<br>用于处理用户的请求，并作出响应（拦截用户的http请求，根据请求所带来的一系列信息，给出一点的响应）</li>
+<li>http响应过程是什么<br>在学习http的过程中，我们要学什么，请求报文呀，请求方法，响应头、状态码等等，为什么会有这些东西存在，说明这些在我http交流中充当着非常重要的角色，而我在上面的思考web服务器的时候<br>却并没有考虑这些东西。</li>
 </ol>
 <ul>
-<li>Content-range</li>
-<li>Date</li>
-<li>ETag</li>
-<li>Content-Location</li>
+<li>我的createServer只获取了参数，没做任何处理，你就是服务器呀，还准备让谁去做这件事情</li>
+<li>你去取request了吗？并没有，那怎么分析请求呢</li>
+<li>你返回数据的时候写响应头了吗？并没有，那怎么知道我的请求是否合法，你的状态码响应头什么的都怎么给呢</li>
 </ul>
-<h5 id="6-3-重定向类状态码-目前实现了7个"><a href="#6-3-重定向类状态码-目前实现了7个" class="headerlink" title="6.3 重定向类状态码(目前实现了7个)"></a>6.3 重定向类状态码(目前实现了7个)</h5><ol>
-<li>300 Multiple Choice<br>请求的url对应多个资源(中文、英文等)会返回该状态码<br>服务器可以在响应的location首部给出首选的URL</li>
-<li>301 Moved permanently<br>表示请求的资源已经转移<br>响应的location头部应该包含资源的新URL</li>
-<li>302 Found<br>与301类似,客户端使用响应的location首部来临时定位资源<br>以后还是会使用来的URL定位资源</li>
-<li>303 See Other<br>告知客户端使用另一个URL来访问资源<br>新的URL位于响应的location首部<br>主要目的是容许post请求将客户端定位到某个资源上<br>讲真,我已经晕了</li>
-<li>304 Not Found<br>这个我倒是经常遇到,传说中的条件缓存<br>客户端的条件get请求,资源未被修改<br>响应的实体不包含主体部分</li>
-<li>305 use proxy<br>必须通过代理来访问资源,代理的位置在响应的location首部</li>
-<li>306 未使用</li>
-<li>307 Temporary Redirect<br>临时的重定向,类似于301,但响应中给出的是临时的url<br>以后还是使用老的url来访问资源</li>
-</ol>
-<h5 id="6-4-服务器端错误状态码"><a href="#6-4-服务器端错误状态码" class="headerlink" title="6.4 服务器端错误状态码"></a>6.4 服务器端错误状态码</h5><p>目前实现了6个</p>
-<ol>
-<li>500 Internal server error<br>遇到妨碍服务器提供服务的内部错误时返回</li>
-<li>501 Not implemented<br>客户端发起的请求超出了服务器的能力范围,例如使用了服务器不支持的方法</li>
-<li>502 bad gateway<br>代理在请求的响应链的下一条链时返回一个伪响应(如无法连接父代理)<br>测试过程中,测试服务器挂了会报这个错误类型</li>
-<li>503 service unavailable<br>表示服务器现在没办法为请求提供服务,但是未来可以<br>如果服务器知道什么时候能够用,可以在响应中返回一个包含retry-after首部</li>
-<li>504 gateway timeout<br>类似于408,这里的响应来自于网关或者代理<br>在等服务器等待请求进行响应时超时了</li>
-<li>505 http version not support</li>
-</ol>
-<h2 id="7-学习时间线"><a href="#7-学习时间线" class="headerlink" title="7. 学习时间线"></a>7. 学习时间线</h2><h5 id="2017-02-27"><a href="#2017-02-27" class="headerlink" title="2017-02-27"></a>2017-02-27</h5><ul>
-<li>http简介</li>
-<li>http报文结构</li>
-<li>url</li>
-<li>请求的方法</li>
-</ul>
-<h5 id="2017-03-01"><a href="#2017-03-01" class="headerlink" title="2017-03-01"></a>2017-03-01</h5><ul>
-<li>状态码 (信息类状态码、成功类状态码、重定向类状态码、服务器端错误状态码)</li>
-</ul>
-<hr>
-<p>做一个勤于思考的人~</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2017/02/个人成长/前端资料总结.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="徐姣">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avater.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="徐姣的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/02/个人成长/前端资料总结.html" itemprop="url">前端资料总结</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-21T00:00:00+08:00">
-                2017-02-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/个人成长/" itemprop="url" rel="index">
-                    <span itemprop="name">个人成长</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/02/个人成长/前端资料总结.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/2017/02/个人成长/前端资料总结.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="1-移动端"><a href="#1-移动端" class="headerlink" title="1. 移动端"></a>1. 移动端</h2><ul>
-<li><a href="http://www.jb51.net/article/76893.htm" target="_blank" rel="noopener">js中flexible.js实现淘宝弹性布局方案</a></li>
-<li><a href="http://www.bootcss.com/p/zeptojs/" target="_blank" rel="noopener">Zepto中文API</a></li>
-<li><a href="http://www.qdfuns.com/notes/23659/5e3cd2904a56f5e6b86c4d49e90e0f34.html?winzoom=1" target="_blank" rel="noopener">从淘宝适配布局谈移动端适配</a></li>
-</ul>
-<h2 id="2-HTML"><a href="#2-HTML" class="headerlink" title="2. HTML"></a>2. HTML</h2><ul>
-<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/Sections_and_Outlines_of_an_HTML5_document" target="_blank" rel="noopener">HTML5的文档节段和纲要</a></li>
-<li><a href="http://tool.oschina.net/commons?type=2" target="_blank" rel="noopener">HTML占位符对照表</a></li>
-</ul>
-<h2 id="3-JS"><a href="#3-JS" class="headerlink" title="3. JS"></a>3. JS</h2><ul>
-<li><a href="http://es6.ruanyifeng.com/" target="_blank" rel="noopener">ECMAScript 6 入门</a></li>
-<li><a href="http://www.cnblogs.com/fingerdancing/archive/2013/04/30/jsPlugin.html" target="_blank" rel="noopener">js插件编写规范</a></li>
-<li><a href="http://www.css88.com/archives/4821" target="_blank" rel="noopener">jQuery插件开发入门</a></li>
-<li><a href="http://www.gulpjs.com.cn/docs/writing-a-plugin/" target="_blank" rel="noopener">gulp编写插件</a></li>
-<li><a href="http://www.css88.com/archives/4821" target="_blank" rel="noopener">jQuery插件开发入门</a></li>
-<li><a href="http://www.gulpjs.com.cn/" target="_blank" rel="noopener">gulpjs官网</a></li>
-<li><a href="http://lzw.me/pages/ecmascript/" target="_blank" rel="noopener">EcmaScript5.1</a></li>
-<li><a href="https://segmentfault.com/a/1190000005128101" target="_blank" rel="noopener">https://segmentfault.com/a/1190000005128101</a></li>
-<li><a href="https://github.com/Platform-CUF/use-gulp" target="_blank" rel="noopener">gulp学习资料整理</a></li>
-<li><a href="http://webpackdoc.com/" target="_blank" rel="noopener">webpack中文指南</a></li>
-</ul>
-<h3 id="4-模块化"><a href="#4-模块化" class="headerlink" title="4. 模块化"></a>4. 模块化</h3><ul>
-<li><a href="http://www.cnblogs.com/ifantastic/p/4648329.html" target="_blank" rel="noopener">CommonJS 模块规范 1.1.1</a></li>
-<li><a href="http://justineo.github.io/singles/writing-modular-js/" target="_blank" rel="noopener">使用 AMD、CommonJS 及 ES Harmony 编写模块化的 JavaScript</a></li>
-<li><a href="http://requirejs.org/docs/whyamd.html" target="_blank" rel="noopener">why amd</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2015/05/commonjs-in-browser.html" target="_blank" rel="noopener">浏览器加载 CommonJS 模块的原理与实现</a></li>
-<li><a href="http://blog.chinaunix.net/uid-26672038-id-4112229.html" target="_blank" rel="noopener">JavaSript模块规范 - AMD规范与CMD规范介绍 </a></li>
-</ul>
-<h2 id="5-浏览器"><a href="#5-浏览器" class="headerlink" title="5. 浏览器"></a>5. 浏览器</h2><ul>
-<li><a href="http://fex.baidu.com/blog/2014/05/what-happen/?qq-pf-to=pcqq.c2c" target="_blank" rel="noopener">从输入 URL 到页面加载完成的过程中都发生了什么事情？</a></li>
-<li><a href="http://www.jianshu.com/p/cf36d48652f4" target="_blank" rel="noopener">Chrome 开发者工具中文指南</a></li>
-<li><a href="http://blog.csdn.net/rogeryi/article/details/23686609" target="_blank" rel="noopener">How Rendering Work (in WebKit and Blink)</a></li>
-<li><a href="http://blog.csdn.net/rogeryi/article/details/17657779" target="_blank" rel="noopener">浏览器渲染发展的一些思考</a></li>
-<li><a href="http://blog.csdn.net/luoshengyang/article/details/50615628" target="_blank" rel="noopener">Chromium网页Render Object Tree创建过程分析</a></li>
-<li><a href="http://blog.csdn.net/luoshengyang/article/details/50648792" target="_blank" rel="noopener">Chromium网页Render Layer Tree创建过程分析</a></li>
-<li><a href="http://blog.csdn.net/luoshengyang/article/details/50661553" target="_blank" rel="noopener">Chromium网页Graphics Layer Tree创建过程分析</a></li>
-</ul>
-<h2 id="6-React"><a href="#6-React" class="headerlink" title="6. React"></a>6. React</h2><ul>
-<li><a href="http://reactnative.cn/" target="_blank" rel="noopener">RN中文网</a></li>
-</ul>
-<h2 id="7-node"><a href="#7-node" class="headerlink" title="7. node"></a>7. node</h2><ul>
-<li><a href="http://nodeschool.io/zh-cn/" target="_blank" rel="noopener">nodeschool</a></li>
-<li><a href="https://www.zhihu.com/question/21567720" target="_blank" rel="noopener">如何系统地学习Node.js？</a></li>
-<li><a href="https://github.com/jimuyouyou/node-interview-questions#%E8%B5%B7%E6%BA%90" target="_blank" rel="noopener">node-interview-questions</a></li>
-<li><a href="http://www.runoob.com/nodejs/nodejs-tutorial.html" target="_blank" rel="noopener">Node.js 教程</a></li>
-<li><a href="http://expressjs.jser.us/api" target="_blank" rel="noopener">express API</a></li>
-<li><a href="https://cnodejs.org/topic/504b4924e2b84515770103dd" target="_blank" rel="noopener">Mongoose学习参考文档</a></li>
-<li><a href="http://www.cnblogs.com/huangxincheng/archive/2012/02/18/2356595.html" target="_blank" rel="noopener">8天学通MongoDB——第一天 基础入门</a></li>
-<li><a href="http://www.cnblogs.com/xuanhun/p/3922847.html" target="_blank" rel="noopener">在express站点中使用ejs模板引擎</a></li>
-</ul>
-<h2 id="8-CSS"><a href="#8-CSS" class="headerlink" title="8. CSS"></a>8. CSS</h2><ul>
-<li><a href="http://www.bootcss.com/" target="_blank" rel="noopener">bootcss</a></li>
-<li><a href="http://www.bootcss.com/p/websafecolors/" target="_blank" rel="noopener">WEB安全色</a></li>
-</ul>
-<h2 id="9-个人"><a href="#9-个人" class="headerlink" title="9. 个人"></a>9. 个人</h2><ul>
-<li><a href="https://github.com/xujiao1989" target="_blank" rel="noopener">github</a></li>
-<li><a href="http://www.xujiaosite.com/" target="_blank" rel="noopener">个人博客</a></li>
-</ul>
-<h2 id="10-其他"><a href="#10-其他" class="headerlink" title="10. 其他"></a>10. 其他</h2><ul>
-<li><a href="http://npm.taobao.org/" target="_blank" rel="noopener">淘宝 NPM 镜像</a></li>
-<li><a href="https://leetcode.com/" target="_blank" rel="noopener">leetcode</a></li>
-<li><a href="http://caniuse.com/" target="_blank" rel="noopener">can i use</a></li>
-<li><a href="http://www.iconfont.cn/plus" target="_blank" rel="noopener">阿里巴巴的iconfont</a></li>
-</ul>
-<h2 id="11-图片素材"><a href="#11-图片素材" class="headerlink" title="11. 图片素材"></a>11. 图片素材</h2><ul>
-<li><a href="http://www.58pic.com/" target="_blank" rel="noopener">千图网</a></li>
-<li><a href="http://588ku.com/?h=bd" target="_blank" rel="noopener">千库网</a></li>
-</ul>
-<h3 id="12-博客搭建"><a href="#12-博客搭建" class="headerlink" title="12. 博客搭建"></a>12. 博客搭建</h3><ul>
-<li><a href="http://theme-next.iissnan.com/" target="_blank" rel="noopener">NexT使用文档</a></li>
-<li><a href="http://www.jianshu.com/p/05289a4bc8b2" target="_blank" rel="noopener">如何搭建一个独立博客——简明Github Pages与Hexo教程</a></li>
-<li><a href="https://segmentfault.com/a/1190000004947261" target="_blank" rel="noopener">手把手教你使用Hexo + Github Pages搭建个人独立博客</a></li>
-<li><a href="https://notes.wanghao.work/2015-10-21-%E4%B8%BANexT%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0%E9%98%85%E8%AF%BB%E9%87%8F%E7%BB%9F%E8%AE%A1%E5%8A%9F%E8%83%BD.html#%E9%85%8D%E7%BD%AELeanCloud" target="_blank" rel="noopener">为NexT主题添加文章阅读量统计功能</a></li>
-<li><a href="https://cart.godaddy.com/EmptyCart.aspx?isc=cjc2off30" target="_blank" rel="noopener">godaddy域名购买</a></li>
-<li><a href="https://www.dnspod.cn/Login" target="_blank" rel="noopener">DNS注册</a></li>
-</ul>
-<h2 id="牛人博客"><a href="#牛人博客" class="headerlink" title="牛人博客"></a>牛人博客</h2><ul>
-<li><a href="http://www.haorooms.com/" target="_blank" rel="noopener">Haorooms</a></li>
-<li><a href="http://www.whycss.com/" target="_blank" rel="noopener">前端网址导航</a></li>
-<li><a href="http://www.liaoxuefeng.com/" target="_blank" rel="noopener">廖雪峰的官方网站</a></li>
-<li><a href="http://www.whycss.com/" target="_blank" rel="noopener">前端网址导航</a></li>
-<li><a href="http://www.haorooms.com/" target="_blank" rel="noopener">Haorooms</a></li>
-<li><a href="http://www.whycss.com/" target="_blank" rel="noopener">前端网址导航</a></li>
-<li><a href="http://www.qdfuns.com/" target="_blank" rel="noopener">前端网</a></li>
-<li><a href="http://fex.baidu.com/" target="_blank" rel="noopener">百度FEX</a></li>
-<li><a href="http://fe.meituan.com/" target="_blank" rel="noopener">美团FE博客</a></li>
-<li><a href="http://fe.meituan.com/yui3-practice.html" target="_blank" rel="noopener">YUI3在美团的实践</a></li>
-<li><a href="http://scrat.io/#!/index" target="_blank" rel="noopener">scrat的webapp模块化开发体系</a></li>
-<li><a href="http://www.ruanyifeng.com/home.html" target="_blank" rel="noopener">阮一峰个人博客</a></li>
-<li><a href="http://www.sdifenzhou.com/" target="_blank" rel="noopener">史蒂夫周-mac软件破解</a></li>
-<li><a href="http://2017.miaov.com/" target="_blank" rel="noopener">妙味课堂</a></li>
-<li><a href="http://fex.baidu.com/" target="_blank" rel="noopener">百度FEX</a></li>
-<li><a href="https://lifesinger.wordpress.com/" target="_blank" rel="noopener">玉伯的博客</a></li>
-<li><a href="https://blog.thankbabe.com/collection/" target="_blank" rel="noopener">好用的工具导航</a></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xujiao1989.github.io/blog/2017/02/版本控制/2017-02-13-git学习笔记.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="徐姣">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/uploads/avater.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="徐姣的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/02/版本控制/2017-02-13-git学习笔记.html" itemprop="url">git学习笔记</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-13T15:49:00+08:00">
-                2017-02-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/代码版本控制/" itemprop="url" rel="index">
-                    <span itemprop="name">代码版本控制</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/02/版本控制/2017-02-13-git学习笔记.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/2017/02/版本控制/2017-02-13-git学习笔记.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1-强制从远程拉取最新代码"><a href="#1-强制从远程拉取最新代码" class="headerlink" title="1. 强制从远程拉取最新代码"></a>1. 强制从远程拉取最新代码</h3><p>git reset –hard remote remote address</p>
-<h3 id="2-已经拉取远程代码，现在需要clone某一个分支"><a href="#2-已经拉取远程代码，现在需要clone某一个分支" class="headerlink" title="2. 已经拉取远程代码，现在需要clone某一个分支"></a>2. 已经拉取远程代码，现在需要clone某一个分支</h3><p>git checkout remote/branch-name</p>
-<h3 id="3-将本地创建的分支提交至远程"><a href="#3-将本地创建的分支提交至远程" class="headerlink" title="3. 将本地创建的分支提交至远程"></a>3. 将本地创建的分支提交至远程</h3><ul>
-<li>远程新分支: git push origin new branch name,可以是本地分支名</li>
-<li>远程老分支: git push origin 本地分支名：远程分支名(也可以用于创建新分支)</li>
-</ul>
-<h3 id="4-git-init"><a href="#4-git-init" class="headerlink" title="4. git init"></a>4. git init</h3><p>将当前的文件夹加入git的版本控制,该文件夹下默认会生成一个隐藏的.git文件夹,里面保存着各个分支各个版本的代码</p>
-<h3 id="5-git-status"><a href="#5-git-status" class="headerlink" title="5. git status"></a>5. git status</h3><p>查看文件是否被修改</p>
-<h3 id="6-git-diff"><a href="#6-git-diff" class="headerlink" title="6. git diff"></a>6. git diff</h3><p>查看文件修改内容</p>
-<h3 id="7-git-reflog"><a href="#7-git-reflog" class="headerlink" title="7. git reflog"></a>7. git reflog</h3><p>用来记录每一次的提交 </p>
-<h3 id="8-撤销工作区的修改-未add和commit的"><a href="#8-撤销工作区的修改-未add和commit的" class="headerlink" title="8. 撤销工作区的修改(未add和commit的)"></a>8. 撤销工作区的修改(未add和commit的)</h3><p>git checkout –file / git checkout – .</p>
-<h3 id="9-回退版本-git-reset"><a href="#9-回退版本-git-reset" class="headerlink" title="9. 回退版本-git reset"></a>9. 回退版本-git reset</h3><ul>
-<li><p>参数</p>
-<ul>
-<li>hard</li>
-<li>soft</li>
-<li>mixed</li>
-</ul>
-</li>
-<li><p>git reset –hard commit_id  </p>
-<p> git reset –hard：彻底回退到某个版本，本地的源码也会变为上一个版本的内容</p>
-</li>
-</ul>
-<h3 id="10-git-rm-file"><a href="#10-git-rm-file" class="headerlink" title="10. git rm file"></a>10. git rm file</h3><p> 删除一个文件</p>
-<h3 id="11-git-分支"><a href="#11-git-分支" class="headerlink" title="11. git 分支"></a>11. git 分支</h3><ul>
-<li>在本地,工作区只有一个,所以工作区所有的修改,只要没有提交到对应的分支上,会体现在所有的分支</li>
-<li>git add 将工作区的内容提交到暂存区</li>
-<li>git commit 将暂存区的内容提交到当前分支</li>
-<li>常用分支命令<ul>
-<li>git branch:查看分支</li>
-<li>git branch -a：查看远程分支</li>
-<li>git checkout branch-name: 切换分支</li>
-<li>git checkout -b name: 创建并且切换分支</li>
-<li>git branch -d branch-name: 删除分支</li>
-<li>git merge xxx:  将xxx分支的内容合并到当前分支</li>
-</ul>
-</li>
-</ul>
-<h3 id="12-git-stash"><a href="#12-git-stash" class="headerlink" title="12. git stash"></a>12. git stash</h3><ul>
-<li>暂时存储当前工区的内容</li>
-<li>存储后,任何分支都没有之前的修改,因为没有add commit</li>
-<li>git stash操作的区域仍然是工作区,所以所有的分支都能读到暂存的内容</li>
-<li>暂存的常用命令<ul>
-<li>git stash list: 查看所有的stash内容</li>
-<li>git stash apply: 恢复stash内容</li>
-<li>git stash drop: 删除stash的内容</li>
-<li>git stash pop: 恢复并且删除stash的内容</li>
-</ul>
-</li>
-</ul>
-<h3 id="13-git-tag"><a href="#13-git-tag" class="headerlink" title="13. git tag"></a>13. git tag</h3><p>打标签,方便回滚,这个主要哦针对一个完整功能上线时打一个tag,方便回滚到上一个功能(类似于-m的作用,只是-m针对每一次的提交)</p>
-<ul>
-<li>git tag: 控制台打印所有的标签</li>
-<li>git tag -l ‘V0.1*’: 搜索符合模式的tag</li>
-<li>打标签的常用命令<ul>
-<li>切换标签: git checkout tagname</li>
-<li>git tag -g v0.1.1.9fbc3d0 :给特定的commit打tag</li>
-<li>标签的发布: git push origin -tags # 说明</li>
-</ul>
-</li>
-</ul>
-<h3 id="14-将本地文件夹关联远程仓库"><a href="#14-将本地文件夹关联远程仓库" class="headerlink" title="14. 将本地文件夹关联远程仓库"></a>14. 将本地文件夹关联远程仓库</h3><p>git remote add origin git@<a href="http://xujiao1989/xxx" target="_blank" rel="noopener">http://xujiao1989/xxx</a></p>
-<h3 id="15-关于-gitignore"><a href="#15-关于-gitignore" class="headerlink" title="15. 关于.gitignore"></a>15. 关于.gitignore</h3><ul>
-<li>只能忽略那些原来没有被trace的文件</li>
-<li><p>如何解决添加规则后不生效的问题</p>
-<p>   git rm –cached file</p>
-<p>   忽略整个文件夹下： git rm –cached file_path -r</p>
-</li>
-</ul>
-<h3 id="16-查看git配置等"><a href="#16-查看git配置等" class="headerlink" title="16. 查看git配置等"></a>16. 查看git配置等</h3><p>git config -l</p>
-<h3 id="17-TIPS"><a href="#17-TIPS" class="headerlink" title="17. TIPS"></a>17. TIPS</h3><ul>
-<li>git跟踪的是修改,而不是文件</li>
-<li>在git当中,HEAD表示的是当前版本,上一个版本是HEAD^,上上个版本是HEAD^^,所以回退到上一个版本可以是git reset –hard HEAD^(这里也可以是特定的提交)</li>
-</ul>
+<p>正确的实现是：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line">http.createServer(<span class="function"><span class="keyword">function</span> (<span class="params">request, response</span>) </span>&#123;</span><br><span class="line">    response.writeHead(<span class="number">200</span>, &#123;<span class="string">'Content-Type'</span>: <span class="string">'text/plain'</span>&#125;);</span><br><span class="line">    response.end(<span class="string">'我是一台服务器\n'</span>);</span><br><span class="line">&#125;).listen(<span class="number">8080</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'Server running at http://127.0.0.1:8080/'</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="7-实现一个函数function-add-a-b-能够处理超出js处理范围两个的和（可能是负数）"><a href="#7-实现一个函数function-add-a-b-能够处理超出js处理范围两个的和（可能是负数）" class="headerlink" title="7. 实现一个函数function add(a,b){},能够处理超出js处理范围两个的和（可能是负数）"></a>7. 实现一个函数function add(a,b){},能够处理超出js处理范围两个的和（可能是负数）</h4><hr>
+<p>做一个勤于思考的人</p>
 
           
         
@@ -1400,7 +1314,7 @@ entity-body
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1448,7 +1362,7 @@ entity-body
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1459,7 +1373,7 @@ entity-body
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1470,7 +1384,7 @@ entity-body
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1507,7 +1421,7 @@ entity-body
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -1515,18 +1429,6 @@ entity-body
 
   
 </div>
-
-
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
-
 
 
 
